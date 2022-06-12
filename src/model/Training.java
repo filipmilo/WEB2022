@@ -1,6 +1,9 @@
 package model;
 
 public class Training {
+
+	private boolean deleted;
+	
 	private String name;
 	private String type;
 	private SportsFacility facility;

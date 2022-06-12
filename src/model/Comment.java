@@ -1,6 +1,10 @@
 package model;
 
 public class Comment {
+	
+
+	private boolean deleted;
+	
 	private User customer;
 	private SportsFacility facility;
 	private String content;

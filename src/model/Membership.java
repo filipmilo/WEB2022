@@ -3,6 +3,9 @@ package model;
 import java.time.LocalDate;
 
 public class Membership {
+
+	private boolean deleted;
+	
 	private String id; //10 characters
 	private String type;
 	private LocalDate dateOfPayment;

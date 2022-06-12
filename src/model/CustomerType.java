@@ -7,6 +7,10 @@ enum Level {
 }
 
 public class CustomerType {
+	
+
+	private boolean deleted;
+	
 	private Level level;
 	private double discount;
 	private int requiredPoints;

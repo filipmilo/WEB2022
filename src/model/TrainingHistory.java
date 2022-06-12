@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 
 public class TrainingHistory {
+
+	private boolean deleted;
 	private LocalDate applicationDate;
 	private Training training;
 	private User customer;

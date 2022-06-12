@@ -16,6 +16,7 @@ enum Role {
 }
 
 public class User {
+	private boolean deleted;
 	private String username;
 	private String password;
 	private String name;

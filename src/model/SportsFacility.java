@@ -2,6 +2,9 @@ package model;
 
 
 public class SportsFacility {
+
+	private boolean deleted;
+	
 	private String name;
 	private String type;
 	private String content;

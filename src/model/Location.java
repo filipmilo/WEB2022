@@ -1,6 +1,10 @@
 package model;
 
 public class Location {
+	
+
+	private boolean deleted;
+	
 	private double longitude;
 	private double latitude;
 	private String address;
