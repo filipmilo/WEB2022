@@ -4,15 +4,36 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 enum Gender {
-	  MALE,
-	  FEMALE
+	MALE("Male"),
+	FEMALE("Female");
+	  
+	private final String gender;
+	
+	private Gender(String gender) {
+		this.gender = gender;
+	}
+	
+	public String getGender() {
+		return gender;
+	}
+	  
 }
 
 enum Role {
-	ADMIN,
-	MANAGER,
-	COACH,
-	CUSTOMER
+	ADMIN("Admin"),
+	MANAGER("Manager"),
+	COACH("Coach"),
+	CUSTOMER("Customer");
+	
+	private final String role;
+	
+	private Role(String role) {
+		this.role = role;
+	}
+	
+	public String getRole() {
+		return role;
+	}
 }
 
 public class User {
@@ -42,6 +63,38 @@ public class User {
 	
 	//type of customer
 	private CustomerType customerType;
+	
+	public User(String username, String password, String name, String surname, String gender, LocalDate dateOfBirth, String role) {
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		
+		switch(gender) {
+		case "Male":
+			this.gender = Gender.MALE;
+			break;
+		case "Female":
+			this.gender = Gender.FEMALE;
+			break;
+		}
+		
+		this.dateOfBirth = dateOfBirth;
+		
+		switch(role) {
+		case "Admin":
+			this.role = Role.ADMIN;
+			break;
+		case "Manager":
+			this.role = Role.MANAGER;
+		case "Coach":
+			this.role = Role.COACH;
+			break;
+		case "Customer":
+			this.role = Role.CUSTOMER;
+			break;
+		}
+	}
 
 	public String getUsername() {
 		return username;
