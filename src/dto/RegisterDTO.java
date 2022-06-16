@@ -1,5 +1,6 @@
 package dto;
 
+import java.time.LocalDate;
 
 public class RegisterDTO {
 	private String username;
@@ -7,10 +8,10 @@ public class RegisterDTO {
 	private String name;
 	private String surname;
 	private String gender;
-	private String dateofBirth;
+	private LocalDate dateofBirth;
 	
 	public RegisterDTO(String username, String password, String name, String surname, String gender,
-			String dateofBirth) {
+			LocalDate dateofBirth) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -50,10 +51,10 @@ public class RegisterDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getDateofBirth() {
+	public LocalDate getDateofBirth() {
 		return dateofBirth;
 	}
-	public void setDateofBirth(String dateofBirth) {
+	public void setDateofBirth(LocalDate dateofBirth) {
 		this.dateofBirth = dateofBirth;
 	}
 	

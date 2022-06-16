@@ -17,7 +17,7 @@ public class SportifyAppMain {
 		get("/hello", (req, res) -> "Hello World");
 		
 		UserController.getUsers();
-		
+		UserController.Register();
 	}
 
 }
