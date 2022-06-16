@@ -6,6 +6,8 @@ import static spark.Spark.get;
 
 import java.io.File;
 
+import controller.UserController;
+
 public class SportifyAppMain {
 
 	public static void main(String[] args) throws Exception {
@@ -13,6 +15,8 @@ public class SportifyAppMain {
 		port(8080);
 		staticFiles.externalLocation(new File("./static/html").getCanonicalPath());
 		get("/hello", (req, res) -> "Hello World");
+		
+		UserController.getUsers();
 		
 	}
 

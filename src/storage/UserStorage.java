@@ -16,7 +16,7 @@ public class UserStorage {
 	private HashMap<String, User> allUsers = new HashMap<String, User>();
 	
 	public UserStorage() {
-		this(".");
+		this("data");
 	}
 	
 	public UserStorage(String path) {
