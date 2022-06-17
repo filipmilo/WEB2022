@@ -30,9 +30,10 @@ public class UserController {
 	public static void Register() {
 		post("rest/users/register/", (req, res) -> {
 			res.type("application/json");
+			System.out.println(req.body());
 			RegisterDTO data = g.fromJson(req.body(), RegisterDTO.class);
 			return userService.addUser(
-					new User(data.getUsername(), data.getPassword(), data.getName(), data.getSurname(), data.getGender(), data.getDateofBirth(), "Customer")
+					new User(data.getUsername(), data.getPassword(), data.getName(), data.getSurname(), data.getGender(), data.getDateofBirth(), "CUSTOMER")
 					) == true ? "SUCCESS" : "FAIL";
 		});
 	}
