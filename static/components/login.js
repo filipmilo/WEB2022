@@ -37,10 +37,15 @@ Vue.component("Login", {
 	, 
 	methods : {
 		loginConfirm : function() {
+			event.preventDefault();
     		axios.get("/rest/users/login/", {params: { username: this.login.username, password: this.login.password }})
     		.then(response => {
-				console.log(response)
-			})
+				console.log(response);
+				router.push(`/mainpage`);
+			}).catch(error => {
+    			console.log(error.response)
+			});
+			
     	}
 	},
 	mounted () {
