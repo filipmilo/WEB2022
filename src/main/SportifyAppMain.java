@@ -6,6 +6,7 @@ import static spark.Spark.get;
 
 import java.io.File;
 
+import controller.FacilityController;
 import controller.UserController;
 
 public class SportifyAppMain {
@@ -18,6 +19,8 @@ public class SportifyAppMain {
 		UserController.getUsers();
 		UserController.Register();
 		UserController.Login();
+		
+		FacilityController.getAll();
 	}
 
 }

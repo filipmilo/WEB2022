@@ -33,7 +33,7 @@ public class UserController {
 			System.out.println(req.body());
 			RegisterDTO data = g.fromJson(req.body(), RegisterDTO.class);
 			return userService.addUser(
-					new User(data.getUsername(), data.getPassword(), data.getName(), data.getSurname(), data.getGender(), data.getDateofBirth(), "CUSTOMER")
+					new User(data.getUsername(), data.getPassword(), data.getName(), data.getSurname(), data.getGender(), data.getDateofBirth(), data.getRole())
 					) == true ? "SUCCESS" : "FAIL";
 		});
 	}

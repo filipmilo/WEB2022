@@ -15,6 +15,20 @@ public class SportsFacility {
 	private String workingHours;
 	
 	
+	
+	
+	public SportsFacility(String name, String type, String content, boolean status, String logoPath, double avgRating,
+			String workingHours, double longitude, double latitude, String address) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.content = content;
+		this.status = status;
+		this.logoPath = logoPath;
+		this.avgRating = avgRating;
+		this.workingHours = workingHours;
+		this.location = new Location(longitude, latitude, address);
+	}
 	public String getName() {
 		return name;
 	}
