@@ -14,7 +14,6 @@ public class SportifyAppMain {
 		// TODO Auto-generated method stub
 		port(8080);
 		staticFiles.externalLocation(new File("./static/html").getCanonicalPath());
-		get("/hello", (req, res) -> "Hello World");
 		
 		UserController.getUsers();
 		UserController.Register();

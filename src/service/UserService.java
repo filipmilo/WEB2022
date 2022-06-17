@@ -17,11 +17,11 @@ public class UserService {
 	}
 	
 	public boolean addUser(User user) {
-		if(users.getUser(user.getUsername()) == null) {
+		if(users.getUser(user.getUsername()) == null) 
 			return users.addUser(user);
-		} else {
+		else 
 			return false;
-		}
+		
 	}
 	
 }

@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import java.awt.Window.Type;
 import java.time.LocalDate;
@@ -11,7 +11,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 public class LocalDateSerializer implements JsonSerializer < LocalDate > {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy").withLocale(Locale.ENGLISH);
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.ENGLISH);
 
     @Override
 	public JsonElement serialize(LocalDate arg0, java.lang.reflect.Type arg1, JsonSerializationContext arg2) {

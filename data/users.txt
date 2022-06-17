@@ -1,2 +1,5 @@
-cofiSrbenda;123;Filip;Milosevic;Male;2001-01-29;Admin
-pekiSmeki;111;Stefan;Pekez;Male;2000-11-18;Admin
+cofiSrbenda;123;Filip;Milosevic;MALE;2001-01-29;ADMIN
+pekiSmeki;111;Stefan;Pekez;MALE;2000-11-18;ADMIN
+misk0;121;Milenko;Krasavcic;MALE;2000-11-18;MANAGER
+ratko;121;Radovan;Milivojevic;MALE;2001-02-01;CUSTOMER
+ratko1;121;Radovan;Milivojevic;MALE;2001-02-01;CUSTOMER

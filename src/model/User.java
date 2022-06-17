@@ -71,10 +71,10 @@ public class User {
 		this.surname = surname;
 		
 		switch(gender) {
-		case "Male":
+		case "MALE":
 			this.gender = Gender.MALE;
 			break;
-		case "Female":
+		case "FEMALE":
 			this.gender = Gender.FEMALE;
 			break;
 		}
@@ -82,15 +82,15 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 		
 		switch(role) {
-		case "Admin":
+		case "ADMIN":
 			this.role = Role.ADMIN;
 			break;
-		case "Manager":
+		case "MANAGER":
 			this.role = Role.MANAGER;
-		case "Coach":
+		case "COACH":
 			this.role = Role.COACH;
 			break;
-		case "Customer":
+		case "CUSTOMER":
 			this.role = Role.CUSTOMER;
 			break;
 		}
@@ -198,6 +198,14 @@ public class User {
 
 	public void setCustomerType(CustomerType customerType) {
 		this.customerType = customerType;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	

@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import java.awt.Window.Type;
 import java.time.LocalDate;
@@ -17,6 +17,6 @@ public class LocalDateDeserializer implements JsonDeserializer < LocalDate > {
 			throws JsonParseException {
 		// TODO Auto-generated method stub
 		return LocalDate.parse(arg0.getAsString(),
-	            DateTimeFormatter.ofPattern("d-MMM-yyyy").withLocale(Locale.ENGLISH));
+	            DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.ENGLISH));
 	}
 }

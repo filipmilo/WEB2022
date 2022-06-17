@@ -9,14 +9,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import dto.RegisterDTO;
-import model.LocalDateDeserializer;
-import model.LocalDateSerializer;
 import model.User;
 import service.UserService;
+import util.GsonSerializer;
+import util.LocalDateDeserializer;
+import util.LocalDateSerializer;
 
 public class UserController {
 	
-	private static Gson g = makeGson();
+	private static Gson g = GsonSerializer.makeGson();
 	private static UserService userService = new UserService();
 	
 	public static void getUsers() {
@@ -34,15 +35,6 @@ public class UserController {
 					new User(data.getUsername(), data.getPassword(), data.getName(), data.getSurname(), data.getGender(), data.getDateofBirth(), "Customer")
 					) == true ? "SUCCESS" : "FAIL";
 		});
-	}
-	
-	private static Gson makeGson() {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
-		gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
-		Gson gson = gsonBuilder.setPrettyPrinting().create();
-		
-		return gson;
 	}
 	
 }

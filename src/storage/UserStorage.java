@@ -3,7 +3,9 @@ package storage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import model.User;
 public class UserStorage {
 	
 	private HashMap<String, User> allUsers = new HashMap<String, User>();
+	private File file;
 	
 	public UserStorage() {
 		this("data");
@@ -22,7 +25,7 @@ public class UserStorage {
 	public UserStorage(String path) {
 		BufferedReader in = null;
 		try {
-			File file = new File(path + "/users.txt");
+			file = new File(path + "/users.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			readAllUsers(in);
@@ -65,6 +68,41 @@ public class UserStorage {
 		}
 	}
 	
+	private void save() {
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(file), true);
+			
+			for(User user: allUsers.values()) {
+				String str = makeLine(user);
+				out.println(str);
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private String makeLine(User user) {
+		
+		StringBuilder str = new StringBuilder();
+		str.append(user.getUsername());
+		str.append(";");
+		str.append(user.getPassword());
+		str.append(";");
+		str.append(user.getName());
+		str.append(";");
+		str.append(user.getSurname());
+		str.append(";");
+		str.append(user.getGender());
+		str.append(";");
+		str.append(user.getDateOfBirth());
+		str.append(";");
+		str.append(user.getRole());
+		
+		return str.toString();
+	}
+	
 	public Collection<User> getAll() {
 		return allUsers.values();
 	}
@@ -75,6 +113,7 @@ public class UserStorage {
 	
 	public boolean addUser(User user) {
 		allUsers.put(user.getUsername(), user);
+		save();
 		return true;
 	}
 }
