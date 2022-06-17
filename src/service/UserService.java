@@ -12,8 +12,15 @@ public class UserService {
 		return users.getAll();
 	}
 	
-	public User getUser(String username) {
-		return users.getUser(username);
+	public User getUser(String username, String password) {
+		User user = users.getUser(username);
+		if(user == null)
+			return null;
+		
+		if(user.getPassword().equals(password))
+			return user;
+		else
+			return null;
 	}
 	
 	public boolean addUser(User user) {
