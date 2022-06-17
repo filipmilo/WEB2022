@@ -7,7 +7,7 @@ Vue.component("Register", {
 				password: "",
 				name: "",
 				surname: "",
-				gender: "MALE",
+				gender: 'MALE',
 				dateofBirth: ""
 				}
 		    }
@@ -19,7 +19,6 @@ Vue.component("Register", {
 			<tr>
 				<td>
 					<p>Username: </p>
-					<p> {{ user.dateOfBirth }} </p>
 					<input type="text" v-model = "user.username"></input>
 				</td>
 			</tr>
@@ -37,7 +36,7 @@ Vue.component("Register", {
 			</tr>
 			<tr>
 				<td>
-					<p>Surname: </p> 
+					<p>Surname: </p>
 					<input type="text" v-model = "user.surname"></input>
 				</td>
 			</tr>
@@ -58,16 +57,23 @@ Vue.component("Register", {
 					<input type="submit" value="Register" v-on:click = "addUser"></input>
 				</td>
 			</tr>
+			
 		</table>
 	</form>
+	
+	<p>Already have an account?</p>
+	<button v-on:click = "showLogin"> Login here. </button>
 </div>
 `
 	, 
 	methods : {
 		addUser : function() {
     		axios
-    		.post('rest/users/register/', this.user);
-    	}
+    		.post('rest/users/register/', this.user)
+    	},
+    	showLogin: function() {
+			router.push(`/login`);
+		}
 	},
 	mounted () {
 		/*this.id = this.$route.params.id;
