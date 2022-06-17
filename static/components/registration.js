@@ -21,6 +21,7 @@ Vue.component("Register", {
 			<tr>
 				<td>
 					<p>Username: </p>
+					<p> {{ this.message }} </p>
 					<input type="text" v-model = "user.username"></input>
 				</td>
 			</tr>
@@ -57,9 +58,9 @@ Vue.component("Register", {
 			<tr v-if="this.isAdmin === true">
 				<td colspan="2" style="text-align:center">
 					<p>Role: </p>
-					<select name="roles" >
-					  	<option value="MANAGER" v-model="user.role">Manager</option>
-					  	<option value="COACH" v-model="user.role">Coach</option>
+					<select name="roles" v-model="user.role">
+					  	<option value="MANAGER">Manager</option>
+					  	<option value="COACH">Coach</option>
 					</select>
 				</td>
 			</tr>
@@ -79,6 +80,7 @@ Vue.component("Register", {
 	, 
 	methods : {
 		registerUser : function() {
+			event.preventDefault();
     		axios
     		.post('rest/users/register/', this.user)
     	},
@@ -87,10 +89,10 @@ Vue.component("Register", {
 		}
 	},
 	mounted () {
-		this.isAdmin = this.$route.params.isAdmin;
+		/*this.isAdmin = this.$route.params.isAdmin;
 		if(this.isAdmin == undefined){
 			this.isAdmin = false;
 		} else
-			this.isAdmin = true;
+			this.isAdmin = true;*/
     }
 });
