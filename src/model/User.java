@@ -87,6 +87,7 @@ public class User {
 			break;
 		case "MANAGER":
 			this.role = Role.MANAGER;
+			break;
 		case "COACH":
 			this.role = Role.COACH;
 			break;
