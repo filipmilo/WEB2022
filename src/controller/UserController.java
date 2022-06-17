@@ -38,4 +38,13 @@ public class UserController {
 		});
 	}
 	
+	public static void Login() {
+		get("rest/users/login/", (req, res) -> {
+			res.type("application/json");
+			String username = req.queryParams("username");
+			String password = req.queryParams("password");
+			return g.toJson(userService.getUser(username, password));
+		});
+	}
+	
 }
