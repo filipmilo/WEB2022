@@ -1,9 +1,11 @@
 const Register = {template: '<register></register>' }
+const Login = {template: '<login></login>'}
 
 const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
-		{ path: '/', component: Register}
+		{ path: '/', component: Register},
+		{ path: '/login', component: Login}
 	  ]
 });
 
