@@ -37,7 +37,7 @@ Vue.component("Login", {
 	, 
 	methods : {
 		loginConfirm : function() {
-    		axios.get("/rest/users/login/", this.login)
+    		axios.get("/rest/users/login/", {params: { username: this.login.username, password: this.login.password }})
     		.then(response => {
 				console.log(response)
 			})
