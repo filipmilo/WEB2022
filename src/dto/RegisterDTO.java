@@ -10,8 +10,10 @@ public class RegisterDTO {
 	private String gender;
 	private LocalDate dateofBirth;
 	
+	private String role;
+	
 	public RegisterDTO(String username, String password, String name, String surname, String gender,
-			LocalDate dateofBirth) {
+			LocalDate dateofBirth, String role) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -19,6 +21,8 @@ public class RegisterDTO {
 		this.surname = surname;
 		this.gender = gender;
 		this.dateofBirth = dateofBirth;
+		
+		this.role = role;
 	}
 	
 	public String getUsername() {
@@ -57,5 +61,14 @@ public class RegisterDTO {
 	public void setDateofBirth(LocalDate dateofBirth) {
 		this.dateofBirth = dateofBirth;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	
 }
