@@ -2,13 +2,15 @@ Vue.component("Register", {
 	data: function () {
 		    return {
 			message: "test",
+			isAdmin: true,
 			user: {
 				username: "",
 				password: "",
 				name: "",
 				surname: "",
 				gender: 'MALE',
-				dateofBirth: ""
+				dateofBirth: "",
+				role: 'CUSTOMER'
 				}
 		    }
 	},
@@ -52,9 +54,18 @@ Vue.component("Register", {
 					<input type="date" v-model="user.dateofBirth"></input>
 				</td>
 			</tr>
+			<tr v-if="this.isAdmin === true">
+				<td colspan="2" style="text-align:center">
+					<p>Role: </p>
+					<select name="roles" >
+					  	<option value="MANAGER" v-model="user.role">Manager</option>
+					  	<option value="COACH" v-model="user.role">Coach</option>
+					</select>
+				</td>
+			</tr>
 			<tr>
 				<td colspan="2" style="text-align:center">
-					<input type="submit" value="Register" v-on:click = "addUser"></input>
+					<input type="submit" value="Register" v-on:click = "registerUser"></input>
 				</td>
 			</tr>
 			
@@ -67,7 +78,7 @@ Vue.component("Register", {
 `
 	, 
 	methods : {
-		addUser : function() {
+		registerUser : function() {
     		axios
     		.post('rest/users/register/', this.user)
     	},
@@ -76,11 +87,10 @@ Vue.component("Register", {
 		}
 	},
 	mounted () {
-		/*this.id = this.$route.params.id;
-		if (this.id != -1){
-	        axios
-	          .get('rest/products/' + this.id)
-	          .then(response => (this.product = response.data))
-		}*/
+		this.isAdmin = this.$route.params.isAdmin;
+		if(this.isAdmin == undefined){
+			this.isAdmin = false;
+		} else
+			this.isAdmin = true;
     }
 });

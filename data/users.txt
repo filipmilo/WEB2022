@@ -1,2 +1,2 @@
 stefan;123;stefan;pekez;MALE;2022-06-23;CUSTOMER
-cofiSrbenda;123;Filip;Milosevic;MALE;2001-01-29;ADMIN
+cofi;123;Filip;Milosevic;MALE;2001-01-29;ADMIN
