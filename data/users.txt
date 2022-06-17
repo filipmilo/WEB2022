@@ -1,5 +1,3 @@
+stefan;123;stefan;pekez;MALE;2022-06-23;CUSTOMER
 cofiSrbenda;123;Filip;Milosevic;MALE;2001-01-29;ADMIN
-pekiSmeki;111;Stefan;Pekez;MALE;2000-11-18;ADMIN
-misk0;121;Milenko;Krasavcic;MALE;2000-11-18;MANAGER
-ratko;121;Radovan;Milivojevic;MALE;2001-02-01;CUSTOMER
-ratko1;121;Radovan;Milivojevic;MALE;2001-02-01;CUSTOMER
+sa;sa;sa;sa;MALE;null;CUSTOMER

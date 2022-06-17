@@ -7,8 +7,8 @@ Vue.component("Register", {
 				password: "",
 				name: "",
 				surname: "",
-				gender: 'Male',
-				dateOfBirth: ""
+				gender: "MALE",
+				dateofBirth: ""
 				}
 		    }
 	},
@@ -19,6 +19,7 @@ Vue.component("Register", {
 			<tr>
 				<td>
 					<p>Username: </p>
+					<p> {{ user.dateOfBirth }} </p>
 					<input type="text" v-model = "user.username"></input>
 				</td>
 			</tr>
@@ -36,20 +37,20 @@ Vue.component("Register", {
 			</tr>
 			<tr>
 				<td>
-					<p>Surname: </p>
+					<p>Surname: </p> 
 					<input type="text" v-model = "user.surname"></input>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="radio" value="Male" v-model="user.gender" :checked="gender === 'Male'">Male</input>
-					<input type="radio" value="Female" v-model="user.gender">Female</input>
+					<input type="radio" value="MALE" v-model="user.gender" :checked="user.gender === 'MALE'">Male</input>
+					<input type="radio" value="FEMALE" v-model="user.gender">Female</input>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<p>Date Of Birth: </p>
-					<input type="date" v-model="user.dateOfBirth"></input>
+					<input type="date" v-model="user.dateofBirth"></input>
 				</td>
 			</tr>
 			<tr>
@@ -65,10 +66,7 @@ Vue.component("Register", {
 	methods : {
 		addUser : function() {
     		axios
-    		.post('rest/users/register/', this.user)
-    		.then(response => (router.push(`/`)));
-    		
-    		console.log(this.user);
+    		.post('rest/users/register/', this.user);
     	}
 	},
 	mounted () {
