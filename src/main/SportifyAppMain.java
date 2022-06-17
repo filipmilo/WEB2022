@@ -13,7 +13,7 @@ public class SportifyAppMain {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		port(8080);
-		staticFiles.externalLocation(new File("./static/html").getCanonicalPath());
+		staticFiles.externalLocation(new File("./static").getCanonicalPath());
 		
 		UserController.getUsers();
 		UserController.Register();
