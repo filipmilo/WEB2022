@@ -17,4 +17,13 @@ public class FacilityController {
 			return g.toJson(facilityService.getFacilities());
 		});
 	}
+	
+	public static void searchFacilities() {
+		get("rest/facilities/search/", (req, res) -> {
+			res.type("application/json");
+			String search = req.queryParams("search");
+			String filter = req.queryParams("filter");
+			return g.toJson(facilityService.getFacilitiesBySearch(search, filter));
+		});
+	}
 }

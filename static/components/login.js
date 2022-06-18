@@ -2,6 +2,7 @@ Vue.component("Login", {
 	data: function () {
 		    return {
 			message: "test",
+			role: "",
 			login: {
 				username: "",
 				password: "",
@@ -40,8 +41,9 @@ Vue.component("Login", {
 			event.preventDefault();
     		axios.get("/rest/users/login/", {params: { username: this.login.username, password: this.login.password }})
     		.then(response => {
-				console.log(response);
-				router.push(`/mainpage`);
+				//console.log(response);
+				this.role = response.data.role;
+				router.push(`/${this.role}`);
 			}).catch(error => {
     			console.log(error.response)
 			});
@@ -55,6 +57,5 @@ Vue.component("Login", {
 	          .get('rest/products/' + this.id)
 	          .then(response => (this.product = response.data))
 		}*/
-		console.log("HIIII")
     }
 });
