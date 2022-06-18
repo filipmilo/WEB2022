@@ -55,7 +55,7 @@ Vue.component("Register", {
 					<input type="date" v-model="user.dateofBirth"></input>
 				</td>
 			</tr>
-			<tr v-if="this.isAdmin === true">
+			<tr v-if="this.user.role === 'ADMIN'">
 				<td colspan="2" style="text-align:center">
 					<p>Role: </p>
 					<select name="roles" v-model="user.role">
@@ -89,10 +89,9 @@ Vue.component("Register", {
 		}
 	},
 	mounted () {
-		/*this.isAdmin = this.$route.params.isAdmin;
-		if(this.isAdmin == undefined){
-			this.isAdmin = false;
-		} else
-			this.isAdmin = true;*/
+		this.user.role = this.$route.params.role;
+		if(this.user.role == undefined){
+			this.user.role = 'CUSTOMER';
+		}
     }
 });

@@ -6,8 +6,8 @@ const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
 		{ path: '/login', component: Login},
-		{ path: '/mainpage', component: Mainpage},
-		{ path: '/:isAdmin?', name: 'home', component: Register}
+		{ path: '/:role?', component: Mainpage},
+		{ path: '/register/:role?', name: 'home', component: Register}
 	  ]
 });
 
