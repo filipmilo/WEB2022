@@ -5,16 +5,25 @@ Vue.component("Mainpage", {
 				role: "",
 				facilities: null,
 				search: "",
-				filter: ""
+				filter: "",
+				registerMessage: ""
 		    }
 	},
 	template: ` 
 <div>
-	<button v-on:click = "showRegisterUser"> Register </button>
-	<button v-on:click = "showLoginUser"> Login </button>
+	<div >
+		<button v-if = "this.role == undefined || this.role === 'ADMIN'" v-on:click = "showRegisterUser"> {{this.registerMessage}} </button>
+		<button v-if = "this.role == undefined" v-on:click = "showLoginUser"> Login </button>
+	</div>
 	<form>
-		<input type="text" v-model="this.search"></input>
-		<input type="text" v-model="this.filter"></input>
+		<input type="text" v-model = "search"></input>
+		<!--<input type="text" ></input>-->
+		<select name="cars" id="cars" v-model = "filter">
+			  <option value="Name">Name</option>
+			  <option value="Type">Type</option>
+			  <option value="Location">Location</option>
+			  <option value="Rating">Average grade</option>
+		</select>
 		<input type="submit" value="Search" v-on:click = "searchForFacility"></input>
 	</form>
 	<table border="1">
@@ -51,23 +60,37 @@ Vue.component("Mainpage", {
 		},
 		searchForFacility: function() {
 			event.preventDefault();
-			axios.get("/rest/facilities/search/?search=" + this.search + "&filter=" + this.filter)
-    		.then(response => {
-				console.log(response);
-			}).catch(error => {
-    			console.log(error.response)
-			});
+			console.log(this.filter)
+			console.log(this.search)
+			if(this.search != "") {
+				axios.get("/rest/facilities/search/",  {params: { search: this.search, filter: this.filter }})
+	    		.then(response => {
+					this.facilities = response.data
+				}).catch(error => {
+	    			console.log(error.response)
+				});	
+			} else {
+				axios.get('rest/facilities/')
+		        .then(response => {
+					this.facilities = response.data
+				})
+			}
+	
 		}
 	},
 	mounted () {
 		this.role = this.$route.params.role;
-		if(this.role == undefined){
-			this.role = 'CUSTOMER';
+		if(this.role === 'ADMIN') {
+			this.registerMessage = 'Register new accounts'
+		} else {
+			this.registerMessage = 'Register'
 		}
 		
 		axios
           .get('rest/facilities/')
-          .then(response => (this.facilities = response.data))
+          .then(response => {
+				this.facilities = response.data
+			})
 		
     }
 });

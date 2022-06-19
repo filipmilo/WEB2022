@@ -41,7 +41,7 @@ Vue.component("Login", {
 			event.preventDefault();
     		axios.get("/rest/users/login/", {params: { username: this.login.username, password: this.login.password }})
     		.then(response => {
-				//console.log(response);
+				console.log(response);
 				this.role = response.data.role;
 				router.push(`/${this.role}`);
 			}).catch(error => {
