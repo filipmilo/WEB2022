@@ -51,7 +51,7 @@ public class UserController {
 			User user = userService.getUser(username, password);
 			
 			if(user != null) {
-				String jws = Jwts.builder().setSubject(user.getUsername()).setExpiration(new Date(new Date().getTime() + 1000*10L)).setIssuedAt(new Date()).signWith(key).compact();
+				String jws = Jwts.builder().setSubject(user.getUsername()).setExpiration(new Date(new Date().getTime() + 1000*7200L)).setIssuedAt(new Date()).signWith(key).compact();
 				UserJwtDTO dto = new UserJwtDTO(user.getUsername(), user.getRoleStr(), jws);
 				System.out.println("Returned JWT: " + jws);
 				return g.toJson(dto);

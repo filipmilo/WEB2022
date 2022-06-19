@@ -14,6 +14,7 @@ Vue.component("Mainpage", {
 	<div >
 		<button v-if = "this.role == undefined || this.role === 'ADMIN'" v-on:click = "showRegisterUser"> {{this.registerMessage}} </button>
 		<button v-if = "this.role == undefined" v-on:click = "showLoginUser"> Login </button>
+		<button v-if = "this.role != undefined" v-on:click = "logout"> Logout </button>
 	</div>
 	<form>
 		<input type="text" v-model = "search"></input>
@@ -76,6 +77,12 @@ Vue.component("Mainpage", {
 				})
 			}
 	
+		},
+		logout: function() {
+			window.localStorage.removeItem('jwt')
+			alert("Logged out")
+			this.role = undefined
+			this.registerMessage = 'Register'
 		}
 	},
 	mounted () {

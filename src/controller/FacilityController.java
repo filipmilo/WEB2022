@@ -23,8 +23,7 @@ public class FacilityController {
 			res.type("application/json");
 			String search = req.queryParams("search");
 			String filter = req.queryParams("filter");
-			System.out.println(search);
-			System.out.println(filter);
+			
 			return g.toJson(facilityService.getFacilitiesBySearch(search, filter));
 		});
 	}

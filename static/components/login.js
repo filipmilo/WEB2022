@@ -43,6 +43,7 @@ Vue.component("Login", {
     		.then(response => {
 				console.log(response);
 				this.role = response.data.role;
+				window.localStorage.setItem('jwt', response)
 				router.push(`/${this.role}`);
 			}).catch(error => {
     			console.log(error.response)
