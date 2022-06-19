@@ -15,6 +15,7 @@ Vue.component("Mainpage", {
 		<button v-if = "this.role == undefined || this.role === 'ADMIN'" v-on:click = "showRegisterUser"> {{this.registerMessage}} </button>
 		<button v-if = "this.role == undefined" v-on:click = "showLoginUser"> Login </button>
 		<button v-if = "this.role != undefined" v-on:click = "logout"> Logout </button>
+		
 	</div>
 	<form>
 		<input type="text" v-model = "search"></input>
