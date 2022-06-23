@@ -41,12 +41,16 @@ Vue.component("Login", {
 			event.preventDefault();
     		axios.get("/rest/users/login/", {params: { username: this.login.username, password: this.login.password }})
     		.then(response => {
-				console.log(response.data);
-				this.role = response.data.role;
-				var parsed = JSON.stringify(response.data);
-				localStorage.setItem('jwt', parsed);
+				if(response.data != null) {
+					console.log(response.data);
+					this.role = response.data.role;
+					var parsed = JSON.stringify(response.data);
+					localStorage.setItem('jwt', parsed);
 				
-				router.push(`/`);
+					router.push(`/`);
+				} else {
+					alert("Username or password are invalid");
+				}
 			}).catch(error => {
     			console.log(error.response)
 			});
