@@ -55,7 +55,7 @@ Vue.component("Register", {
 					<input type="date" v-model="user.dateofBirth"></input>
 				</td>
 			</tr>
-			<tr v-if="this.user.role === 'ADMIN'">
+			<tr v-if = "this.user.role === 'ADMIN'">
 				<td colspan="2" style="text-align:center">
 					<p>Role: </p>
 					<select name="roles" v-model="user.role">
@@ -73,8 +73,10 @@ Vue.component("Register", {
 		</table>
 	</form>
 	
+	<div v-if = "this.user.role === 'CUSTOMER'">
 	<p>Already have an account?</p>
-	<button v-on:click = "showLogin"> Login here. </button>
+	<button  v-on:click = "showLogin"> Login here. </button>
+	</div>
 </div>
 `
 	, 
@@ -90,8 +92,17 @@ Vue.component("Register", {
 	},
 	mounted () {
 		this.user.role = this.$route.params.role;
-		if(this.user.role == undefined){
-			this.user.role = 'CUSTOMER';
-		}
+		
+		var toParse = localStorage.getItem('jwt');
+		var role;
+		
+		if(!toParse) 
+			role = 'CUSTOMER'
+		else
+			role = JSON.parse(toParse).role;
+			
+		this.user.role = role;
+		
+		console.log(this.user.role)
     }
 });

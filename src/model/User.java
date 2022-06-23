@@ -209,6 +209,18 @@ public class User {
 		this.deleted = deleted;
 	}
 	
-	
+	public String getRoleStr() {
+		switch(this.role) {
+		case ADMIN:
+			return "ADMIN";
+		case MANAGER:
+			return "MANAGER";
+		case CUSTOMER:
+			return "CUSTOMER";
+		case COACH:
+			return "COACH";
+		default:
+			return "";		}
+	} 
 	
 }
