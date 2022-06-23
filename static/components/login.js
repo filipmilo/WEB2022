@@ -41,10 +41,12 @@ Vue.component("Login", {
 			event.preventDefault();
     		axios.get("/rest/users/login/", {params: { username: this.login.username, password: this.login.password }})
     		.then(response => {
-				console.log(response);
+				console.log(response.data);
 				this.role = response.data.role;
-				window.localStorage.setItem('jwt', response)
-				router.push(`/${this.role}`);
+				var parsed = JSON.stringify(response.data);
+				localStorage.setItem('jwt', parsed);
+				
+				router.push(`/`);
 			}).catch(error => {
     			console.log(error.response)
 			});

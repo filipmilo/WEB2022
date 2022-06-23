@@ -12,9 +12,9 @@ Vue.component("Mainpage", {
 	template: ` 
 <div>
 	<div >
-		<button v-if = "this.role == undefined || this.role === 'ADMIN'" v-on:click = "showRegisterUser"> {{this.registerMessage}} </button>
-		<button v-if = "this.role == undefined" v-on:click = "showLoginUser"> Login </button>
-		<button v-if = "this.role != undefined" v-on:click = "logout"> Logout </button>
+		<button v-if = "this.role == '' || this.role === 'ADMIN'" v-on:click = "showRegisterUser"> {{this.registerMessage}} </button>
+		<button v-if = "this.role == ''" v-on:click = "showLoginUser"> Login </button>
+		<button v-if = "this.role != ''" v-on:click = "logout"> Logout </button>
 		
 	</div>
 	<form>
@@ -55,7 +55,7 @@ Vue.component("Mainpage", {
 	, 
 	methods : {
 		showRegisterUser: function() {
-			router.push(`/register/${this.role}`);
+			router.push(`/register`);
 		},
 		showLoginUser: function() {
 			router.push(`/login`);
@@ -80,14 +80,26 @@ Vue.component("Mainpage", {
 	
 		},
 		logout: function() {
-			window.localStorage.removeItem('jwt')
-			alert("Logged out")
-			this.role = undefined
-			this.registerMessage = 'Register'
+			localStorage.removeItem('jwt');
+			this.role = '';
+			this.registerMessage = 'Register';
+		
+			alert("Logged out");
 		}
 	},
 	mounted () {
 		this.role = this.$route.params.role;
+		
+		var toParse = localStorage.getItem('jwt');
+		var role;
+		
+		if(!toParse)
+			role = ''
+		else
+			role = JSON.parse(toParse).role;
+			
+		this.role = role;		
+
 		if(this.role === 'ADMIN') {
 			this.registerMessage = 'Register new accounts'
 		} else {
