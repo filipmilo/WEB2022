@@ -21,7 +21,6 @@ Vue.component("Register", {
 			<tr>
 				<td>
 					<p>Username: </p>
-					<p> {{ this.message }} </p>
 					<input type="text" v-model = "user.username"></input>
 				</td>
 			</tr>
@@ -85,6 +84,9 @@ Vue.component("Register", {
 			event.preventDefault();
     		axios
     		.post('rest/users/register/', this.user)
+    		.then(response =>{ 
+				router.push(`/`);
+			})
     	},
     	showLogin: function() {
 			router.push(`/login`);
