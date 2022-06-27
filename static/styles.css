@@ -37,12 +37,24 @@
     margin-top: 20px;
 }
 
-#register-button {
-    border-radius: 8px;
+#signin-buttons {
+    margin-top: 20px;
+    text-align: center;
 }
 
-#login-button {
-    margin-left: 10px;
+td {
+    padding: 0 15px;
+}
+
+#search-form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#sportObject-table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
 }
 
 /*#endregion*/

@@ -1,2 +1,4 @@
 Classic gym bulevar;teretana;sprave;true;0.0;0.0;Bulevar Oslobodjenja 72, Novi Sad, 21000;nema;4.5;8-9
 Hattrick;otvorena teretana;sipke;false;0.0;0.0;Liman 4, Novi Sad, 21000;nema;4.8;8-23
+Hattrick;otvorena teretana;sipke;false;0.0;0.0;Liman 4, Beograd, 11000;nema;4.8;8-23
+Impulse Dance Studio;dance studio;dance;true;0.0;0.0;Vase Stajica 14A, Novi Sad, 21000;nema;4.8;8-23

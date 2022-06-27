@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -13,51 +14,53 @@ public class FacilityService {
 		return facilities.getAll();
 	}
 	
-	public Collection<SportsFacility> getFacilitiesBySearch(String search, String filter) {
-		HashMap<String, SportsFacility> allFacilities = facilities.getHashMap();
-		HashMap<String, SportsFacility> filteredFacilities = new HashMap<String, SportsFacility>();
+	public ArrayList<SportsFacility> getFacilitiesArrayList() {
+		return facilities.getArray();
+	}
+	
+	public ArrayList<SportsFacility> getFacilitiesBySearch(String filter, 
+			ArrayList<SportsFacility> facilities, int i) {
+		ArrayList<SportsFacility> filteredFacilities = new ArrayList<SportsFacility>();
 		
-		search = search.toLowerCase();
-		System.out.println(search);
-		System.out.println(filter);
+		filter = filter.toLowerCase();
 		
-		switch(filter) {
-			case "Name":
-				for(SportsFacility sf: allFacilities.values())
+		switch(i) {
+			case 0:
+				for(SportsFacility sf: facilities)
 				{
 					String name = sf.getName().toLowerCase();
-					if(search.equals(name))
-						filteredFacilities.put(name, sf);
+					if(filter.equals(name))
+						filteredFacilities.add(sf);
 				}
 				break;
-			case "Type":
-				for(SportsFacility sf: allFacilities.values())
+			case 1:
+				for(SportsFacility sf: facilities)
 				{
 					String type = sf.getType().toLowerCase();
-					if(search.equals(type))
-						filteredFacilities.put(sf.getName(), sf);
+					if(filter.equals(type))
+						filteredFacilities.add(sf);
 				}
 				break;
-			case "Location":
-				for(SportsFacility sf: allFacilities.values())
+			case 2:
+				for(SportsFacility sf: facilities)
 				{
 					String location = sf.getLocation().getAddress().split(",")[1].toLowerCase();
-					if(search.equals(location))
-						filteredFacilities.put(sf.getName(), sf);
+					location = location.substring(1);
+					if(filter.equals(location))
+						filteredFacilities.add(sf);
 				}
 					
 				break;
-			case "Rating":
-				for(SportsFacility sf: allFacilities.values())
+			case 3:
+				for(SportsFacility sf: facilities)
 				{
 					String rating = Double.toString(sf.getAvgRating());
-					if(search.equals(rating))
-						filteredFacilities.put(sf.getName(), sf);
+					if(filter.equals(rating))
+						filteredFacilities.add(sf);
 				}
 				break;
 		}
 		
-		
-		return filteredFacilities.values();
+		return filteredFacilities;
 	}
 }

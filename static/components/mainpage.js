@@ -4,31 +4,34 @@ Vue.component("Mainpage", {
 				message: "Test",
 				role: "",
 				facilities: null,
-				search: "",
 				filter: "",
-				registerMessage: ""
+				registerMessage: "",
+				filterName: "",
+				filterType: "",
+				filterLocation: "",
+				filterRating: ""
 		    }
 	},
 	template: ` 
 <div>
-	<div >
+	<div id="signin-buttons">
 		<button v-if = "this.role == '' || this.role === 'ADMIN'" v-on:click = "showRegisterUser"> {{this.registerMessage}} </button>
-		<button v-if = "this.role == ''" v-on:click = "showLoginUser"> Login </button>
+		<button v-if = "this.role == ''" v-on:click = "showLoginUser" id="login-button"> Login </button>
 		<button v-if = "this.role != ''" v-on:click = "logout"> Logout </button>
 		
 	</div>
-	<form>
-		<input type="text" v-model = "search"></input>
-		<!--<input type="text" ></input>-->
-		<select name="cars" id="cars" v-model = "filter">
-			  <option value="Name">Name</option>
-			  <option value="Type">Type</option>
-			  <option value="Location">Location</option>
-			  <option value="Rating">Average grade</option>
-		</select>
+	<form id="search-form">
+		Name:
+		<input type="text" v-model = "filterName"></input>
+		Type:
+		<input type="text" v-model = "filterType"></input>
+		Location:
+		<input type="text" v-model = "filterLocation"></input>
+		Rating:
+		<input type="text" v-model = "filterRating"></input>
 		<input type="submit" value="Search" v-on:click = "searchForFacility"></input>
 	</form>
-	<table border="1">
+	<table id="sportObject-table" border="1">
 		<tr>
 			<td>Name</td>
 			<td>Type</td>
@@ -62,10 +65,11 @@ Vue.component("Mainpage", {
 		},
 		searchForFacility: function() {
 			event.preventDefault();
-			console.log(this.filter)
-			console.log(this.search)
-			if(this.search != "") {
-				axios.get("/rest/facilities/search/",  {params: { search: this.search, filter: this.filter }})
+			this.filter = this.filterName + "," + this.filterType + "," 
+						+ this.filterLocation + "," + this.filterRating;
+						
+			if(this.filter != "") {
+				axios.get("/rest/facilities/search/",  {params: { filter: this.filter}})
 	    		.then(response => {
 					this.facilities = response.data
 				}).catch(error => {
