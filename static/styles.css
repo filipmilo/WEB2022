@@ -57,4 +57,13 @@ td {
     margin-top: 20px;
 }
 
+.navbar-nav {
+	margin-right: 30px;
+}
+
+.nav-item {
+	margin-right: 10px;
+}
+
+
 /*#endregion*/
