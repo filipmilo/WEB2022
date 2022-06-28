@@ -12,9 +12,9 @@ Vue.component("Mainpage", {
 	template: ` 
 <div>
 	<div >
-		<button v-if = "this.role == '' || this.role === 'ADMIN'" v-on:click = "showRegisterUser"> {{this.registerMessage}} </button>
-		<button v-if = "this.role == ''" v-on:click = "showLoginUser"> Login </button>
-		<button v-if = "this.role != ''" v-on:click = "logout"> Logout </button>
+		<button v-if = "this.role === 'ADMIN'" v-on:click = "showRegisterUser"> Register new users </button>
+		<!--<button v-if = "this.role == ''" v-on:click = "showLoginUser"> Login </button>
+		<button v-if = "this.role != ''" v-on:click = "logout"> Logout </button>-->
 		
 	</div>
 	<form>
@@ -83,12 +83,29 @@ Vue.component("Mainpage", {
 			localStorage.removeItem('jwt');
 			this.role = '';
 			this.registerMessage = 'Register';
+			
+			this.$root.$emit('messageFromChild1ToChild2', 'false');
 		
 			alert("Logged out");
 		}
 	},
 	mounted () {
-		this.role = this.$route.params.role;
+		
+		this.$root.$on('messageFromChild2ToChild1', (text) => {
+			if(text === 'false') {
+				this.role = '';
+			} else {
+				var toParsee = localStorage.getItem('jwt');
+				var rolee;
+				
+				if(!toParsee)
+					rolee = ''
+				else
+					rolee = JSON.parse(toParse).role;
+					
+				this.role = rolee;
+			}
+		});
 		
 		var toParse = localStorage.getItem('jwt');
 		var role;
@@ -99,12 +116,6 @@ Vue.component("Mainpage", {
 			role = JSON.parse(toParse).role;
 			
 		this.role = role;		
-
-		if(this.role === 'ADMIN') {
-			this.registerMessage = 'Register new accounts'
-		} else {
-			this.registerMessage = 'Register'
-		}
 		
 		axios
           .get('rest/facilities/')

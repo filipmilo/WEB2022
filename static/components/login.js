@@ -46,6 +46,8 @@ Vue.component("Login", {
 					this.role = response.data.role;
 					var parsed = JSON.stringify(response.data);
 					localStorage.setItem('jwt', parsed);
+					
+					this.$root.$emit('messageFromChild1ToChild2', 'true');
 				
 					router.push(`/`);
 				} else {
