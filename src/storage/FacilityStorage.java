@@ -13,6 +13,7 @@ import model.SportsFacility;
 
 public class FacilityStorage {
 	private HashMap<String, SportsFacility> allFacilities = new HashMap<String, SportsFacility>();
+	private ArrayList<SportsFacility> allfacs = new ArrayList<SportsFacility>();
 	private File file;
 	
 	public FacilityStorage() {
@@ -64,7 +65,8 @@ public class FacilityStorage {
 				}
 				
 				SportsFacility fac = new SportsFacility(name, type, content, status, logoPath, avgRating, workingHours, longitude, latitude, address);
-				allFacilities.put(name, fac);
+				//allFacilities.put(java.util.UUID.randomUUID().toString(), fac);
+				allfacs.add(fac);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -78,5 +80,9 @@ public class FacilityStorage {
 	
 	public HashMap<String, SportsFacility> getHashMap() {
 		return allFacilities;
+	}
+	
+	public ArrayList<SportsFacility> getArray() {
+		return allfacs;
 	}
 }
