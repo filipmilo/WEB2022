@@ -20,7 +20,12 @@ Vue.component("Navbar", {
         </li>
         
         <li class="nav-item">
-            <router-link class="nav-link" to="/" v-on:click.native="logoutUser" v-if="isLoggedIn">Logout</router-link>
+        	<button class="btn btn-info" @click="logoutUser" v-if="isLoggedIn"  id="logout-button">Logout</button>
+           <!-- <router-link class="nav-link" to="/" v-on:click.native="logoutUser" v-if="isLoggedIn" id="logout-button">Logout</router-link>-->
+        </li>
+        
+        <li class="nav-item">
+            <button class="btn btn-info" @click="$router.push('/profile')" v-if="isLoggedIn" >Profile</button>
         </li>
         
         <li class="nav-item">
@@ -41,6 +46,8 @@ Vue.component("Navbar", {
 			this.$root.$emit('messageFromChild2ToChild1', 'false');
 		
 			alert("Logged out");
+			
+			router.push("/");
         }
 	},
 	mounted () {

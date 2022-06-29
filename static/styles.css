@@ -141,6 +141,10 @@
     margin-top: 20px;
 }
 
+#logout-button {
+	margin-right: 20px;
+}
+
 #register-div {
     width: 400px;
     height: 700px;
@@ -161,9 +165,7 @@
     transform: translateY(-50%);
 }
 
-#loginButton {
-    margin-right: 10px;
-}
+
 
 #register-button {
     margin-left: 10px;
