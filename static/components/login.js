@@ -10,7 +10,7 @@ Vue.component("Login", {
 		  }
 	},
 	template: ` 
-<div>
+<div id="login-div">
 	<form>
 		<table>
 			<tr>
@@ -28,7 +28,7 @@ Vue.component("Login", {
 			
 			<tr>
 				<td colspan="2" style="text-align:center">
-					<input type="submit" value="Login" v-on:click = "loginConfirm"></input>
+					<input type="submit" value="Login" v-on:click = "loginConfirm" id="login-button" class="btn btn-info"></input>
 				</td>
 			</tr>
 		</table>

@@ -13,46 +13,47 @@ Vue.component("Mainpage", {
 		    }
 	},
 	template: ` 
-<div>
-	<div id="signin-buttons">
+<div id="mainpage-div">
+	<!--<div id="signin-buttons">
 		<button v-if = "this.role === 'ADMIN'" v-on:click = "showRegisterUser"> Register new users </button>
-		<!--<button v-if = "this.role == ''" v-on:click = "showLoginUser"> Login </button>
-		<button v-if = "this.role != ''" v-on:click = "logout"> Logout </button>-->
+		<button v-if = "this.role == ''" v-on:click = "showLoginUser"> Login </button>
+		<button v-if = "this.role != ''" v-on:click = "logout"> Logout </button>
 		
+	</div>-->
+	<div id="so-div">
+		<div>
+			<form>
+				<div class="form-group">
+					<input type="text" v-model = "filterName" placeholder="Name" class="form-control" id="first-input"></input>
+					<input type="text" v-model = "filterType" placeholder="Type" class="form-control"></input>
+					<input type="text" v-model = "filterLocation" placeholder="Location" class="form-control"></input>
+					<input type="text" v-model = "filterRating" placeholder="Rating" class="form-control"></input>
+
+					<input type="submit" value="Search" v-on:click = "searchForFacility" class="btn btn-primary"></input>
+				</div>
+			</form>
+		</div>
+
+		<div v-for="(f, index) in facilities" id="list-div">
+			<div class="img-div">
+				<img src="Hattrick.png"/>
+			</div>
+			<div id="info-div">
+				<router-link class="nav-link" to="/">
+					{{ f.name }}
+				</router-link>
+				<hr class="separator"></hr>
+				<div id="type-content-div">
+					<p class="so-p" id="p-type"> Type: {{ f.type }} </p>
+					<p class="so-p" id="p-content"> Content: {{ f.content }} </p>
+				</div>
+				<p class="so-p" id="p-location"> Location: {{ f.location.address.split(',')[1] }} </p>
+				<p class="so-p" id="p-avgRating"> Rating: {{ f.avgRating }} </p>
+				<p class="so-p" id="p-workingHours"> Working Hours: {{ f.workingHours }} </p>
+			</div>
+			
+		</div>
 	</div>
-	<form id="search-form">
-		Name:
-		<input type="text" v-model = "filterName"></input>
-		Type:
-		<input type="text" v-model = "filterType"></input>
-		Location:
-		<input type="text" v-model = "filterLocation"></input>
-		Rating:
-		<input type="text" v-model = "filterRating"></input>
-		<input type="submit" value="Search" v-on:click = "searchForFacility"></input>
-	</form>
-	<table id="sportObject-table" border="1">
-		<tr>
-			<td>Name</td>
-			<td>Type</td>
-			<td>Content</td>
-			<td>Status</td>
-			<td>Location</td>
-			<td>Rating</td>
-			<td>Working Hours</td>
-		</tr>
-		
-		<tr v-for="(f, index) in facilities">
-			<td>{{ f.name }}</td>
-			<td>{{ f.type }}</td>
-			<td>{{ f.content }}</td>
-			<td v-if="f.status">Open</td>
-			<td v-else>Closed</td>
-			<td>{{ f.location.address.split(',')[1] }}</td>
-			<td>{{ f.avgRating }}</td>
-			<td>{{ f.workingHours }}</td>
-		</tr>
-	</table>
 </div>
 `
 	, 
@@ -91,6 +92,26 @@ Vue.component("Mainpage", {
 			this.$root.$emit('messageFromChild1ToChild2', 'false');
 		
 			alert("Logged out");
+		}
+	},
+	watch: {
+		filterName(value) {
+			this.filter = this.filterName + "," + this.filterType + "," 
+						+ this.filterLocation + "," + this.filterRating;
+						
+			if(this.filter != "") {
+				axios.get("/rest/facilities/search/",  {params: { filter: this.filter}})
+	    		.then(response => {
+					this.facilities = response.data
+				}).catch(error => {
+	    			console.log(error.response)
+				});	
+			} else {
+				axios.get('rest/facilities/')
+		        .then(response => {
+					this.facilities = response.data
+				})
+			}
 		}
 	},
 	mounted () {

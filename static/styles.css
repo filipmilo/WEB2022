@@ -1,21 +1,5 @@
 /*#region Mainpage style*/
 
-#mainpage-div {
-    width: 50%;
-    height: 50%;
-
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    text-align: center;
-}
-
-#facility-table {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 150px;
-}
-
 .mainpage-button {
     width: 140px;
     height: 40px;
@@ -33,37 +17,175 @@
     cursor: pointer;
 }
 
-#mainpage-form {
-    margin-top: 20px;
-}
-
 #signin-buttons {
     margin-top: 20px;
     text-align: center;
 }
 
-td {
-    padding: 0 15px;
+.form-group {
+    padding: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-basis: 100%;
 }
 
-#search-form {
+.form-group > input {
+    margin-left: 10px;
+    width: 150px;
+    flex-basis: 100%;
+}
+
+#first-input {
+    margin-left: 0px;
+}
+
+#list-div {
+    display: flex;
     margin-top: 20px;
-    text-align: center;
+    border: thin solid black;
+    padding: 10px;
+    height: 225px;
 }
 
-#sportObject-table {
+#list-div:hover {
+    border: thin solid blue;
+    background-color: aliceblue;
+}
+
+/*#region img-div style*/
+#list-div .img-div {
+    width: 30%;
+}
+
+#list-div .img-div img {
+    width: 100%;
+    height: 100%
+}
+/*#endregion*/
+
+/*#region info-div style*/
+#list-div #info-div {
+    width: 100%;
+}
+
+#list-div #info-div .nav-link {
+    color: black;
+    font-weight: 500;
+    font-size: 48px;
+    width: fit-content;
+    font-family: 'Lora';
+
+    margin: 0;
+    padding: 0;
+    margin-left: 10px;
+}
+
+.so-p {
+    margin: 0;
+    padding: 0;
+
+    margin-left: 10px;
+}
+
+.separator {
+    padding: 0;
+    margin: 0;
+    margin-left: 10px;
+}
+/*#endregion*/
+
+#so-div {
+    width: 1020px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    padding: 20px;
+    border-left: solid thick black;
+    border-right: solid thick black;
+    border-bottom: solid thick black;
+}
+
+#navbar-div {
+    width: 100%;
+    background-color: white;
+    border-bottom: solid thick black;
+}
+
+#navbar {
+    font-size: large;
+}
+
+#login-div {
+    width: 400px;
+    height: 500px;
+    background-color: white;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    border: solid thick black;
 }
 
-.navbar-nav {
-	margin-right: 30px;
+#login-div > form {
+    width: fit-content;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
 }
 
-.nav-item {
-	margin-right: 10px;
+#login-button  {
+    margin-top: 20px;
 }
 
+#register-div {
+    width: 400px;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    border: solid thick black;
+    
+}
+
+#register-div .inner-div {
+    width: fit-content;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#loginButton {
+    margin-right: 10px;
+}
+
+#register-button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#home-navbar {
+    color: black;
+    display: flex;
+}
+
+#home-navbar > p {
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 24px;
+}
+
+/*#endregion*/
+
+@font-face {
+    font-family: 'Lora', serif;
+    src: url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap'); /*URL to font*/
+}
 
 /*#endregion*/
