@@ -31,6 +31,12 @@ Vue.component("Register", {
 						<input type="password" v-model = "user.password"></input>
 					</td>
 				</tr>
+        <tr>
+          <td>
+            <p>Confirm Password: {{passwordMessage}} </p>
+            <input type="password" v-model = "confirmPassword"  @change="confPassword"></input>
+          </td>
+			  </tr>
 				<tr>
 					<td>
 						<p>Name: </p>
@@ -80,9 +86,13 @@ Vue.component("Register", {
 	</div>
 </div>
 `
-	,
-	methods: {
-		registerUser: function () {
+	, 
+	methods : {
+		registerUser : function() {
+			if(this.user.password != this.confirmPassword) {
+				alert("Please enter confirmation password");
+				return;
+			}
 			event.preventDefault();
 			axios
 				.post('rest/users/register/', this.user)
@@ -92,7 +102,16 @@ Vue.component("Register", {
 		},
 		showLogin: function () {
 			router.push(`/login`);
+		},
+		confPassword: function() {
+			if(this.user.password === this.confirmPassword) {
+				this.passwordMessage = '';
+			} else {
+				this.passwordMessage = 'PLEASE ENTER THE SAME PASSWORD!!';				
+			}
+			
 		}
+		
 	},
 	mounted() {
 		this.user.role = this.$route.params.role;
@@ -106,7 +125,5 @@ Vue.component("Register", {
 			role = JSON.parse(toParse).role;
 
 		this.user.role = role;
-
-		console.log(this.user.role)
 	}
 });
