@@ -5,17 +5,18 @@ Vue.component("Navbar", {
 		  }
 	},
 	template: ` 
-<div>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="nav-link" href="/">
-    <img src="logo.png" width="48" height="48"/>
-    Sportify
+<div id="navbar-div">
+    <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+    <a class="nav-link" href="/" id="home-navbar">
+		<img src="logo.png" width="64" height="64"/>
+		<p>Home</p>
     </a>
 
     <div class="collapse navbar-collapse">
     <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-            <router-link class="nav-link" to="/login" v-if="!isLoggedIn">Login</router-link>
+			<button class="btn btn-info" @click="$router.push('/login')" v-if="!isLoggedIn" id="loginButton">Login</button>
+            <!--<router-link class="nav-link" to="/login" tag="button" v-if="!isLoggedIn">Login</router-link>-->
         </li>
         
         <li class="nav-item">
@@ -23,7 +24,8 @@ Vue.component("Navbar", {
         </li>
         
         <li class="nav-item">
-            <router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>
+			<button class="btn btn-info" @click="$router.push('/register')" v-if="!isLoggedIn" id="register-button">Register</button>
+            <!--<router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>-->
         </li>
     </ul>
     </div>
