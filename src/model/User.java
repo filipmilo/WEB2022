@@ -222,5 +222,16 @@ public class User {
 		default:
 			return "";		}
 	} 
-	
+
+	public String getGenderStr() {
+		switch(this.gender) {
+		case MALE:
+			return "MALE";
+		case FEMALE:
+			return "FEMALE";
+		default:
+			return "";
+		}
+		
+	}
 }

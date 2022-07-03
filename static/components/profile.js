@@ -35,7 +35,7 @@ Vue.component("Profile", {
 			<tr>
 				<td>
 					<p>Username: </p>
-					<input type="text" v-model = "profileData.username" :disabled="!isEdit"></input>
+					<input type="text" v-model = "profileData.username" :disabled="true"></input>
 				</td>
 			</tr>
 			<tr>
@@ -77,7 +77,7 @@ Vue.component("Profile", {
 			
 			<tr>
 				<td colspan="1" style="text-align:center">
-					<input type="submit" value="Confirm edit" v-if="isEdit"  id="login-button" class="btn btn-info"></input>
+					<input type="submit" value="Confirm edit" v-if="isEdit" @click="save"  id="login-button" class="btn btn-info"></input>
 				</td>
 				
 				<td colspan="1" style="text-align:center">
@@ -117,9 +117,64 @@ Vue.component("Profile", {
 			this.profileData.role = this.roleBackup;
 			this.isEdit = false;
 			
+		},
+		
+		save: function() {
+			var toParse = localStorage.getItem('jwt');
+			var jwtt = '';
+			if(!toParse)
+				alert("ERROR USER NOT LOGGED IN");
+			else {
+				jwtt = JSON.parse(toParse).jwt;
+			}
+			
+			axios.post("/rest/users/edit/", this.profileData, {
+			  headers: { Authorization: `Bearer ${jwtt}` }
+			})
+			.then(response => {
+				if(response === null) {
+					alert("User session expired");
+					localStorage.removeItem('jwt');
+					this.$root.$emit('messageFromChild1ToChild2', 'false');
+					router.push('/');
+				}
+				
+				this.profileData = response.data;
+				this.isEdit = false;
+				this.fullName = this.profileData.name + ' ' + this.profileData.surname;	
+				
+				alert("Successfully saved!");
+			});
 		}
 	},
 	mounted () {
+		//rest/users/getData/
+		var toParse = localStorage.getItem('jwt');
+		var jwtt = '';
+		var usernamee = '';
 		
+		if(!toParse)
+			alert("ERROR USER NOT LOGGED IN");
+		else {
+			jwtt = JSON.parse(toParse).jwt;
+			usernamee = JSON.parse(toParse).username;
+		}
+			
+		 axios.get("/rest/users/getData/",  {
+				params: { username: usernamee},
+				headers: {Authorization: `Bearer ${jwtt}`}
+			})
+	          .then(response => {
+				if(response.data === null) {
+					alert("User session expired");
+					localStorage.removeItem('jwt');
+					this.$root.$emit('messageFromChild1ToChild2', 'false');
+					router.push('/');
+				}	
+				
+				this.profileData = response.data;
+				
+				this.fullName = this.profileData.name + ' ' + this.profileData.surname;	
+			});
     }
 });

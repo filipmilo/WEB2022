@@ -6,10 +6,9 @@ import static spark.Spark.post;
 import java.security.Key;
 import java.util.Date;
 
-import org.eclipse.jetty.server.Authentication;
-
 import com.google.gson.Gson;
 
+import dto.EditUserDTO;
 import dto.RegisterDTO;
 import dto.UserJwtDTO;
 import io.jsonwebtoken.Jwts;
@@ -66,21 +65,39 @@ public class UserController {
 		}); 
 	}
 	
-	public static void EditUserInfo() {
-		get("rest/users/edit/", (req, res) -> {
-			
-			//String jwt = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb2ZpIiwiZXhwIjoxNjU2Njg1MzA0LCJpYXQiOjE2NTY2NzgxMDR9.OW4_ZTm_alS3JDOP6uorG0tHHcxfvQiy2SvnW8FLR88";
+	public static void getUserData() {
+		get("rest/users/getData/", (req, res) -> {
+			res.type("application/json");
 			String username = req.queryParams("username");
-			String password = req.queryParams("password");
-			String name = req.queryParams("name");
-			String surname = req.queryParams("surname");
+			String jwt = req.headers("Authorization");
+			
+			if(!Authorization.isLoggedIn(key, jwt))
+			return "null";
+			
+			User user = userService.getUser(username);
+			
+			return g.toJson(new EditUserDTO(user.getUsername(), user.getPassword(), user.getName(), user.getSurname(),user.getGenderStr(), user.getDateOfBirth().toString(), user.getRoleStr()));
+		}); 
+	}
+	
+	public static void EditUserInfo() {
+		post("rest/users/edit/", (req, res) -> {
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(key, jwt))
+			return "null";
+			
+			EditUserDTO user = g.fromJson(req.body(), EditUserDTO.class);
+			
+			String username = user.getUsername();
+			String password = user.getPassword();
+			String name = user.getName();
+			String surname = user.getSurname();
 			
 			String changes = password + "," + name + "," + surname;
 			
-			/*if(!Authorization.isLoggedIn(key, jwt))
-				return "nothing";*/
+			User convert = userService.editUser(username, changes);
 			
-			return g.toJson(userService.editUser(username, changes));
+			return g.toJson(user);
 			
 		});
 	}
