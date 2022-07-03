@@ -116,4 +116,9 @@ public class UserStorage {
 		save();
 		return true;
 	}
+	
+	public boolean removeUser(User user) {
+		allUsers.remove(user);
+		return true;
+	}
 }

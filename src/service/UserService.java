@@ -23,12 +23,40 @@ public class UserService {
 			return null;
 	}
 	
+	public User getUser(String username) {
+		User user = users.getUser(username);
+		if(user == null)
+			return null;
+		
+		return user;
+	}
+	
 	public boolean addUser(User user) {
 		if(users.getUser(user.getUsername()) == null) 
 			return users.addUser(user);
 		else 
 			return false;
 		
+	}
+	
+	public User editUser(String username, String changes) {
+		
+		for(User user: users.getAll())
+			if(user.getUsername().equals(username))
+				users.removeUser(user);
+		
+		String[] changedValues = changes.split(",");
+		User user = users.getUser(username);
+		
+		user.setPassword(changedValues[0]);
+		user.setName(changedValues[1]);
+		user.setSurname(changedValues[2]);
+//		user.setGender();
+//		user.setDateOfBirth();
+//		user.setRole();
+		
+		users.addUser(user);
+		return user;
 	}
 	
 }
