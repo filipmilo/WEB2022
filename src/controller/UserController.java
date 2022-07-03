@@ -6,6 +6,8 @@ import static spark.Spark.post;
 import java.security.Key;
 import java.util.Date;
 
+import org.eclipse.jetty.server.Authentication;
+
 import com.google.gson.Gson;
 
 import dto.RegisterDTO;
@@ -15,6 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import model.User;
 import service.UserService;
+import util.Authorization;
 import util.GsonSerializer;
 
 public class UserController {
@@ -61,6 +64,25 @@ public class UserController {
 			}
 			
 		}); 
+	}
+	
+	public static void EditUserInfo() {
+		get("rest/users/edit/", (req, res) -> {
+			
+			//String jwt = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb2ZpIiwiZXhwIjoxNjU2Njg1MzA0LCJpYXQiOjE2NTY2NzgxMDR9.OW4_ZTm_alS3JDOP6uorG0tHHcxfvQiy2SvnW8FLR88";
+			String username = req.queryParams("username");
+			String password = req.queryParams("password");
+			String name = req.queryParams("name");
+			String surname = req.queryParams("surname");
+			
+			String changes = password + "," + name + "," + surname;
+			
+			/*if(!Authorization.isLoggedIn(key, jwt))
+				return "nothing";*/
+			
+			return g.toJson(userService.editUser(username, changes));
+			
+		});
 	}
 	
 }

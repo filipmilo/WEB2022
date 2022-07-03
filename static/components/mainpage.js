@@ -14,12 +14,9 @@ Vue.component("Mainpage", {
 	},
 	template: ` 
 <div id="mainpage-div">
-	<!--<div id="signin-buttons">
+	<div id="signin-buttons">
 		<button v-if = "this.role === 'ADMIN'" v-on:click = "showRegisterUser"> Register new users </button>
-		<button v-if = "this.role == ''" v-on:click = "showLoginUser"> Login </button>
-		<button v-if = "this.role != ''" v-on:click = "logout"> Logout </button>
-		
-	</div>-->
+	</div>
 	<div id="so-div">
 		<div>
 			<form>
@@ -83,15 +80,6 @@ Vue.component("Mainpage", {
 				})
 			}
 	
-		},
-		logout: function() {
-			localStorage.removeItem('jwt');
-			this.role = '';
-			this.registerMessage = 'Register';
-			
-			this.$root.$emit('messageFromChild1ToChild2', 'false');
-		
-			alert("Logged out");
 		}
 	},
 	watch: {
