@@ -15,8 +15,6 @@ public class SportsFacility {
 	private String workingHours;
 	
 	
-	
-	
 	public SportsFacility(String name, String type, String content, boolean status, String logoPath, double avgRating,
 			String workingHours, double longitude, double latitude, String address) {
 		super();

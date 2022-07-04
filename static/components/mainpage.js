@@ -4,12 +4,15 @@ Vue.component("Mainpage", {
 				message: "Test",
 				role: "",
 				facilities: null,
-				filter: "",
+				search: "",
 				registerMessage: "",
-				filterName: "",
-				filterType: "",
-				filterLocation: "",
-				filterRating: ""
+				searchName: "",
+				searchType: "",
+				searchLocation: "",
+				searchRating: "",
+				sortName: 0,
+				sortLocation: 0,
+				sortRating: 0
 		    }
 	},
 	template: ` 
@@ -21,15 +24,36 @@ Vue.component("Mainpage", {
 	<div id="so-div">
 		<div>
 			<form>
-				<div class="form-group">
-					<input type="text" v-model = "filterName" placeholder="Name" class="form-control" id="first-input"></input>
-					<input type="text" v-model = "filterType" placeholder="Type" class="form-control"></input>
-					<input type="text" v-model = "filterLocation" placeholder="Location" class="form-control"></input>
-					<input type="text" v-model = "filterRating" placeholder="Rating" class="form-control"></input>
+				<div class="search-group">
+					<div class="searchName-group">
+						<input type="text" v-model = "searchName" placeholder="Name" class="form-control" id="first-input"></input>
+						<button id="nameButton" v-on:click="sortBy" class="btn btn-light btn-outline-dark">A-Z</button>
+					</div>
+					<div class="searchType-group">
+						<input type="text" v-model = "searchType" placeholder="Type" class="form-control"></input>
+					</div>
+					<div class="searchLocation-group">
+						<input type="text" v-model = "searchLocation" placeholder="Location" class="form-control"></input>
+						<button id="locationButton" v-on:click="sortBy" class="btn btn-light btn-outline-dark">A-Z</button>
+					</div>
+					<div class="searchRating-group">
+						<input type="text" v-model = "searchRating" placeholder="Rating" class="form-control"></input>
+						<button id="ratingButton" v-on:click="sortBy" class="btn btn-light btn-outline-dark">▼</button>
+					</div>
 
 					<input type="submit" value="Search" v-on:click = "searchForFacility" class="btn btn-primary"></input>
 				</div>
 			</form>
+			<!--<form>
+				<div class="sort-group">
+					<input type="text" v-model = "searchName" placeholder="Name" class="form-control" id="first-input"></input>
+					<input type="text" v-model = "searchType" placeholder="Type" class="form-control"></input>
+					<input type="text" v-model = "searchLocation" placeholder="Location" class="form-control"></input>
+					<input type="text" v-model = "searchRating" placeholder="Rating" class="form-control"></input>
+
+					<input type="submit" value="Search" v-on:click = "searchForFacility" class="btn btn-primary"></input>
+				</div>
+			</form>-->
 		</div>
 
 		<div v-for="(f, index) in facilities" id="list-div">
@@ -68,13 +92,16 @@ Vue.component("Mainpage", {
 		},
 		searchForFacility: function() {
 			event.preventDefault();
-			this.filter = this.filterName + "," + this.filterType + "," 
-						+ this.filterLocation + "," + this.filterRating;
+			this.search = this.searchName + "," + this.searchType + "," 
+						+ this.searchLocation + "," + this.searchRating;
 						
-			if(this.filter != "") {
-				axios.get("/rest/facilities/search/",  {params: { filter: this.filter}})
+			if(this.search != ",,,") {
+				axios.get("/rest/facilities/search/",  {params: { filter: this.search}})
 	    		.then(response => {
 					this.facilities = response.data
+					this.facilities.sort(function(a,b) {
+						return b.status - a.status;
+					})
 				}).catch(error => {
 	    			console.log(error.response)
 				});	
@@ -82,31 +109,100 @@ Vue.component("Mainpage", {
 				axios.get('rest/facilities/')
 		        .then(response => {
 					this.facilities = response.data
+					this.facilities.sort(function(a,b) {
+						return b.status - a.status;
+					})
+					document.getElementById('nameButton').setAttribute('class', 'btn btn-light btn-outline-dark');
+					document.getElementById('nameButton').textContent = 'A-Z';
+					document.getElementById('locationButton').setAttribute('class', 'btn btn-light btn-outline-dark');
+					document.getElementById('locationButton').textContent = 'A-Z';
+					document.getElementById('ratingButton').setAttribute('class', 'btn btn-light btn-outline-dark');
+					document.getElementById('ratingButton').textContent = '▼';
 				})
 			}
 	
 		},
 		createSportsFacility: function() {
 			router.push('/createFacility');
-		}
-	},
-	watch: {
-		filterName(value) {
-			this.filter = this.filterName + "," + this.filterType + "," 
-						+ this.filterLocation + "," + this.filterRating;
-						
-			if(this.filter != "") {
-				axios.get("/rest/facilities/search/",  {params: { filter: this.filter}})
-	    		.then(response => {
-					this.facilities = response.data
-				}).catch(error => {
-	    			console.log(error.response)
-				});	
-			} else {
-				axios.get('rest/facilities/')
-		        .then(response => {
-					this.facilities = response.data
-				})
+		},
+		sortBy: function() {
+			event.preventDefault();
+			switch(window.event.target.id) {
+				case 'nameButton':
+					this.sortName = this.sortToggler(this.sortName, window.event.target, 'A-Z', 'Z-A');
+					break;
+				case 'locationButton':
+					this.sortLocation = this.sortToggler(this.sortLocation, window.event.target, 'A-Z', 'Z-A');
+					break;
+				case 'ratingButton':
+					this.sortRating = this.sortToggler(this.sortRating, window.event.target, '▼', '▲');
+					break;
+			}
+
+			this.facilitySort(this.sortName, this.sortLocation, this.sortRating);
+
+		},
+		sortToggler: function(sorty, trigger, ascending, descending) {
+			++sorty;
+
+			if(sorty === 3) {
+				sorty = 0;
+				trigger.setAttribute('class', 'btn btn-light btn-outline-dark');
+				trigger.textContent = ascending;
+				return sorty;
+			}
+
+			switch(sorty) {
+				case 0:
+					trigger.setAttribute('class', 'btn btn-light btn-outline-dark');
+					trigger.textContent = ascending;
+					break;
+				case 1:
+					trigger.setAttribute('class', 'btn btn-primary');
+					trigger.textContent = ascending;
+					break;
+				case 2:
+					trigger.textContent = descending;
+					break;
+			}
+			return sorty;
+		},
+		facilitySort: function(sortName, sortLocation, sortRating) {
+			console.log(sortName + ", " + sortLocation + ", " + sortRating);
+
+			switch(sortRating) {
+				case 0:
+					break;
+				case 1:
+					this.facilities.sort((a, b) => b.avgRating - a.avgRating);
+					break;
+				case 2:
+					this.facilities.sort((a, b) => a.avgRating - b.avgRating);
+					break;
+			}
+
+			switch(sortLocation) {
+				case 0:
+					
+					break;
+				case 1:
+					this.facilities.sort((a, b) => a.location.address.split(',')[1].localeCompare(b.location.address.split(',')[1]));
+					break;
+				case 2:
+					this.facilities.sort((a, b) => b.location.address.split(',')[1].localeCompare(a.location.address.split(',')[1]));
+					break;
+			}
+
+			switch(sortName) {
+				case 0:
+					this.searchForFacility();
+					break;
+				case 1:
+					this.facilities.sort((a, b) => a.name.localeCompare(b.name));
+					break;
+				case 2:
+					this.facilities.sort((a, b) => b.name.localeCompare(a.name));
+					break;
 			}
 		}
 	},
