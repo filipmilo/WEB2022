@@ -62,30 +62,36 @@ Vue.component("Profile", {
 			<tr>
 				<td>
 					<p>Gender: </p>
-					<input type="text" v-model = "profileData.gender" :disabled="!isEdit"></input>
+					<!--<input type="text" v-model = "profileData.gender" :disabled="!isEdit"></input>-->
+					<input type="radio" value="MALE" v-model="profileData.gender" :disabled="!isEdit" :checked="profileData.gender === 'MALE'">Male</input>
+					<input type="radio" value="FEMALE" v-model="profileData.gender" :disabled="!isEdit" :checked="profileData.gender === 'FEMALE'">Female</input>
 				</td>
 			</tr>
 			
 			<tr>
 				<td>
 					<p>Date of birth: </p>
-					<input type="text" v-model = "profileData.dateOfBirth" :disabled="!isEdit"></input>
+					<!--<input type="text" v-model = "profileData.dateOfBirth" :disabled="!isEdit"></input>-->
+					<input type="date" v-model = "profileData.dateOfBirth" :disabled="!isEdit"></input>
 				</td>
 			</tr>
 			
 			
 			
 			<tr>
+				<td colspan="2" style="text-align:center">
+					<button class="btn btn-info" v-if="!isEdit" @click="editEnable" >Edit</button>
+				</td>
+			
+				
+			</tr>
+			<tr>
 				<td colspan="1" style="text-align:center">
-					<input type="submit" value="Confirm edit" v-if="isEdit" @click="save"  id="login-button" class="btn btn-info"></input>
+					<input type="submit" value="Confirm edit" v-if="isEdit" @click="save" class="btn btn-info"></input>
 				</td>
 				
 				<td colspan="1" style="text-align:center">
 					<button class="btn btn-info" v-if="isEdit" @click="cancelEdit" >Cancel</button>
-				</td>
-				
-				<td colspan="1" style="text-align:center">
-					<button class="btn btn-info" v-if="!isEdit" @click="editEnable" >Edit</button>
 				</td>
 			</tr>
 		</table>

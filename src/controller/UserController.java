@@ -92,8 +92,10 @@ public class UserController {
 			String password = user.getPassword();
 			String name = user.getName();
 			String surname = user.getSurname();
+			String date = user.getDateofBirth();
+			String gender = user.getGender();
 			
-			String changes = password + "," + name + "," + surname;
+			String changes = password + "," + name + "," + surname + "," + gender + "," + date;
 			
 			User convert = userService.editUser(username, changes);
 			

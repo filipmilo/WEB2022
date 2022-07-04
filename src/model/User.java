@@ -136,6 +136,17 @@ public class User {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+	
+	public void setGender(String gender) {
+		switch(gender) {
+		case "MALE":
+			this.gender = Gender.MALE;
+			break;
+		case "FEMALE":
+			this.gender = Gender.FEMALE;
+			break;
+		}
+	}
 
 	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
