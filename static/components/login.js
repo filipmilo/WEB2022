@@ -48,6 +48,7 @@ Vue.component("Login", {
 					localStorage.setItem('jwt', parsed);
 					
 					this.$root.$emit('messageFromChild1ToChild2', 'true');
+					this.$root.$emit('usernameMessage', response.data.username);
 				
 					router.push(`/`);
 				} else {
