@@ -29,6 +29,11 @@ public class UserController {
 	public static void getUsers() {
 		get("rest/users/", (req, res) -> {
 			res.type("application/json");
+			
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(key, jwt))
+				return "null";
+			
 			return g.toJson(userService.getUsers());
 		});
 	}
