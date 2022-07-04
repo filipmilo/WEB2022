@@ -5,6 +5,7 @@ const Navbar = {template: '<navbar></navbar>' }
 const Profile = {template: '<profile></profile>'}
 const Createfacility = {template: '<createfacility></createfacility>' }
 const Facilitypage = {template: '<facilitypage></facilitypage>'}
+const Allusers = {template: '<allusers></allusers>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -14,7 +15,8 @@ const router = new VueRouter({
 		{ path: '/', component: Mainpage},
 		{ path: '/register', name: 'home', component: Register},
 		{ path: '/profile', component: Profile},
-		{ path: '/facilityPage', name: 'facilityPage', component: Facilitypage}
+		{ path: '/facilityPage', name: 'facilityPage', component: Facilitypage},
+		{ path: '/allUsers', component: Allusers}
 	  ]
 });
 

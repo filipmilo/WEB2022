@@ -1,5 +1,5 @@
-stefan;123;stefan;pekez;MALE;2022-06-23;CUSTOMER
-cofi;123;Filip;Milosevic;MALE;2001-01-29;ADMIN
+stefan;123;Stefan;Pekez;MALE;2022-06-24;CUSTOMER
+cofi;123;Filip;Milosevic;MALE;2001-01-30;ADMIN
 rob;123;Robert;Whittaker;MALE;2022-06-22;COACH
 meki;123;Marko;Markovic;MALE;2007-01-01;CUSTOMER
 Nikola;123;Nikola;Nikolic;MALE;2022-06-22;CUSTOMER

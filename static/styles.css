@@ -142,7 +142,17 @@
     width: 100%;
 }
 
-#list-div #info-div .nav-link {
+#profiles-div {
+	width: 50%;
+    height: 250px;
+    border-width: 2px;
+    border-style:ridge;
+    margin: 0 auto;
+
+    margin-top: 20px;
+}
+
+#list-div #info-div .nav-link{
     color: black;
     font-weight: 500;
     font-size: 48px;
@@ -163,6 +173,7 @@
 
 #title-div {
     display: flex;
+    margin-left: 10px;
 }
 
 #title-div > p {
