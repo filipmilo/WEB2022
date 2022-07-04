@@ -21,7 +21,7 @@
     text-align: center;
 }
 
-.form-group {
+.search-group {
     padding: 0;
     width: 100%;
     margin-left: auto;
@@ -30,7 +30,66 @@
     flex-basis: 100%;
 }
 
-.form-group > input {
+.search-group > div {
+    margin-left: 10px;
+    width: 150px;
+    display: flex;
+    flex-basis: 100%;
+}
+
+.search-group .searchName-group {
+    margin-left: 0px;
+}
+
+.search-group .searchName-group #nameButton {
+    margin-left: 0px;
+    border: thin solid black;
+}
+
+.search-group .searchType-group {
+    margin-left: 5px;
+}
+
+.search-group .searchType-group #typeButton {
+    margin-left: 0px;
+    visibility: hidden;
+}
+
+.search-group .searchLocation-group {
+    margin-left: 5px;
+}
+
+.search-group .searchLocation-group #locationButton {
+    margin-left: 0px;
+}
+
+.search-group .searchLocation-group #locationButton:hover {
+    color: white;
+}
+
+.search-group .searchRating-group {
+    margin-left: 5px;
+}
+
+.search-group .searchRating-group #ratingButton {
+    margin-left: 0px;
+    margin-right: 5px;
+}
+
+.search-group .searchRating-group #ratingButton:hover {
+    color: white;
+}
+
+.sort-group {
+    padding: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-basis: 100%;
+}
+
+.sort-group > input {
     margin-left: 10px;
     width: 150px;
     flex-basis: 100%;
