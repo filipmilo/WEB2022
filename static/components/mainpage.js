@@ -16,6 +16,7 @@ Vue.component("Mainpage", {
 <div id="mainpage-div">
 	<div id="signin-buttons">
 		<button v-if = "this.role === 'ADMIN'" v-on:click = "showRegisterUser"> Register new users </button>
+		<button v-if = "this.role === 'ADMIN'" v-on:click = "createSportsFacility"> Create Sports Facility </button>
 	</div>
 	<div id="so-div">
 		<div>
@@ -33,12 +34,16 @@ Vue.component("Mainpage", {
 
 		<div v-for="(f, index) in facilities" id="list-div">
 			<div class="img-div">
-				<img src="Hattrick.png"/>
+				<img :src="f.logoPath"/>
 			</div>
 			<div id="info-div">
-				<router-link class="nav-link" to="/">
-					{{ f.name }}
-				</router-link>
+				<div id="title-div">
+					<router-link class="nav-link" to="/">
+						{{ f.name }}
+					</router-link>
+					<p class="so-p" id="p-location" v-if="f.status"> Open </p>
+					<p class="so-p" id="p-location" v-else> Closed </p>
+				</div>
 				<hr class="separator"></hr>
 				<div id="type-content-div">
 					<p class="so-p" id="p-type"> Type: {{ f.type }} </p>
@@ -80,6 +85,9 @@ Vue.component("Mainpage", {
 				})
 			}
 	
+		},
+		createSportsFacility: function() {
+			router.push('/createFacility');
 		}
 	},
 	watch: {
@@ -134,7 +142,9 @@ Vue.component("Mainpage", {
           .get('rest/facilities/')
           .then(response => {
 				this.facilities = response.data
+				this.facilities.sort(function(a,b) {
+					return b.status - a.status;
+				})
 			})
-		
     }
 });

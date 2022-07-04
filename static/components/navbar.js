@@ -5,12 +5,12 @@ Vue.component("Navbar", {
 		  }
 	},
 	template: ` 
-<div id="navbar-div">
-    <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-    <a class="nav-link" href="/" id="home-navbar">
-		<img src="logo.png" width="64" height="64"/>
-		<p>Home</p>
-    </a>
+<div id="navbar-maindiv">
+	<nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+		<a class="nav-link" href="/" id="home-navbar">
+			<img src="logo.png" width="64" height="64"/>
+			<p>Home</p>
+		</a>
 
     <div class="collapse navbar-collapse">
     <ul class="navbar-nav ms-auto">
