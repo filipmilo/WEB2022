@@ -18,8 +18,10 @@ Vue.component("Mainpage", {
 	template: ` 
 <div id="mainpage-div">
 	<div id="signin-buttons">
-		<button v-if = "this.role === 'ADMIN'" v-on:click = "showRegisterUser"> Register new users </button>
-		<button v-if = "this.role === 'ADMIN'" v-on:click = "createSportsFacility"> Create Sports Facility </button>
+		<button v-if = "this.role === 'ADMIN'" v-on:click = "showRegisterUser" class="btn btn-info"> Register new users </button>
+		<button v-if = "this.role === 'ADMIN'" v-on:click = "createSportsFacility" class="btn btn-info"> Create Sports Facility </button>
+		<button v-if = "this.role === 'ADMIN'" v-on:click = "showAllUsers" class="btn btn-info"> View all users </button>
+		
 	</div>
 	<div id="so-div">
 		<div>
@@ -87,6 +89,9 @@ Vue.component("Mainpage", {
 		showRegisterUser: function() {
 			router.push(`/register`);
 		},
+		showAllUsers: function() {
+			router.push(`/allUsers`)
+		},
 		showLoginUser: function() {
 			router.push(`/login`);
 		},
@@ -143,6 +148,7 @@ Vue.component("Mainpage", {
 
 		},
 		sortToggler: function(sorty, trigger, ascending, descending) {
+			event.preventDefault();
 			++sorty;
 
 			if(sorty === 3) {
@@ -168,6 +174,7 @@ Vue.component("Mainpage", {
 			return sorty;
 		},
 		facilitySort: function(sortName, sortLocation, sortRating) {
+			event.preventDefault();
 			console.log(sortName + ", " + sortLocation + ", " + sortRating);
 
 			switch(sortRating) {
