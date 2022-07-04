@@ -1,5 +1,6 @@
 package service;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import model.User;
@@ -51,8 +52,8 @@ public class UserService {
 		user.setPassword(changedValues[0]);
 		user.setName(changedValues[1]);
 		user.setSurname(changedValues[2]);
-//		user.setGender();
-//		user.setDateOfBirth();
+		user.setGender(changedValues[3]);
+		user.setDateOfBirth(LocalDate.parse(changedValues[4]));
 //		user.setRole();
 		
 		users.addUser(user);

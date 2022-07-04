@@ -12,24 +12,29 @@ Vue.component("Navbar", {
 			<p>Home</p>
 		</a>
 
-		<div class="collapse navbar-collapse">
-			<ul class="navbar-nav ms-auto">
-				<li class="nav-item">
-					<button class="btn btn-info" @click="$router.push('/login')" v-if="!isLoggedIn" id="loginButton">Login</button>
-					<!--<router-link class="nav-link" to="/login" tag="button" v-if="!isLoggedIn">Login</router-link>-->
-				</li>
-				
-				<li class="nav-item">
-					<router-link class="nav-link btn btn-info" to="/" v-on:click.native="logoutUser" v-if="isLoggedIn">Logout</router-link>
-				</li>
-				
-				<li class="nav-item">
-					<button class="btn btn-info" @click="$router.push('/register')" v-if="!isLoggedIn" id="register-button">Register</button>
-					<!--<router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>-->
-				</li>
-			</ul>
-		</div>
-	</nav>
+    <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+			<button class="btn btn-info" @click="$router.push('/login')" v-if="!isLoggedIn" id="loginButton">Login</button>
+            <!--<router-link class="nav-link" to="/login" tag="button" v-if="!isLoggedIn">Login</router-link>-->
+        </li>
+        
+        <li class="nav-item">
+        	<button class="btn btn-info" @click="logoutUser" v-if="isLoggedIn"  id="logout-button">Logout</button>
+           <!-- <router-link class="nav-link" to="/" v-on:click.native="logoutUser" v-if="isLoggedIn" id="logout-button">Logout</router-link>-->
+        </li>
+        
+        <li class="nav-item">
+            <button class="btn btn-info" @click="$router.push('/profile')" v-if="isLoggedIn" >Profile</button>
+        </li>
+        
+        <li class="nav-item">
+			<button class="btn btn-info" @click="$router.push('/register')" v-if="!isLoggedIn" id="register-button">Register</button>
+            <!--<router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>-->
+        </li>
+    </ul>
+    </div>
+    </nav>
 </div>
 `
 	, 
@@ -41,6 +46,8 @@ Vue.component("Navbar", {
 			this.$root.$emit('messageFromChild2ToChild1', 'false');
 		
 			alert("Logged out");
+			
+			router.push("/");
         }
 	},
 	mounted () {

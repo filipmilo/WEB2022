@@ -144,6 +144,16 @@
     border: solid thick black;
 }
 
+#profile-div {
+	width: 450;
+	height: 500;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	border: solid thick black;	
+	
+}
 #login-div > form {
     width: fit-content;
     height: fit-content;
@@ -156,6 +166,10 @@
 
 #login-button  {
     margin-top: 20px;
+}
+
+#logout-button {
+	margin-right: 20px;
 }
 
 #register-div {
@@ -178,9 +192,7 @@
     transform: translateY(-50%);
 }
 
-#loginButton {
-    margin-right: 10px;
-}
+
 
 #register-button {
     margin-left: 10px;

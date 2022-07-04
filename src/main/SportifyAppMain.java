@@ -20,6 +20,7 @@ public class SportifyAppMain {
 		UserController.Register();
 		UserController.Login();
 		UserController.EditUserInfo();
+		UserController.getUserData();
 		
 		FacilityController.getAll();
 		FacilityController.searchFacilities();
