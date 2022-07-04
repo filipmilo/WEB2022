@@ -62,7 +62,7 @@ Vue.component("Mainpage", {
 			</div>
 			<div id="info-div">
 				<div id="title-div">
-					<router-link class="nav-link" to="/">
+					<router-link class="nav-link" :to="{ name: 'facilityPage', params: { facilityID: index } }">
 						{{ f.name }}
 					</router-link>
 					<p class="so-p" id="p-location" v-if="f.status"> Open </p>
