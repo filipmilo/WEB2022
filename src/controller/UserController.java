@@ -118,7 +118,7 @@ public class UserController {
 			return "null";
 			
 			
-			return g.toJson(userService.getAllManagers());
+			return g.toJson(userService.getAllAvailableManagers());
 		});
 	}
 	

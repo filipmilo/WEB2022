@@ -49,11 +49,11 @@ public class UserService {
 		return users.addUser(user);
 	}
 	
-	public ArrayList<User> getAllManagers() {
+	public ArrayList<User> getAllAvailableManagers() {
 		ArrayList<User> managers = new ArrayList<User>();
 		
 		for(User u: users.getAll()) 
-			if(u.getRoleStr() == "MANAGER") managers.add(u);
+			if(u.getRoleStr() == "MANAGER" && u.getFacility() == "null") managers.add(u);
 		
 		return managers;
 	}
