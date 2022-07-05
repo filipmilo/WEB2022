@@ -65,7 +65,7 @@ public class FacilityController {
 			SportsFacility facility = new SportsFacility(processDto.getName(), processDto.getType(), processDto.getContent(), true, processDto.getLogoPath(), 0.0, processDto.getWorkingHours(), processDto.getLocation());
 			facility = facilityService.newFacility(facility);
 			
-			if(processDto.getManager() != "null") {
+			if(processDto.getManager() != null) {
 				UserController.userService.addFacilityToManager(processDto.getManager(), facility);
 			}
 			

@@ -3,13 +3,16 @@ package storage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import model.SportsFacility;
+import model.User;
 
 public class FacilityStorage {
 	private HashMap<String, SportsFacility> allFacilities = new HashMap<String, SportsFacility>();
@@ -78,6 +81,49 @@ public class FacilityStorage {
 		
 	}
 	
+	private void save() {
+		try {
+			PrintWriter out = new PrintWriter(new FileWriter(file), true);
+			
+			for(SportsFacility facility: allFacilities.values()) {
+				String str = makeLine(facility);
+				out.println(str);
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+private String makeLine(SportsFacility facility) {
+		
+		StringBuilder str = new StringBuilder();
+		str.append(facility.getId());
+		str.append(";");
+		str.append(facility.getName());
+		str.append(";");
+		str.append(facility.getType());
+		str.append(";");
+		str.append(facility.getContent());
+		str.append(";");
+		str.append(facility.isStatus());
+		str.append(";");
+		str.append(facility.getLocation().getLongitude());
+		str.append(";");
+		str.append(facility.getLocation().getLatitude());
+		str.append(";");
+		str.append(facility.getLocation().getAddress());
+		str.append(";");
+		str.append(facility.getLogoPath());
+		str.append(";");
+		str.append(facility.getAvgRating());
+		str.append(";");
+		str.append(facility.getWorkingHours());
+		
+		return str.toString();
+	}
+	
 	public Collection<SportsFacility> getAll() {
 		return allFacilities.values();
 	}
@@ -97,7 +143,7 @@ public class FacilityStorage {
 	public SportsFacility addFacility(SportsFacility facility) {
 		allFacilities.put(facility.getId(), facility);
 		allfacs.add(facility);
-		//save to txt
+		save();
 		return facility;
 	}
 }
