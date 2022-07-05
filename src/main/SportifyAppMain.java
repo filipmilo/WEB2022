@@ -21,9 +21,12 @@ public class SportifyAppMain {
 		UserController.Login();
 		UserController.EditUserInfo();
 		UserController.getUserData();
+		UserController.getAllManagers();
 		
 		FacilityController.getAll();
 		FacilityController.searchFacilities();
+		FacilityController.getFacilityById();
+		FacilityController.newFacility();
 	}
 
 }
