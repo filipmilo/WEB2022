@@ -1,7 +1,8 @@
 Vue.component("Navbar", {
 	data: function () {
 		    return {
-			isLoggedIn: false
+			isLoggedIn: false,
+			username: '',
 		  }
 	},
 	template: ` 
@@ -12,28 +13,30 @@ Vue.component("Navbar", {
 			<p>Home</p>
 		</a>
 
-    <div class="collapse navbar-collapse">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-			<button class="btn btn-info" @click="$router.push('/login')" v-if="!isLoggedIn" id="loginButton">Login</button>
-            <!--<router-link class="nav-link" to="/login" tag="button" v-if="!isLoggedIn">Login</router-link>-->
-        </li>
-        
-        <li class="nav-item">
-        	<button class="btn btn-info" @click="logoutUser" v-if="isLoggedIn"  id="logout-button">Logout</button>
-           <!-- <router-link class="nav-link" to="/" v-on:click.native="logoutUser" v-if="isLoggedIn" id="logout-button">Logout</router-link>-->
-        </li>
-        
-        <li class="nav-item">
-            <button class="btn btn-info" @click="$router.push('/profile')" v-if="isLoggedIn" >Profile</button>
-        </li>
-        
-        <li class="nav-item">
-			<button class="btn btn-info" @click="$router.push('/register')" v-if="!isLoggedIn" id="register-button">Register</button>
-            <!--<router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>-->
-        </li>
-    </ul>
-    </div>
+		<div class="collapse navbar-collapse" id="username-div">
+			<div class="dropdown" id="dropdown-div" v-if="isLoggedIn">
+				<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					{{ this.username }}
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li class="nav-item">
+						<button class="btn btn-outline-info" @click="$router.push('/profile')" v-if="isLoggedIn" id="profile-button">Profile</button>
+					</li>
+					<li class="nav-item">
+						<button class="btn btn-outline-info" @click="logoutUser" v-if="isLoggedIn"  id="logout-button">Logout</button>
+					</li>
+				</ul>
+			</div>
+			<ul class="navbar-nav ms-auto" v-if="!isLoggedIn">
+				<li class="nav-item">
+					<button class="btn btn-info" @click="$router.push('/login')" v-if="!isLoggedIn" id="loginButton">Login</button>
+				</li>
+				
+				<li class="nav-item">
+					<button class="btn btn-info" @click="$router.push('/register')" v-if="!isLoggedIn" id="register-button">Register</button>
+				</li>
+			</ul>
+		</div>
     </nav>
 </div>
 `
@@ -51,7 +54,6 @@ Vue.component("Navbar", {
         }
 	},
 	mounted () {
-		
 		var toParse = localStorage.getItem('jwt');
 		
 		if(toParse) 
@@ -65,6 +67,10 @@ Vue.component("Navbar", {
 			} else if (text === 'true') {
 				this.isLoggedIn = true;
 			}
+		});
+
+		this.$root.$on('usernameMessage', (text) => {
+			this.username = text;
 		});
     }
 });

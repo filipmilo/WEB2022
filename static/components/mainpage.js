@@ -64,7 +64,7 @@ Vue.component("Mainpage", {
 			</div>
 			<div id="info-div">
 				<div id="title-div">
-					<router-link class="nav-link" to="/">
+					<router-link class="nav-link" :to="{ name: 'facilityPage', params: { facilityID: index } }">
 						{{ f.name }}
 					</router-link>
 					<p class="so-p" id="p-location" v-if="f.status"> Open </p>
@@ -117,12 +117,10 @@ Vue.component("Mainpage", {
 					this.facilities.sort(function(a,b) {
 						return b.status - a.status;
 					})
-					document.getElementById('nameButton').setAttribute('class', 'btn btn-light btn-outline-dark');
-					document.getElementById('nameButton').textContent = 'A-Z';
-					document.getElementById('locationButton').setAttribute('class', 'btn btn-light btn-outline-dark');
-					document.getElementById('locationButton').textContent = 'A-Z';
-					document.getElementById('ratingButton').setAttribute('class', 'btn btn-light btn-outline-dark');
-					document.getElementById('ratingButton').textContent = '▼';
+
+					this.sortName = this.buttonReset('nameButton', 'A-Z');
+					this.sortLocation = this.buttonReset('locationButton', 'A-Z');
+					this.sortRating = this.buttonReset('ratingButton', '▼');
 				})
 			}
 	
@@ -135,16 +133,29 @@ Vue.component("Mainpage", {
 			switch(window.event.target.id) {
 				case 'nameButton':
 					this.sortName = this.sortToggler(this.sortName, window.event.target, 'A-Z', 'Z-A');
+
+					this.sortLocation = this.buttonReset('locationButton', 'A-Z');
+					this.sortRating = this.buttonReset('ratingButton', '▼');
+
+					this.facilitySort(this.sortName, this.sortLocation, this.sortRating);
 					break;
 				case 'locationButton':
 					this.sortLocation = this.sortToggler(this.sortLocation, window.event.target, 'A-Z', 'Z-A');
+
+					this.sortName = this.buttonReset('nameButton', 'A-Z');
+					this.sortRating = this.buttonReset('ratingButton', '▼');
+
+					this.facilitySort(this.sortName, this.sortLocation, this.sortRating);
 					break;
 				case 'ratingButton':
 					this.sortRating = this.sortToggler(this.sortRating, window.event.target, '▼', '▲');
+
+					this.sortName = this.buttonReset('nameButton', 'A-Z');
+					this.sortLocation = this.buttonReset('locationButton', 'A-Z');
+
+					this.facilitySort(this.sortName, this.sortLocation, this.sortRating);
 					break;
 			}
-
-			this.facilitySort(this.sortName, this.sortLocation, this.sortRating);
 
 		},
 		sortToggler: function(sorty, trigger, ascending, descending) {
@@ -174,11 +185,10 @@ Vue.component("Mainpage", {
 			return sorty;
 		},
 		facilitySort: function(sortName, sortLocation, sortRating) {
-			event.preventDefault();
-			console.log(sortName + ", " + sortLocation + ", " + sortRating);
-
 			switch(sortRating) {
 				case 0:
+					if(sortName === 0 && sortLocation === 0)
+						this.searchForFacility();
 					break;
 				case 1:
 					this.facilities.sort((a, b) => b.avgRating - a.avgRating);
@@ -190,7 +200,8 @@ Vue.component("Mainpage", {
 
 			switch(sortLocation) {
 				case 0:
-					
+					if(sortName === 0 && sortRating === 0)
+						this.searchForFacility();
 					break;
 				case 1:
 					this.facilities.sort((a, b) => a.location.address.split(',')[1].localeCompare(b.location.address.split(',')[1]));
@@ -202,7 +213,8 @@ Vue.component("Mainpage", {
 
 			switch(sortName) {
 				case 0:
-					this.searchForFacility();
+					if(sortLocation === 0 && sortRating === 0)
+						this.searchForFacility();
 					break;
 				case 1:
 					this.facilities.sort((a, b) => a.name.localeCompare(b.name));
@@ -211,6 +223,11 @@ Vue.component("Mainpage", {
 					this.facilities.sort((a, b) => b.name.localeCompare(a.name));
 					break;
 			}
+		},
+		buttonReset: function(buttonId, ascending) {
+			document.getElementById(buttonId).setAttribute('class', 'btn btn-light btn-outline-dark');
+			document.getElementById(buttonId).textContent = ascending;
+			return 0;
 		}
 	},
 	mounted () {

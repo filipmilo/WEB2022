@@ -95,6 +95,20 @@
     flex-basis: 100%;
 }
 
+.facilityPage-div {
+    width: 1600px;
+    height: 800px;
+    border: thin black solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.facilityPage-div > h1 {
+    font-weight: bold;
+    font-size: 200;
+    text-align: center;
+}
+
 #first-input {
     margin-left: 0px;
 }
@@ -234,14 +248,6 @@
     position: relative;
 }
 
-#login-button  {
-    margin-top: 20px;
-}
-
-#logout-button {
-	margin-right: 20px;
-}
-
 #register-div {
     width: 400px;
     height: 700px;
@@ -262,11 +268,42 @@
     transform: translateY(-50%);
 }
 
+#username-div  {
+    width: 100%;
+    /* margin-left: auto; */
+}
 
+#dropdown-div {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+#dropdownMenuButton1 {
+    width: 120px;
+}
+
+.dropdown-menu {
+    min-width: 100%;
+    height: fit-content;
+    padding: 0;
+}
+
+#loginButton {
+    width: 120px;
+    margin-right: 10px;
+}
 
 #register-button {
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 120px;
+    margin-right: 20px;
+}
+
+#profile-button {
+    width: 100%;
+}
+
+#logout-button {
+    width: 100%;
 }
 
 #home-navbar {
