@@ -39,19 +39,21 @@ public class FacilityStorage {
 	}
 	
 	private void readAllFacilities(BufferedReader in) {
-		String line, name = "", type = "", content = "", logoPath = "", workingHours = "", address="";
+		String line, name = "", type = "", content = "", logoPath = "", workingHours = "", address="", id = "";
 		boolean status = false;
 		double avgRating = 0.0, longitude = 0.0, latitude = 0.0;
 		
 		StringTokenizer st;
 		
 		try {
+			int i = 0;
 			while((line = in.readLine()) != null) {
 				line = line.trim();
 				if(line.equals("") || line.indexOf("#") == 0) 
 					continue;
 				st = new StringTokenizer(line, ";");
 				while(st.hasMoreTokens()) {
+					id = st.nextToken().trim();
 					name = st.nextToken().trim();
 					type = st.nextToken().trim();
 					content = st.nextToken().trim();
@@ -66,6 +68,8 @@ public class FacilityStorage {
 				
 				SportsFacility fac = new SportsFacility(name, type, content, status, logoPath, avgRating, workingHours, longitude, latitude, address);
 				//allFacilities.put(java.util.UUID.randomUUID().toString(), fac);
+				fac.setId(id);
+				allFacilities.put(fac.getId(), fac);
 				allfacs.add(fac);
 			}
 		} catch(Exception e) {
@@ -84,5 +88,16 @@ public class FacilityStorage {
 	
 	public ArrayList<SportsFacility> getArray() {
 		return allfacs;
+	}
+	
+	public SportsFacility getById(String id) {
+		return allFacilities.get(id);
+	}
+	
+	public SportsFacility addFacility(SportsFacility facility) {
+		allFacilities.put(facility.getId(), facility);
+		allfacs.add(facility);
+		//save to txt
+		return facility;
 	}
 }

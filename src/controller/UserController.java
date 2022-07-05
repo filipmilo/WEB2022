@@ -22,9 +22,9 @@ import util.GsonSerializer;
 public class UserController {
 	
 	private static Gson g = GsonSerializer.makeGson();
-	private static UserService userService = new UserService();
+	public static UserService userService = new UserService();
 	
-	private static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+	public static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 	
 	public static void getUsers() {
 		get("rest/users/", (req, res) -> {
@@ -106,6 +106,19 @@ public class UserController {
 			
 			return g.toJson(user);
 			
+		});
+	}
+	
+	public static void getAllManagers() {
+		get("rest/users/managers/", (req, res) ->{
+			res.type("application/json");
+			
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(key, jwt))
+			return "null";
+			
+			
+			return g.toJson(userService.getAllManagers());
 		});
 	}
 	

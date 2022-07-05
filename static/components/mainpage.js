@@ -244,7 +244,8 @@ Vue.component("Mainpage", {
 		axios
           .get('rest/facilities/')
           .then(response => {
-				this.facilities = response.data
+				this.facilities = response.data;
+				console.log(this.facilities);
 				this.facilities.sort(function(a,b) {
 					return b.status - a.status;
 				})

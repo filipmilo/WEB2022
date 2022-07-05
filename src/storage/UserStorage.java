@@ -41,7 +41,7 @@ public class UserStorage {
 	}
 	
 	private void readAllUsers(BufferedReader in) {
-		String line, username = "", password = "", name = "", surname = "", gender = "", dateOfBirth = "", role = "";
+		String line, username = "", password = "", name = "", surname = "", gender = "", dateOfBirth = "", role = "", facility = "";
 		StringTokenizer st;
 		
 		try {
@@ -58,6 +58,7 @@ public class UserStorage {
 					gender = st.nextToken().trim();
 					dateOfBirth = st.nextToken().trim();
 					role = st.nextToken().trim();
+					facility = st.nextToken().trim();
 				}
 				
 				User user = new User(username, password, name, surname, gender, LocalDate.parse(dateOfBirth), role);
@@ -99,6 +100,9 @@ public class UserStorage {
 		str.append(user.getDateOfBirth());
 		str.append(";");
 		str.append(user.getRole());
+		str.append(";");
+		str.append(user.getFacility());
+		
 		
 		return str.toString();
 	}

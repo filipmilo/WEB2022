@@ -53,7 +53,7 @@ public class User {
 	private Membership membership;
 	
 	//Sport object manager
-	private SportsFacility facility;
+	private String facility;
 	
 	//Visited Sport object customer
 	private ArrayList<SportsFacility> visitedFacilities;
@@ -180,11 +180,11 @@ public class User {
 		this.membership = membership;
 	}
 
-	public SportsFacility getFacility() {
+	public String getFacility() {
 		return facility;
 	}
 
-	public void setFacility(SportsFacility facility) {
+	public void setFacility(String facility) {
 		this.facility = facility;
 	}
 

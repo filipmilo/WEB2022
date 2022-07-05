@@ -1,8 +1,10 @@
 package service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 
+import model.SportsFacility;
 import model.User;
 import storage.UserStorage;
 
@@ -38,6 +40,22 @@ public class UserService {
 		else 
 			return false;
 		
+	}
+	
+	public boolean addFacilityToManager(String username, SportsFacility facility) {
+		User user = users.getUser(username);
+		user.setFacility(facility.getId());
+		
+		return users.addUser(user);
+	}
+	
+	public ArrayList<User> getAllManagers() {
+		ArrayList<User> managers = new ArrayList<User>();
+		
+		for(User u: users.getAll()) 
+			if(u.getRoleStr() == "MANAGER") managers.add(u);
+		
+		return managers;
 	}
 	
 	public User editUser(String username, String changes) {

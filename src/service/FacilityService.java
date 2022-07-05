@@ -2,7 +2,6 @@ package service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 
 import model.SportsFacility;
 import storage.FacilityStorage;
@@ -16,6 +15,24 @@ public class FacilityService {
 	
 	public ArrayList<SportsFacility> getFacilitiesArrayList() {
 		return facilities.getArray();
+	}
+	
+	public SportsFacility getFacilityById(String id) {
+		return facilities.getById(id);
+	}
+	
+	public SportsFacility newFacility(SportsFacility facility) {
+		
+		int id = 0;
+		for(SportsFacility fac: facilities.getArray()) {
+			if(Integer.parseInt(fac.getId()) > id) {
+				id++;
+			}
+		}
+		
+		facility.setId(Integer.toString(++id));
+		
+		return facilities.addFacility(facility);
 	}
 	
 	public ArrayList<SportsFacility> getFacilitiesBySearch(String filter, 
