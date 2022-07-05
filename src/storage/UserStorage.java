@@ -62,6 +62,7 @@ public class UserStorage {
 				}
 				
 				User user = new User(username, password, name, surname, gender, LocalDate.parse(dateOfBirth), role);
+				user.setFacility(facility);
 				allUsers.put(username, user); 
 			}
 		} catch(Exception e) {
