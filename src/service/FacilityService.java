@@ -80,4 +80,15 @@ public class FacilityService {
 		
 		return filteredFacilities;
 	}
+	
+	public ArrayList<String> getAllTypes() {
+		ArrayList<String> types = new ArrayList<String>();
+		types.add("");
+		for(SportsFacility sf: facilities.getAll()) {
+			if(!types.contains(sf.getType())) {
+				types.add(sf.getType());
+			}
+		}
+		return types;
+	}
 }
