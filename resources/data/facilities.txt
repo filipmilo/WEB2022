@@ -1,0 +1,6 @@
+1;Classic gym bulevar;teretana;machine,bars,dance;true;0.0;0.0;Bulevar Oslobodjenja 72, Novi Sad, 21000;classicGymLogo.png;4.5;08:00-21:00
+2;Hattrick;otvorena teretana;bars;false;0.0;0.0;Liman 4, Novi Sad, 21000;hattrickLogo.png;4.2;08:00-23:00
+3;Hattrick;otvorena teretana;bars;false;0.0;0.0;Liman 4, Novi Sad, 21000;hattrickLogo.png;3.9;08:00-23:00
+4;Hattrick;otvorena teretana;bars;false;0.0;0.0;Liman 4, Beograd, 11000;hattrickLogo.png;4.8;08:00-23:00
+5;Fiesta Dance Studio;dance studio;dance;true;0.0;0.0;Geri Karolja 5, Novi Sad, 21000;fiestaLogo.png;3.5;08:00-23:00
+6;Albatros;teretana;bars;true;0.0;0.0;Dragoslava Srejovica 12, Novi Sad, 21000;albatrosLogo.png;3.7;08:00-23:00
