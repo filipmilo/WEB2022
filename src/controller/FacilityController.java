@@ -72,4 +72,11 @@ public class FacilityController {
 			return facility;
 		});
 	}
+	
+	public static void getAllFacilityTypes() {
+		get("rest/facilities/types/", (req, res) -> {
+			res.type("application/json");
+			return g.toJson(facilityService.getAllTypes());
+		});
+	}
 }

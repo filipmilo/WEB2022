@@ -27,6 +27,7 @@ public class SportifyAppMain {
 		FacilityController.searchFacilities();
 		FacilityController.getFacilityById();
 		FacilityController.newFacility();
+		FacilityController.getAllFacilityTypes();
 	}
 
 }

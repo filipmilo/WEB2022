@@ -14,7 +14,7 @@ Vue.component("Mainpage", {
 				sortLocation: 0,
 				sortRating: 0,
 				isOpenChecked: false,
-				types: ['','teretana', 'dance studio', 'otvorena teretana']
+				types: []
 		    }
 	},
 	template: ` 
@@ -281,6 +281,11 @@ Vue.component("Mainpage", {
 				this.facilities.sort(function(a,b) {
 					return b.status - a.status;
 				})
-			})
+			});
+			
+		axios.get('rest/facilities/types/')
+			.then(response => {
+				this.types = response.data;
+			});
     }
 });
