@@ -95,20 +95,6 @@
     flex-basis: 100%;
 }
 
-.facilityPage-div {
-    width: 1600px;
-    height: 800px;
-    border: thin black solid;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.facilityPage-div > h1 {
-    font-weight: bold;
-    font-size: 200;
-    text-align: center;
-}
-
 #first-input {
     margin-left: 0px;
 }
@@ -133,7 +119,8 @@
 
 #list-div .img-div img {
     width: 100%;
-    height: 100%
+    height: 100%;
+    border: thick #bfbfbf solid;
 }
 /*#endregion*/
 
@@ -173,7 +160,6 @@
 
 #title-div {
     display: flex;
-    margin-left: 10px;
 }
 
 #title-div > p {
@@ -329,6 +315,169 @@
 @font-face {
     font-family: 'Lora', serif;
     src: url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap'); /*URL to font*/
+}
+
+/*#endregion*/
+
+/*#region facilityPage style*/
+
+.facilityPage-div {
+    width: 1200px;
+    height: 2000px;
+    margin-left: auto;
+    margin-right: auto;
+    border: thick black solid;
+    padding: 20px;
+}
+
+.facilityPage-div > h1 {
+    height: 120px;
+    font-weight: bold;
+    font-size: 500;
+}
+
+.infoDiv {
+    width: 1047px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#separator {
+    border-bottom: thick solid black;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#titleDiv {
+    display: flex;
+    text-align: left;
+}
+
+#titleDiv > div {
+    margin-left: 20px;
+    width: 100%;
+}
+
+#titleDiv > div > h1 {
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+#separator-title {
+    border-bottom: thick solid black;
+    margin-top: 10px;
+    margin-left: 5px;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#sf-rating {
+    font-size: 28px;
+    font-weight: 500;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 0;
+}
+
+#ratingDiv {
+    display: flex;
+    margin-top: 10px;
+}
+
+#sf-status {
+    background-color: #ffca05;
+    border: thick solid #ffb72f;
+    border-radius: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: auto;
+    padding: 5px;
+    color: #222e4b;
+}
+
+#titleDiv > img {
+    margin-top: 5px;
+    width: 150px;
+    height: 150px;
+    border: thick #bfbfbf solid;
+}
+
+#carouselExampleIndicators {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.d-block {
+    height: 700px;
+    border: thick solid black;
+}
+
+.horizontal-div {
+    /* background-color: lightblue; */
+    display: flex;
+    flex-basis: 100%;
+    margin-top: 30px;
+}
+
+#separator-hours {
+    border-bottom: thick solid black;
+    margin-top: 10px;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+#workingHoursDiv {
+    width: 100%;
+    /* background-color: lightgoldenrodyellow; */
+    margin-right: 125px;
+}
+
+#locationDiv {
+    width: 100%;
+    /* background-color: lightcoral; */
+}
+
+#address-div {
+    display: flex;
+}
+
+.daysDiv {
+    display: flex;
+    flex-basis: 100%;
+}
+
+.daysDiv .days > p {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0;
+}
+
+.daysDiv .hours > p {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0;
+}
+
+.content-class-lead {
+    background-color: #f7f7f7;
+    border: thick solid #cdcdcd;
+    border-radius: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 5px;
+    color: #222e4b;
+}
+
+.content-class {
+    background-color: #f7f7f7;
+    border: thick solid #cdcdcd;
+    border-radius: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 10px;
+    padding: 5px;
+    color: #222e4b;
 }
 
 /*#endregion*/

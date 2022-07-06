@@ -19,7 +19,7 @@ public class UserStorage {
 	private File file;
 	
 	public UserStorage() {
-		this("data");
+		this("resources\\data");
 	}
 	
 	public UserStorage(String path) {

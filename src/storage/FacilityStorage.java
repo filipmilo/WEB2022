@@ -20,7 +20,7 @@ public class FacilityStorage {
 	private File file;
 	
 	public FacilityStorage() {
-		this("data");
+		this("resources\\data");
 	}
 	
 	public FacilityStorage(String path) {

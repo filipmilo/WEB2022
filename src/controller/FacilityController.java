@@ -26,7 +26,7 @@ public class FacilityController {
 	}
 	
 	public static void getFacilityById() {
-		get("rest/facilities/", (req, res) -> {
+		get("rest/facilities/getById/", (req, res) -> {
 			res.type("application/json");
 			return g.toJson(facilityService.getFacilityById(req.queryParams("id")));
 		});
