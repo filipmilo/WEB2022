@@ -12,7 +12,10 @@ Vue.component("Mainpage", {
 				searchRating: "",
 				sortName: 0,
 				sortLocation: 0,
-				sortRating: 0
+				sortRating: 0,
+				isOpenChecked: false,
+				types: ['','teretana', 'dance studio', 'otvorena teretana']
+				
 		    }
 	},
 	template: ` 
@@ -32,7 +35,10 @@ Vue.component("Mainpage", {
 						<button id="nameButton" v-on:click="sortBy" class="btn btn-light btn-outline-dark">A-Z</button>
 					</div>
 					<div class="searchType-group">
-						<input type="text" v-model = "searchType" placeholder="Type" class="form-control"></input>
+						<!--<input type="text" v-model = "searchType" placeholder="Type" class="form-control"></input>-->
+						<select v-model="searchType" class="form-select" aria-label="Default select example">
+						  <option v-for="t in types">{{t}}</option>
+						</select>
 					</div>
 					<div class="searchLocation-group">
 						<input type="text" v-model = "searchLocation" placeholder="Location" class="form-control"></input>
@@ -57,8 +63,16 @@ Vue.component("Mainpage", {
 				</div>
 			</form>-->
 		</div>
-
-		<div v-for="(f, index) in facilities" id="list-div">
+		
+		<div>
+			<label for="openGymsSwitch" id="switchLabel">Show only open gyms:</label>
+			<label class="switch" >
+			<input type="checkbox" id="openGymsSwitch" v-model="isOpenChecked">
+			  <span class="slider round"></span>
+			</label>
+			
+			</div>
+		<div v-for="(f, index) in facilities" id="list-div" v-if="!(!f.status && isOpenChecked)">
 			<div class="img-div">
 				<img :src="f.logoPath"/>
 			</div>
