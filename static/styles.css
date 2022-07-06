@@ -385,9 +385,11 @@
 }
 
 #sf-status {
-    background-color: #ffca05;
-    border: thick solid #ffb72f;
-    border-radius: 10px;
+    /* background-color: #ffca05;
+    border: thick solid #ffb72f; */
+    background-color: #abdefc;
+    border: thick solid #25a6f3;
+    border-radius: 20px;
     font-size: 28px;
     font-weight: bold;
     margin-left: auto;

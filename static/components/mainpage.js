@@ -60,15 +60,17 @@ Vue.component("Mainpage", {
 
 		<div v-for="(f, index) in facilities" id="list-div">
 			<div class="img-div">
-				<img :src="'images/' + f.logoPath"/>
+				<router-link :to="{ name: 'facilityPage', params: { facilityID: f.id } }">
+					<img :src="'images/' + f.logoPath"/>
+				</router-link>
 			</div>
 			<div id="info-div">
 				<div id="title-div">
 					<router-link class="nav-link" :to="{ name: 'facilityPage', params: { facilityID: f.id } }">
 						{{ f.name }}
 					</router-link>
-					<p class="so-p" id="p-location" v-if="f.status"> Open </p>
-					<p class="so-p" id="p-location" v-else> Closed </p>
+					<p class="so-p" id="sf-status" v-if="f.status" style="margin-bottom: 10px;"> Open </p>
+					<p class="so-p" id="sf-status" style="margin-bottom: 10px;" v-else> Closed </p>
 				</div>
 				<hr class="separator"></hr>
 				<div id="type-content-div">
