@@ -56,8 +56,10 @@ Vue.component("Navbar", {
 	mounted () {
 		var toParse = localStorage.getItem('jwt');
 		
-		if(toParse) 
+		if(toParse) {
 			this.isLoggedIn = true;
+			this.username = JSON.parse(toParse).username;
+		}
 		else
 			this.isLoggedIn = false;
 		

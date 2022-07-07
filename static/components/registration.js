@@ -11,7 +11,9 @@ Vue.component("Register", {
 				gender: 'MALE',
 				dateofBirth: "",
 				role: 'CUSTOMER'
-			}
+			},
+			confirmPassword: '',
+			passwordMessage: ''
 		}
 	},
 	template: ` 
