@@ -44,6 +44,9 @@ public class UserService {
 	
 	public boolean addFacilityToManager(String username, SportsFacility facility) {
 		User user = users.getUser(username);
+		if(user == null)
+			return false;
+		
 		user.setFacility(facility.getId());
 		
 		return users.addUser(user);
