@@ -22,12 +22,15 @@ public class SportifyAppMain {
 		UserController.EditUserInfo();
 		UserController.getUserData();
 		UserController.getAllManagers();
+		UserController.getManagerFacilityId();
+		UserController.getAllCoaches();
 		
 		FacilityController.getAll();
 		FacilityController.searchFacilities();
 		FacilityController.getFacilityById();
 		FacilityController.newFacility();
 		FacilityController.getAllFacilityTypes();
+		FacilityController.addContent();
 	}
 
 }

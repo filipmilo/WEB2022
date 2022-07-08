@@ -53,9 +53,22 @@ public class UserService {
 		ArrayList<User> managers = new ArrayList<User>();
 		
 		for(User u: users.getAll()) 
-			if(u.getRoleStr() == "MANAGER" && u.getFacility() == "null") managers.add(u);
+			if(u.getRoleStr().equals("MANAGER") && u.getFacility().equals("null")) {
+				managers.add(u);
+			}
 		
 		return managers;
+	}
+	
+	public ArrayList<User> getAllCoaches() {
+		ArrayList<User> coaches = new ArrayList<User>();
+		
+		for(User u: users.getAll()) 
+			if(u.getRoleStr().equals("COACH")) {
+				coaches.add(u);
+			}
+		
+		return coaches;
 	}
 	
 	public User editUser(String username, String changes) {
@@ -76,6 +89,10 @@ public class UserService {
 		
 		users.addUser(user);
 		return user;
+	}
+	
+	public String getManagerFacility(String username) {
+		return users.getUser(username).getFacility();
 	}
 	
 }
