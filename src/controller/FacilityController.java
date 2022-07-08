@@ -62,10 +62,10 @@ public class FacilityController {
 			
 			NewFacilityDTO processDto = g.fromJson(req.body(), NewFacilityDTO.class);
 			
-			SportsFacility facility = new SportsFacility(processDto.getName(), processDto.getType(), processDto.getContent(), true, processDto.getLogoPath(), 0.0, processDto.getWorkingHours(), processDto.getLocation());
+			SportsFacility facility = new SportsFacility(processDto.getName(), processDto.getType(), "nothing", true, processDto.getLogoPath(), 0.0, "08:00-23:00", processDto.getLocation());
 			facility = facilityService.newFacility(facility);
 			
-			if(processDto.getManager() != null) {
+			if(processDto.getManager() != "") {
 				UserController.userService.addFacilityToManager(processDto.getManager(), facility);
 			}
 			

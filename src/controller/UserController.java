@@ -115,7 +115,7 @@ public class UserController {
 			
 			String jwt = req.headers("Authorization");
 			if(!Authorization.isLoggedIn(key, jwt))
-			return "null";
+				return "null";
 			
 			
 			return g.toJson(userService.getAllAvailableManagers());

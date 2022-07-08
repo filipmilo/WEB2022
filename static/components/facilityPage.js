@@ -45,7 +45,7 @@ Vue.component("Facilitypage", {
 					<div id="ratingDiv">
 						<p id="sf-rating"> Rating: {{ facility.avgRating }} ★ </p>
 						<p id="sf-status" v-if="facility.status"> Open </p>
-						<p id="sf-status" v-else> Closed </p>
+						<p id="sf-status" style="background-color: #ff8d8d; border: thick solid #ff4747;" v-else> Closed </p>
 					</div>
 				</div>
 			</div>

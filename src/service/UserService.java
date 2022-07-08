@@ -53,7 +53,7 @@ public class UserService {
 		ArrayList<User> managers = new ArrayList<User>();
 		
 		for(User u: users.getAll()) 
-			if(u.getRoleStr() == "MANAGER" && u.getFacility() == "null") managers.add(u);
+			if(u.getRoleStr() == "MANAGER" && u.getFacility().equals("null")) managers.add(u);
 		
 		return managers;
 	}
