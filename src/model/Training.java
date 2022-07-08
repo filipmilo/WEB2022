@@ -4,14 +4,34 @@ public class Training {
 
 	private boolean deleted;
 	
+	private String id;
+	
 	private String name;
 	private String type;
-	private SportsFacility facility;
+	private String facility;
 	private int duration;
-	private User coach;
+	private String coach;
 	private String description;
-	private String imagePath;
+	private String imagePath; 
 	
+
+	public Training(String name, String type, String facility, String duration, String coach,
+			String description, String imagePath) {
+		super();
+		this.deleted = false;
+		this.name = name;
+		this.type = type;
+		this.facility = facility;
+		try {
+			this.duration = Integer.parseInt(duration);
+			
+		} catch(NumberFormatException e) {
+			this.duration = 0;
+		}
+		this.coach = coach;
+		this.description = description;
+		this.imagePath = imagePath;
+	}
 	
 	public String getName() {
 		return name;
@@ -25,10 +45,10 @@ public class Training {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public SportsFacility getFacility() {
+	public String getFacility() {
 		return facility;
 	}
-	public void setFacility(SportsFacility facility) {
+	public void setFacility(String facility) {
 		this.facility = facility;
 	}
 	public int getDuration() {
@@ -37,10 +57,10 @@ public class Training {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	public User getCoach() {
+	public String getCoach() {
 		return coach;
 	}
-	public void setCoach(User coach) {
+	public void setCoach(String coach) {
 		this.coach = coach;
 	}
 	public String getDescription() {
@@ -55,6 +75,23 @@ public class Training {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 	
 }

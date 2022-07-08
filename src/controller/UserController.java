@@ -109,17 +109,44 @@ public class UserController {
 		});
 	}
 	
+	public static void getAllCoaches() {
+		get("rest/users/coaches/", (req, res) ->{
+			res.type("application/json");
+			
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(key, jwt))
+				return "null";
+			
+			return g.toJson(userService.getAllCoaches());
+		});
+	}
+	
 	public static void getAllManagers() {
 		get("rest/users/managers/", (req, res) ->{
 			res.type("application/json");
 			
 			String jwt = req.headers("Authorization");
 			if(!Authorization.isLoggedIn(key, jwt))
-			return "null";
-			
+				return "null";
 			
 			return g.toJson(userService.getAllAvailableManagers());
 		});
 	}
+	
+	public static void getManagerFacilityId() {
+		get("rest/users/managerfacility/", (req, res) -> {
+			res.type("application/json");
+			
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(key, jwt) && jwt != null)
+				return "nothing";
+			
+			String username = req.queryParams("username");
+			
+			return g.toJson(userService.getManagerFacility(username));
+		});
+	}
+
+	
 	
 }
