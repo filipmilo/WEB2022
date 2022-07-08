@@ -85,7 +85,7 @@ Vue.component("Mainpage", {
 						{{ f.name }}
 					</router-link>
 					<p class="so-p" id="sf-status" v-if="f.status" style="margin-bottom: 10px;"> Open </p>
-					<p class="so-p" id="sf-status" style="margin-bottom: 10px;" v-else> Closed </p>
+					<p class="so-p" id="sf-status" style="margin-bottom: 10px; background-color: #ff8d8d; border: thick solid #ff4747;" v-else> Closed </p>
 				</div>
 				<hr class="separator"></hr>
 				<div id="type-content-div">
@@ -301,7 +301,7 @@ Vue.component("Mainpage", {
           .get('rest/facilities/')
           .then(response => {
 				this.facilities = response.data;
-				console.log(this.facilities);
+				// console.log(this.facilities);
 				this.facilities.sort(function(a,b) {
 					return b.status - a.status;
 				})
