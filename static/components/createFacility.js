@@ -51,8 +51,10 @@ Vue.component("Createfacility", {
 				</tr>
 				<tr>
 					<div class="list-group">
+						<a href="#" class="list-group-item list-group-item-action"
+						v-on:click="setManager(''); selectedIndex = 0;" v-bind:class="{ 'active' : isSelected(0) }">Without manager</a>
 						<a href="#" class="list-group-item list-group-item-action" v-for="(m, index) in this.managers" 
-						v-on:click="setManager(m); selectedIndex = index;" v-bind:class="{ 'active' : isSelected(index) }">{{ m.name }} {{ m.surname }}</a>
+						v-on:click="setManager(m.username); selectedIndex = index+1;" v-bind:class="{ 'active' : isSelected(index+1) }">{{ m.name }} {{ m.surname }}</a>
 					</div>
 				</tr>
 				<tr>
@@ -83,8 +85,7 @@ Vue.component("Createfacility", {
 			})
 		},
 		setManager: function(m) {
-			this.sportsFacility.manager = m.username;
-			// console.log(this.sportsFacility.selectedManager);
+			this.sportsFacility.manager = m;
 		},
 		isSelected(index) {
 			return index === this.selectedIndex;
