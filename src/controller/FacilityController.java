@@ -7,9 +7,12 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import dto.ContentDTO;
 import dto.NewFacilityDTO;
 import model.SportsFacility;
+import model.Training;
 import service.FacilityService;
+import service.TrainingService;
 import util.Authorization;
 import util.GsonSerializer;
 
@@ -17,6 +20,7 @@ public class FacilityController {
 	
 	private static Gson g = GsonSerializer.makeGson();
 	private static FacilityService facilityService = new FacilityService();
+	private static TrainingService trainingService = new TrainingService();
 
 	public static void getAll() {
 		get("rest/facilities/", (req, res) -> {
@@ -77,6 +81,23 @@ public class FacilityController {
 		get("rest/facilities/types/", (req, res) -> {
 			res.type("application/json");
 			return g.toJson(facilityService.getAllTypes());
+		});
+	}
+	
+	public static void addContent( ) {
+		post("rest/facilities/newcontent/", (req, res) -> {
+			res.type("application/json");
+			System.out.println(req.body());
+			
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(UserController.key, jwt))
+				return "null";
+			
+			ContentDTO newContent = g.fromJson(req.body(), ContentDTO.class);
+			
+			Training training = new Training(newContent.getName(), newContent.getType(), newContent.getFacilityId(), newContent.getDuration(), newContent.getCoach(), newContent.getDescription(), newContent.getImage());
+			
+			return g.toJson(trainingService.addContent(training));
 		});
 	}
 }

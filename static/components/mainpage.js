@@ -24,6 +24,8 @@ Vue.component("Mainpage", {
 		<button v-if = "this.role === 'ADMIN'" v-on:click = "createSportsFacility" class="btn btn-info"> Create Sports Facility </button>
 		<button v-if = "this.role === 'ADMIN'" v-on:click = "showAllUsers" class="btn btn-info"> View all users </button>
 		
+		<button v-if = "this.role === 'MANAGER'" v-on:click = "managerFacility" class="btn btn-info"> View my facility </button>
+				
 	</div>
 	<div id="so-div">
 		<div>
@@ -243,6 +245,28 @@ Vue.component("Mainpage", {
 			document.getElementById(buttonId).setAttribute('class', 'btn btn-light btn-outline-dark');
 			document.getElementById(buttonId).textContent = ascending;
 			return 0;
+		},
+		
+		managerFacility: function() {
+			var toParse = localStorage.getItem('jwt');
+			if(toParse) {
+				axios.get('/rest/users/managerfacility/', {
+						params: {username: JSON.parse(toParse).username},
+						headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}
+					})
+					.then(response => {
+						console.log(response.data);
+						if(response.data === null) {
+							alert("User does not have any facility to run");
+						} else if(response.data === "nothing") {
+							alert("User session expired");
+							//logout user
+						}	else {
+							router.push( {name:'facilityPage',  params: {facilityID: response.data}});
+						}
+					});
+			}
+			
 		}
 	},
 	mounted () {

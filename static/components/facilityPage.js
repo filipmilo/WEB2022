@@ -3,7 +3,23 @@ Vue.component("Facilitypage", {
 		    return {
 				facility: null,
 				firstWordOfName: '',
-				contents: ''
+				contents: '',
+				isManagerPage: false,
+				enableAddContent: false,
+				
+				content: {
+					name: '',
+					type: '',
+					duration: '',
+					coach: '',
+					facilityId: '',
+					description: '',
+					image: ''
+				},
+				
+				allCoaches: [],
+				isTraining: false
+				
 		  }
 	},
 	template: ` 
@@ -50,6 +66,66 @@ Vue.component("Facilitypage", {
 				</div>
 			</div>
 			<h1>Content:</h1>
+			
+			<button type="button" class="btn btn-primary active" v-if="isManagerPage"  @click="addContentEnable">Add content</button>
+			<div id="new-content-div" v-if="enableAddContent">
+				<form>
+					<table>
+						<tr>
+							<td>
+								<label for="name-i">Name: </label>
+								<input type="text" id="name-i" v-model="content.name"></input>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="training-box">Training: </label>
+								<input type="checkbox" id="training-box" v-model="isTraining">
+				
+							</td>
+							<td v-if="!isTraining">
+								<label for="type-i" >Type: </label>
+								<input type="text" id="type-i"  v-model="content.type"></input>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="duration-i">Duration: </label>
+								<input type="text" id="duration-i" v-model="content.duration"></input>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="description-i">Description: </label>
+								<input type="text" id="description-i" v-model="content.description"></input>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<label for="choose-i">Add image: </label>
+								<input type="file" id="choose-i" v-on:change="loadLogo"></input>
+							</td>
+						</tr>	
+						
+						<tr v-if="isTraining">
+							<td>
+								<label for="coach-i">If training choose coach: </label>
+								
+								<select v-model="content.coach" id="coach-i" class="form-select" aria-label="Default select example">
+								  <option v-for="c in allCoaches">{{c.username}}</option>
+								</select>
+							</td>
+						</tr>	
+						
+						<tr>
+							<td colspan="2" style="text-align:center">
+								<input type="submit" value="Post" @click="addContent"  class="btn btn-info"></input>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
 			<div class="horizontal-div">
 				<div v-for="(c, index) in contents">
 					<p class="content-class-lead" v-if="index === 0"> {{ c }} </p>
@@ -96,8 +172,61 @@ Vue.component("Facilitypage", {
 `
 	, 
 	methods : {
+		addContentEnable: function() {
+			if(!this.enableAddContent) {
+				this.enableAddContent = true;
+				var toParse = localStorage.getItem('jwt');
+				
+				axios.get("/rest/users/coaches/", {
+					headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}
+				})
+				.then(response => {
+					this.allCoaches = response.data;
+				});		
+			}
+			else 
+				this.enableAddContent = false;	
+				
+			
+		},
+		loadLogo: function(event) {
+			var files = event.target.files;
+			this.content.image = files[0].name;
+			console.log(this.content.image);
+		},
+		addContent: function(){
+			event.preventDefault();
+			if((this.content.name === '' || this.content.type === '' || this.content.image === '') && !this.isTraining) {
+				alert("Name, type and image must be selected");
+				return;
+			} else if ((this.content.name === '' || this.content.image === '' || this.content.coach === '') && this.isTraining){
+				alert("Name, image and coach must be selected");
+				return;
+			}
+			
+			this.content.facilityId = this.facility.id;
+			
+			if(this.isTraining) {
+				this.content.type = 'training';
+			}
+			
+			var toParse = localStorage.getItem('jwt');
+			if(!toParse){
+				alert("ERROR USER NOT LOGGED IN");
+				return;	
+			}
+			
+			axios.post("/rest/facilities/newcontent/", this.content, {
+				headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}					
+			})
+			.then(response => {
+				console.log(response);
+				router.push('/');
+			});
+		}
 	},
 	mounted () {
+		console.log(this.$route.params.facilityID);
 		axios.get("/rest/facilities/getById/", {params: { id: this.$route.params.facilityID}})
 		.then(response => {
 			this.facility = response.data;
@@ -111,5 +240,16 @@ Vue.component("Facilitypage", {
 			this.contents = this.facility.content.split(',');
 			console.log(this.contents);
 		});
-    }
+		
+		var toParse = localStorage.getItem('jwt');
+		
+		if(toParse) {
+			axios.get("/rest/users/managerfacility/", {params: {username: JSON.parse(toParse).username}})
+				.then(response => {
+					if(response.data != null && this.$route.params.facilityID === response.data) {
+						this.isManagerPage = true;
+					}
+				});
+		}
+	 }
 });
