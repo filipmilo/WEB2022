@@ -1,4 +1,0 @@
-1;Dance;training;1;2;rob;Cardio dance full body workout;20220521130409_1.jpg;
-2;Tabata;training;1;0;rob;nothing;20220521150735_1.jpg;
-3;Hiit;training;1;2;rob;Intensive high calorie draining training;20220521121650_1.jpg;
-4;Kick Box;training;1;2;rob;Pad training in kickbox;20220521121650_1.jpg;

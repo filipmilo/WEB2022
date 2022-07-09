@@ -13,7 +13,7 @@ public class TrainingService {
 		//add function to training
 		int id = 0;
 		for(Training tr: trainings.getAll()) {
-			if(tr.getName() == training.getName() && tr.getFacility() == training.getFacility()) return null;
+			if(tr.getName().equals(training.getName()) && tr.getFacility().equals(training.getFacility())) return null;
 			
 			if(Integer.parseInt(tr.getId()) > id) {
 				id++;
@@ -24,6 +24,10 @@ public class TrainingService {
 		training.setId(Integer.toString(++id));
 		return trainings.addTraining(training);
 		
+	}
+	
+	public Training editContent(Training training) {
+		return trainings.addTraining(training);
 	}
 	
 	public ArrayList<Training> getAllContent(String parse) {
