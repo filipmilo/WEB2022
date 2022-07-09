@@ -18,7 +18,10 @@ Vue.component("Facilitypage", {
 				},
 				
 				allCoaches: [],
-				isTraining: false
+				isTraining: false,
+				isEdit: false,
+				
+				currContentId: ''
 				
 		  }
 	},
@@ -126,7 +129,7 @@ Vue.component("Facilitypage", {
 					</table>
 				</form>
 			</div>
-			<div class="horizontal-div" >
+			<div class="horizontal-div" v-if="contents != null && contents != ''">
 				<div v-for="(c, index) in contents" @click="enableEdit(c)">
 					<p class="content-class-lead" v-if="index === 0"> {{ c.name }} </p>
 					<p class="content-class" v-else> {{ c.name }} </p>
@@ -175,6 +178,19 @@ Vue.component("Facilitypage", {
 		addContentEnable: function() {
 			if(!this.enableAddContent) {
 				this.enableAddContent = true;
+				
+				this.content.name = '';
+				this.content.type = '';
+				this.content.duration = '';
+				this.content.coach = '';
+				this.content.facilityId = '';
+				this.content.description = '';
+				this.content.image = '';
+				
+				this.isTraining = false;
+				this.isEdit = false;
+				
+				
 				var toParse = localStorage.getItem('jwt');
 				
 				axios.get("/rest/users/coaches/", {
@@ -189,6 +205,35 @@ Vue.component("Facilitypage", {
 				
 			
 		},
+		enableEdit: function(content) {
+			this.currContentId = content.id;
+			this.isEdit = true;
+			this.enableAddContent = true;
+			
+			this.content.name = content.name;
+			this.content.type = content.type;
+			this.content.duration = content.duration;
+			this.content.coach = content.coach;
+			this.content.facilityId = content.facilityId;
+			this.content.description = content.description;
+			this.content.image = content.image;
+			
+			if(this.content.type === 'training') {
+				this.isTraining = true;
+			}
+			
+			var toParse = localStorage.getItem('jwt');
+				
+				axios.get("/rest/users/coaches/", {
+					headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}
+				})
+				.then(response => {
+					this.allCoaches = response.data;
+				});	
+			
+			
+		}
+		,
 		loadLogo: function(event) {
 			var files = event.target.files;
 			this.content.image = files[0].name;
@@ -216,13 +261,25 @@ Vue.component("Facilitypage", {
 				return;	
 			}
 			
-			axios.post("/rest/facilities/newcontent/", this.content, {
-				headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}					
-			})
-			.then(response => {
-				console.log(response);
-				router.push('/');
-			});
+			if(!this.isEdit){
+				axios.post("/rest/facilities/newcontent/", this.content, {
+					headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}					
+				})
+				.then(response => {
+					console.log(response);
+					router.push('/');
+				});
+			} else {
+				axios.post("/rest/facilities/editcontent/", this.content, {
+					params: {id: this.currContentId},
+					headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}					
+				})
+				.then(response => {
+					console.log(response);
+					router.push('/');
+				});
+			}
+			
 		}
 	},
 	mounted () {

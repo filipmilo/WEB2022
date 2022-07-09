@@ -32,6 +32,7 @@ public class SportifyAppMain {
 		FacilityController.getAllFacilityTypes();
 		FacilityController.addContent();
 		FacilityController.getContent();
+		FacilityController.editContent();
 	}
 
 }
