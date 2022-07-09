@@ -35,6 +35,24 @@ public class FacilityService {
 		return facilities.addFacility(facility);
 	}
 	
+	public void addContentToFacility(String trainingId, String facilityId) {
+		SportsFacility facility = facilities.getById(facilityId);
+		
+		if(facility.getContent().equals("nothing")) {
+			facility.setContent(trainingId);
+		} else {
+			StringBuilder str = new StringBuilder();
+			str.append(facility.getContent());
+			str.append(",");
+			str.append(trainingId);
+			
+			facility.setContent(str.toString());
+		}
+		
+		facilities.editFacility(facility);
+		
+	}
+	
 	public ArrayList<SportsFacility> getFacilitiesBySearch(String filter, 
 			ArrayList<SportsFacility> facilities, int i) {
 		ArrayList<SportsFacility> filteredFacilities = new ArrayList<SportsFacility>();

@@ -84,7 +84,7 @@ public class FacilityController {
 		});
 	}
 	
-	public static void addContent( ) {
+	public static void addContent() {
 		post("rest/facilities/newcontent/", (req, res) -> {
 			res.type("application/json");
 			System.out.println(req.body());
@@ -97,7 +97,22 @@ public class FacilityController {
 			
 			Training training = new Training(newContent.getName(), newContent.getType(), newContent.getFacilityId(), newContent.getDuration(), newContent.getCoach(), newContent.getDescription(), newContent.getImage());
 			
-			return g.toJson(trainingService.addContent(training));
+			training = trainingService.addContent(training);
+			facilityService.addContentToFacility(training.getId(), newContent.getFacilityId());
+			
+			return g.toJson(training);
+		});
+	}
+	
+	public static void getContent() {
+		get("rest/facilities/content/", (req, res) -> {
+			res.type("application/json");
+			
+			String content = req.queryParams("content");
+			
+			System.out.println(content);
+			
+			return g.toJson(trainingService.getAllContent(content));
 		});
 	}
 }

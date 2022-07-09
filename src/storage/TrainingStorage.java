@@ -117,4 +117,8 @@ public class TrainingStorage {
 		return training;
 	}
 	
+	public Training getById(String id) {
+		return allContent.get(id);
+	}
+	
 }

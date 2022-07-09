@@ -146,4 +146,17 @@ private String makeLine(SportsFacility facility) {
 		save();
 		return facility;
 	}
+	
+	public SportsFacility editFacility(SportsFacility facility) {
+		allFacilities.put(facility.getId(), facility);
+		for(SportsFacility sf: allfacs) {
+			if(sf.getId().equals(facility.getId())) {
+				allfacs.remove(sf);
+				allfacs.add(facility);
+				break;
+			}
+		}
+		save();
+		return facility;
+	}
 }

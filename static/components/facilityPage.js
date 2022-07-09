@@ -126,10 +126,10 @@ Vue.component("Facilitypage", {
 					</table>
 				</form>
 			</div>
-			<div class="horizontal-div">
-				<div v-for="(c, index) in contents">
-					<p class="content-class-lead" v-if="index === 0"> {{ c }} </p>
-					<p class="content-class" v-else> {{ c }} </p>
+			<div class="horizontal-div" >
+				<div v-for="(c, index) in contents" @click="enableEdit(c)">
+					<p class="content-class-lead" v-if="index === 0"> {{ c.name }} </p>
+					<p class="content-class" v-else> {{ c.name }} </p>
 				</div>
 			</div>
 			<div class="horizontal-div">
@@ -237,10 +237,21 @@ Vue.component("Facilitypage", {
 
 			console.log(this.firstWordOfName);
 
-			this.contents = this.facility.content.split(',');
-			console.log(this.contents);
+			//this.contents = this.facility.content.split(',');
+			
+			axios.get("/rest/facilities/content/", {params: {content: this.facility.content}})
+			.then(response => {
+				this.contents = response.data;
+			});
+			
 		});
 		
+		
+		/*axios.get("rest/facilities/content/", {params: {content: this.facility.content}})
+			.then(response => {
+				this.contents = response.data;
+			});
+			*/
 		var toParse = localStorage.getItem('jwt');
 		
 		if(toParse) {
