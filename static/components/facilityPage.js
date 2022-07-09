@@ -90,6 +90,13 @@ Vue.component("Facilitypage", {
 								<label for="type-i" >Type: </label>
 								<input type="text" id="type-i"  v-model="content.type"></input>
 							</td>
+								
+						</tr>
+						<tr>
+							<td v-if="isTraining">
+								<input type="radio" value="training1" v-model="content.type" :checked="content.type === 'training1'">Personal</input>
+								<input type="radio" value="training2" v-model="content.type">Group</input>
+							</td>
 						</tr>
 						<tr>
 							<td>
@@ -218,7 +225,7 @@ Vue.component("Facilitypage", {
 			this.content.description = content.description;
 			this.content.image = content.image;
 			
-			if(this.content.type === 'training') {
+			if(this.content.type === 'training1' || this.content.type === 'training2') {
 				this.isTraining = true;
 			}
 			
@@ -251,8 +258,9 @@ Vue.component("Facilitypage", {
 			
 			this.content.facilityId = this.facility.id;
 			
-			if(this.isTraining) {
-				this.content.type = 'training';
+			if(this.isTraining && (this.content.type != 'training1' && this.content.type != 'training2')) {
+				alert("Please select a valid training");
+				return;
 			}
 			
 			var toParse = localStorage.getItem('jwt');
