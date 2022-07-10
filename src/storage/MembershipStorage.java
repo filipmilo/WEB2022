@@ -45,7 +45,7 @@ public class MembershipStorage {
 	private void readAllMemberships(BufferedReader in) {
 		String line, id = "", type = "", dateOfPayment = "", dateOfExpiration = "", customer = "";
 		boolean status = false;
-		int fee = 0, dailyLimit = 0;
+		int fee = 0, dailyLimit = 0, remainingVisits = 0;
 		
 		StringTokenizer st;
 		
@@ -65,10 +65,11 @@ public class MembershipStorage {
 					customer = st.nextToken().trim();
 					status = Boolean.parseBoolean(st.nextToken().trim());
 					dailyLimit = Integer.parseInt(st.nextToken().trim());
+					remainingVisits = Integer.parseInt(st.nextToken().trim());
 				}
 				
 				Membership membership = new Membership(id, type, LocalDate.parse(dateOfPayment), LocalDate.parse(dateOfExpiration), 
-						fee, customer, status, dailyLimit);
+						fee, customer, status, dailyLimit, remainingVisits);
 				allMemberships.put(membership.getId(), membership);
 				allMems.add(membership);
 			}
@@ -111,6 +112,8 @@ public class MembershipStorage {
 		str.append(membership.isStatus());
 		str.append(";");
 		str.append(membership.getDailyLimit());
+		str.append(";");
+		str.append(membership.getRemainingVisits());
 		
 		
 		return str.toString();
@@ -138,5 +141,14 @@ public class MembershipStorage {
 		}
 		save();
 		return membership;
+	}
+	
+	public Membership getByUsername(String username) {
+		for(Membership m: allMems) {
+			if(m.getCustomer().equals(username)) {
+				return m;
+			}
+		}
+		return null;
 	}
 }

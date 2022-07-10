@@ -11,19 +11,17 @@ Vue.component("Enroll", {
                     fee: 2000,
                     customer: '',
                     status: true,
-                    dailyLimit: 1
+                    dailyLimit: 1,
+                    remainingVisits: 15
                 }
 		  }
 	},
 	template: ` 
 <div id="enroll-div">
     <div>
-        <div>
-            <!--<button class="btn btn-info" @click="calculateDate()">Date</button>-->
-        </div>
         <div style="display: flex; margin-top: 30px; margin-left: 30px;">
             <p style="margin-top: 10px; margin-left: 20px;">Choose membership duration: </p>
-            <select v-model="duration" @change="calculateFee();" style="margin-left: 20px;">
+            <select v-model="duration" @change="calculateFeeAndVisits(membership.remainingVisits);" style="margin-left: 20px;">
                 <option value="1">One month</option>
                 <option value="3">Three months</option>
                 <option value="6">Six months</option>
@@ -31,7 +29,7 @@ Vue.component("Enroll", {
         </div>
         <div id="typeOfMembership-div">
             <div id="bronzeMem" class="membership-type-div" style="background-color: #E3AF66; filter: brightness(115%);
-            border: blue solid thick;" v-on:click="isSelected(0, $event); calculateFee()">
+            border: blue solid thick;" v-on:click="isSelected(0, $event); calculateFeeAndVisits(15)">
                 <h1>BRONZE</h1>
                 <p class="separator-membershiptype"></p>
                 <div class="meminfo-div">
@@ -44,7 +42,7 @@ Vue.component("Enroll", {
                     </div>
                 </div>
             </div>
-            <div id="silverMem" class="membership-type-div" style="background-color: #C0C0C0;" v-on:click="isSelected(1, $event); calculateFee()">
+            <div id="silverMem" class="membership-type-div" style="background-color: #C0C0C0;" v-on:click="isSelected(1, $event); calculateFeeAndVisits(20);">
                 <h1>SILVER</h1>
                 <p class="separator-membershiptype"></p>
                 <div class="meminfo-div">
@@ -57,7 +55,7 @@ Vue.component("Enroll", {
                     </div>
                 </div>
             </div>
-            <div id="goldMem" class="membership-type-div" style="background-color: #FFD700;" v-on:click="isSelected(2, $event); calculateFee()">
+            <div id="goldMem" class="membership-type-div" style="background-color: #FFD700;" v-on:click="isSelected(2, $event); calculateFeeAndVisits(30)">
                 <h1>GOLD</h1>
                 <p class="separator-membershiptype"></p>
                 <div class="meminfo-div">
@@ -71,8 +69,8 @@ Vue.component("Enroll", {
                 </div>
             </div>
         </div>
-        <div style="width: 800px; height: 50px; display: block; background-color: lightcoral; margin-left: auto; margin-right: auto;">
-            <button id="payMembership-button" class="btn btn-info" @click="calculateDate(); enroll()">Pay</button>
+        <div style="width: 800px; margin-left: auto; margin-right: auto; margin-top: 40px;">
+            <button id="payMembership-button" class="btn btn-info" @click="calculateDate(); enroll(); $router.push('/');">Pay</button>
         </div>
     </div>
 </div>
@@ -96,8 +94,9 @@ Vue.component("Enroll", {
 
             console.log(this.membership);
         },
-        calculateFee: function() {
+        calculateFeeAndVisits: function(visits) {
             let tempFee = this.membership.fee;
+            this.membership.remainingVisits = visits * this.duration;
             console.log(tempFee);
             switch(this.membership.type) {
                 case 'BRONZE':
@@ -129,9 +128,6 @@ Vue.component("Enroll", {
             }).then(response => {
                 console.log(response);
             })
-        },
-        setType: function(type) {
-            this.membership.type = type;
         },
         isSelected(index, event) {
 			switch(index) {

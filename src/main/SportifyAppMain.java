@@ -8,7 +8,7 @@ import java.io.File;
 import controller.FacilityController;
 
 import controller.TrainingController;
-
+import controller.TrainingHistoryController;
 import controller.MembershipController;
 
 import controller.UserController;
@@ -43,6 +43,11 @@ public class SportifyAppMain {
 
 		MembershipController.getAll();
 		MembershipController.newMembership();
+		MembershipController.getMembershipByUsername();
+		MembershipController.reduceVisits();
+		
+		TrainingHistoryController.getAll();
+		TrainingHistoryController.addTrainingHistory();
 
 	}
 
