@@ -5,6 +5,7 @@ import static spark.Spark.staticFiles;
 
 import java.io.File;
 
+import controller.CommentsController;
 import controller.FacilityController;
 
 import controller.TrainingController;
@@ -43,6 +44,10 @@ public class SportifyAppMain {
 
 		MembershipController.getAll();
 		MembershipController.newMembership();
+		
+		CommentsController.getCommentsByFacility();
+		CommentsController.addComment();
+		CommentsController.changeCommentStatus();
 
 	}
 

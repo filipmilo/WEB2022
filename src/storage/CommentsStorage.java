@@ -6,13 +6,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import model.Comment;
-import model.TrainingHistory;
 
 public class CommentsStorage {
 	private HashMap<String, Comment> allComments = new HashMap<String, Comment>();
@@ -25,7 +23,7 @@ public class CommentsStorage {
 	private CommentsStorage(String path) {
 		BufferedReader in = null;
 		try {
-			file = new File(path + "/trainingHistory.txt");
+			file = new File(path + "/comments.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			readAllContent(in);
@@ -82,6 +80,7 @@ public class CommentsStorage {
 				String str = makeLine(c);
 				out.println(str);
 			}
+			out.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -116,7 +115,7 @@ public class CommentsStorage {
 		return allComments.get(id);
 	}
 	
-	public Comment addTrainingHistory(Comment c) {
+	public Comment addComment(Comment c) {
 		allComments.put(c.getId(), c);
 		save();
 		return c;
