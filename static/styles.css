@@ -303,6 +303,11 @@
     font-size: 24px;
 }
 
+#membership-button {
+    margin-top: 5px;
+    text-align: center;
+}
+
 #createFacility-div {
     width: fit-content;
     height: fit-content;
@@ -554,4 +559,44 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+#membershipPage-div {
+    width: 1200px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#buttons-div {
+    width: fit-content;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+}
+
+#enroll-button {
+    width: 500px;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#activeMembership-button {
+    width: 500px;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+#enroll-div {
+    width: 1200px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border: thick solid black;
 }
