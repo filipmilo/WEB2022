@@ -2,11 +2,11 @@ package main;
 
 import static spark.Spark.port;
 import static spark.Spark.staticFiles;
-import static spark.Spark.get;
 
 import java.io.File;
 
 import controller.FacilityController;
+import controller.TrainingController;
 import controller.UserController;
 
 public class SportifyAppMain {
@@ -30,11 +30,11 @@ public class SportifyAppMain {
 		FacilityController.getFacilityById();
 		FacilityController.newFacility();
 		FacilityController.getAllFacilityTypes();
-		FacilityController.addContent();
-		FacilityController.getContent();
-		FacilityController.editContent();
-		FacilityController.getCoachTrainings();
-		FacilityController.deleteTraining();
+		TrainingController.addContent();
+		TrainingController.getContent();
+		TrainingController.editContent();
+		TrainingController.getCoachTrainings();
+		TrainingController.deleteTraining();
 	}
 
 }
