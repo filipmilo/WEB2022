@@ -69,7 +69,7 @@ Vue.component("Facilitypage", {
 					</div>
 				</div>
 			</div>
-			<h1>Content:</h1>
+			
 			
 			<button type="button" class="btn btn-primary active" v-if="isManagerPage"  @click="addContentEnable">Add content</button>
 			<div id="new-content-div" v-if="enableAddContent">
@@ -142,12 +142,16 @@ Vue.component("Facilitypage", {
 					</table>
 				</form>
 			</div>
+			<h1>Content:</h1>
+			<h2 v-if="contents === null || contents === ''">There is no regular content</h2>
 			<div class="horizontal-div" v-if="contents != null && contents != ''">
 				<div v-for="(c, index) in contents" @click="enableEdit(c)">
 					<p class="content-class-lead" v-if="index === 0"> {{ c.name }} </p>
 					<p class="content-class" v-else> {{ c.name }} </p>
 				</div>
 			</div>
+			
+			
 			<div class="horizontal-div">
 				<div id="workingHoursDiv">
 					<h1>Working Hours:</h1>
