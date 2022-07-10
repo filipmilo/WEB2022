@@ -425,7 +425,6 @@
     display: flex;
     flex-basis: 100%;
     margin-top: 30px;
-    flex-wrap: wrap;
 }
 
 #separator-hours {
@@ -612,18 +611,19 @@ input:checked + .slider:before {
     flex-basis: 100%;
     /* border: thick solid black; */
     width: 95%;
-    height:  600px;
+    height:  fit-content;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
 }
 
 .membership-type-div {
     width: 350px;
     height: 500px;
     border: thick black solid;
-    top: 50%;
+    /* top: 50%;
     transform: translateY(-50%);
-    position: relative;
+    position: relative; */
     margin-left: auto;
     margin-right: auto;
 }
@@ -652,7 +652,7 @@ input:checked + .slider:before {
 
 .meminfo-div {
     width: 100%;
-    height: 100%;
+    height: max-content;
     display: block;
 }
 
@@ -665,4 +665,13 @@ input:checked + .slider:before {
 #payMembership-button {
     width: 100%;
     height: 100%;
+}
+
+#schedule-button {
+    width: 100%;
+    height: 100%;
+}
+
+.list-group-item:hover {
+    cursor: pointer;
 }

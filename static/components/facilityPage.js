@@ -6,6 +6,9 @@ Vue.component("Facilitypage", {
 				contents: '',
 				isManagerPage: false,
 				enableAddContent: false,
+				selectedIndex: 0,
+				user: '',
+				jwtt: '',
 				
 				content: {
 					name: '',
@@ -16,6 +19,13 @@ Vue.component("Facilitypage", {
 					description: '',
 					image: '',
 					date: ''
+				},
+
+				newTraining: {
+					applicationDate: '',
+					training: '',
+					customer: '',
+					coach: ''
 				},
 				
 				allCoaches: [],
@@ -144,7 +154,7 @@ Vue.component("Facilitypage", {
 			</div>
 			<h1>Content:</h1>
 			<h2 v-if="contents === null || contents === ''">There is no regular content</h2>
-			<div class="horizontal-div" v-if="contents != null && contents != ''">
+			<div class="horizontal-div" v-if="contents != null && contents != ''" style="flex-wrap: wrap;">
 				<div v-for="(c, index) in contents" @click="enableEdit(c)">
 					<p class="content-class-lead" v-if="index === 0"> {{ c.name }} </p>
 					<p class="content-class" v-else> {{ c.name }} </p>
@@ -185,6 +195,15 @@ Vue.component("Facilitypage", {
 						<p style="font-size: 24px; font-weight: 500; padding: 0; margin-left: 10px;">{{ facility.location.address }}</p>
 					</div>
 				</div>
+			</div>
+			<div class="list-group">
+				<a class="list-group-item list-group-item-action"
+				v-on:click="setTraining(null); selectedIndex = 0;" v-bind:class="{ 'active' : isSelected(0) }">No training</a>
+				<a class="list-group-item list-group-item-action" v-for="(c, index) in contents" 
+				v-on:click="setTraining(c); selectedIndex = index+1;" v-bind:class="{ 'active' : isSelected(index+1) }">{{ c.name }}</a>
+			</div>
+			<div style="margin-top: 100px; background-color: lightcoral; width: 900px; margin-left: auto; margin-right: auto;">
+				<button id="schedule-button" class="btn btn-info" @click="scheduleTraining();" :disabled="isSelected(0)">Schedule Training</button>
 			</div>
 		</div>
     </div>
@@ -302,6 +321,51 @@ Vue.component("Facilitypage", {
 				});
 			}
 			
+		},
+		isSelected(index) {
+			return index === this.selectedIndex;
+		},
+		setTraining: function(c) {
+			this.content = c;
+			console.log(this.content);
+		},
+		scheduleTraining: function() {
+
+			let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let yyyy = today.getFullYear();
+
+			this.newTraining.applicationDate = yyyy + '-' + mm + '-' + dd;
+
+			this.newTraining.training = this.content.id;
+
+			// axios.get("/rest/memberships/getByUsername/", {
+			// 	params: {username: this.user},
+			// 	headers: {Authorization: `Bearer ${this.jwtt}`}					
+			// })
+			// .then(response => {
+			// 	this.newTraining.customer = response.data.customer;
+			// });
+
+			this.newTraining.customer = this.user;
+			this.newTraining.coach = this.content.coach;
+
+			console.log(this.newTraining);
+
+			axios.post("/rest/memberships/reduceVisits/", null, {
+				params: {username: this.user},
+				headers: {Authorization: `Bearer ${this.jwtt}`}					
+			})
+			.then(response => {
+			});
+
+			axios.post("/rest/trainingHistory/new/", this.newTraining, {
+				headers: {Authorization: `Bearer ${this.jwtt}`}					
+			})
+			.then(response => {
+				alert('Training scheduled!')
+			});
 		}
 	},
 	mounted () {
@@ -332,6 +396,7 @@ Vue.component("Facilitypage", {
 			});
 			*/
 		var toParse = localStorage.getItem('jwt');
+		this.jwtt = JSON.parse(toParse).jwt;
 		
 		if(toParse) {
 			axios.get("/rest/users/managerfacility/", {params: {username: JSON.parse(toParse).username}})
@@ -341,5 +406,9 @@ Vue.component("Facilitypage", {
 					}
 				});
 		}
+
+		this.user = this.username = JSON.parse(toParse).username;
+
+		
 	 }
 });

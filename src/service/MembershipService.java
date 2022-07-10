@@ -10,7 +10,7 @@ import storage.MembershipStorage;
 public class MembershipService {
 	private MembershipStorage memberships = new MembershipStorage();
 	
-	public ArrayList<Membership> getFacilitiesArrayList() {
+	public ArrayList<Membership> getMembershipArray() {
 		return memberships.getArray();
 	}
 	
@@ -35,6 +35,18 @@ public class MembershipService {
 		membership.setId(Integer.toString(++id));
 		
 		return memberships.addMembership(membership);
+	}
+	
+	public Membership getByUsername(String username) {
+		return memberships.getByUsername(username);
+	}
+	
+	public Membership reduceVisits(String username) {
+		Membership mem = memberships.getByUsername(username);
+		mem.setRemainingVisits(mem.getRemainingVisits() - 1);
+		memberships.editMembership(mem);
+		
+		return mem;
 	}
 
 }

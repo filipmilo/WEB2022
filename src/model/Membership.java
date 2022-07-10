@@ -14,9 +14,10 @@ public class Membership {
 	private String customer;
 	private boolean status;
 	private int dailyLimit;
+	private int remainingVisits;
 	
 	public Membership(String id, String type, LocalDate dateOfPayment, LocalDate dateOfExpiration,
-			int fee, String customer, boolean status, int dailyLimit) {
+			int fee, String customer, boolean status, int dailyLimit, int remainingVisits) {
 		
 		this.id = id;
 		this.type = type;
@@ -26,10 +27,11 @@ public class Membership {
 		this.customer = customer;
 		this.status = status;
 		this.dailyLimit = dailyLimit;
+		this.remainingVisits = remainingVisits;
 	}
 	
 	public Membership(String type, String dateOfPayment, String dateOfExpiration,
-			int fee, String customer, boolean status, int dailyLimit) {
+			int fee, String customer, boolean status, int dailyLimit, int remainingVisits) {
 		
 		this.id = "";
 		this.type = type;
@@ -39,6 +41,7 @@ public class Membership {
 		this.customer = customer;
 		this.status = status;
 		this.dailyLimit = dailyLimit;
+		this.remainingVisits = remainingVisits;
 	}
 	
 	public String getId() {
@@ -88,6 +91,14 @@ public class Membership {
 	}
 	public void setDailyLimit(int dailyLimit) {
 		this.dailyLimit = dailyLimit;
+	}
+
+	public int getRemainingVisits() {
+		return remainingVisits;
+	}
+
+	public void setRemainingVisits(int remainingVisits) {
+		this.remainingVisits = remainingVisits;
 	}
 	
 	

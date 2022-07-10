@@ -7,14 +7,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import model.Membership;
 import model.TrainingHistory;
 
 public class TrainingHistoryStorage {
 	private HashMap<String, TrainingHistory> allTrainings = new HashMap<String, TrainingHistory>();
+	private ArrayList<TrainingHistory> allTHistories = new ArrayList<TrainingHistory>();
 	private File file;
 	
 	
@@ -65,6 +68,7 @@ public class TrainingHistoryStorage {
 				th.setId(id);
 				th.setDeleted(Boolean.parseBoolean(deleted));
 				
+				allTHistories.add(th);
 				allTrainings.put(th.getId(), th);
 			}
 		} catch(Exception e) {
@@ -99,8 +103,6 @@ public class TrainingHistoryStorage {
 		str.append(";");
 		str.append(training.getCoach());
 		str.append(";");
-		str.append(training.getCoach());
-		str.append(";");
 		str.append(training.isDeleted());	
 
 		return str.toString();
@@ -110,8 +112,13 @@ public class TrainingHistoryStorage {
 		return allTrainings.values();
 	}
 	
+	public ArrayList<TrainingHistory> getArray() {
+		return allTHistories;
+	}
+	
 	public TrainingHistory addTrainingHistory(TrainingHistory training) {
 		allTrainings.put(training.getId(), training);
+		allTHistories.add(training);
 		save();
 		return training;
 	}
