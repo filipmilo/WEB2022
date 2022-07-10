@@ -425,6 +425,7 @@
     display: flex;
     flex-basis: 100%;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 
 #separator-hours {
@@ -595,8 +596,68 @@ input:checked + .slider:before {
 
 #enroll-div {
     width: 1200px;
-    height: 600px;
+    height: 900px;
     margin-left: auto;
     margin-right: auto;
     border: thick solid black;
+}
+
+#typeOfMembership-div {
+    display: flex;
+    flex-basis: 100%;
+    /* border: thick solid black; */
+    width: 95%;
+    height:  600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.membership-type-div {
+    width: 350px;
+    height: 500px;
+    border: thick black solid;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.membership-type-div:hover {
+    filter: brightness(110%);
+    cursor: pointer;
+}
+
+.membership-type-div > h1 {
+    text-align: center;
+}
+
+.separator-membershiptype {
+    border-bottom: thick solid black;
+    margin-top: 10px;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.memebership-info-p {
+    font-size: 28px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.meminfo-div {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.checkmark {
+    width: 64px;
+    height: 64px;
+    margin-left: auto;
+}
+
+#payMembership-button {
+    width: 100%;
+    height: 100%;
 }

@@ -3,6 +3,7 @@ Vue.component("Enroll", {
 		    return {
                 jwtt: '',
                 duration: 1,
+                selectedIndex: 0,
                 membership: {
                     type: 'BRONZE',
                     dateOfPayment: '',
@@ -18,10 +19,9 @@ Vue.component("Enroll", {
 <div id="enroll-div">
     <div>
         <div>
-            <button class="btn btn-info" @click="calculateDate()">Date</button>
-            <h1 style="text-align: center;">Cost: {{ this.membership.fee }}</h1>
+            <!--<button class="btn btn-info" @click="calculateDate()">Date</button>-->
         </div>
-        <div style="display: flex; margin-top: 30px;">
+        <div style="display: flex; margin-top: 30px; margin-left: 30px;">
             <p style="margin-top: 10px; margin-left: 20px;">Choose membership duration: </p>
             <select v-model="duration" @change="calculateFee();" style="margin-left: 20px;">
                 <option value="1">One month</option>
@@ -29,16 +29,50 @@ Vue.component("Enroll", {
                 <option value="6">Six months</option>
             </select>
         </div>
-        <div style="display: flex; margin-top: 30px;">
-            <p style="margin-top: 10px; margin-left: 20px;">Choose membership type: </p>
-            <select v-model="membership.type" @change="calculateFee()" style="margin-left: 20px;">
-                <option value="BRONZE">Bronze</option>
-                <option value="SILVER">Silver</option>
-                <option value="GOLD">Gold</option>
-            </select>
+        <div id="typeOfMembership-div">
+            <div id="bronzeMem" class="membership-type-div" style="background-color: #E3AF66; filter: brightness(115%);
+            border: blue solid thick;" v-on:click="isSelected(0, $event); calculateFee()">
+                <h1>BRONZE</h1>
+                <p class="separator-membershiptype"></p>
+                <div class="meminfo-div">
+                    <p class="memebership-info-p">x15 sessions monthly</p>
+                    <p class="memebership-info-p">x1 daily entrances</p>
+
+                    <div style="margin-top: 250px; display: flex;">
+                        <h1 style="margin-left: 10px; margin-top: 5px;" v-if="membership.type ==='BRONZE'">Cost: {{ this.membership.fee }}</h1>
+                        <img class="checkmark" src="images/checkmark.png" v-if="membership.type ==='BRONZE'"/>
+                    </div>
+                </div>
+            </div>
+            <div id="silverMem" class="membership-type-div" style="background-color: #C0C0C0;" v-on:click="isSelected(1, $event); calculateFee()">
+                <h1>SILVER</h1>
+                <p class="separator-membershiptype"></p>
+                <div class="meminfo-div">
+                    <p class="memebership-info-p">x20 sessions monthly</p>
+                    <p class="memebership-info-p">x1 daily entrances</p>
+
+                    <div style="margin-top: 250px; display: flex;">
+                        <h1 style="margin-left: 10px; margin-top: 5px;" v-if="membership.type ==='SILVER'">Cost: {{ this.membership.fee }}</h1>
+                        <img class="checkmark" src="images/checkmark.png" v-if="membership.type ==='SILVER'"/>
+                    </div>
+                </div>
+            </div>
+            <div id="goldMem" class="membership-type-div" style="background-color: #FFD700;" v-on:click="isSelected(2, $event); calculateFee()">
+                <h1>GOLD</h1>
+                <p class="separator-membershiptype"></p>
+                <div class="meminfo-div">
+                    <p class="memebership-info-p">x30 sessions monthly</p>
+                    <p class="memebership-info-p">x1 daily entrances</p>
+
+                    <div style="margin-top: 250px; display: flex;">
+                        <h1 style="margin-left: 10px; margin-top: 5px;" v-if="membership.type ==='GOLD'">Cost: {{ this.membership.fee }}</h1>
+                        <img class="checkmark" src="images/checkmark.png" v-if="membership.type ==='GOLD'"/>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <button class="btn btn-info" @click="calculateDate(); enroll()">Pay</button>
+        <div style="width: 800px; height: 50px; display: block; background-color: lightcoral; margin-left: auto; margin-right: auto;">
+            <button id="payMembership-button" class="btn btn-info" @click="calculateDate(); enroll()">Pay</button>
         </div>
     </div>
 </div>
@@ -95,7 +129,50 @@ Vue.component("Enroll", {
             }).then(response => {
                 console.log(response);
             })
-        }
+        },
+        setType: function(type) {
+            this.membership.type = type;
+        },
+        isSelected(index, event) {
+			switch(index) {
+                case 0:
+                    event.currentTarget.style.filter = "brightness(115%)";
+                    event.currentTarget.style.border = "blue solid thick";
+
+                    document.getElementById("silverMem").style.filter = "brightness(100%)";
+                    document.getElementById("silverMem").style.border = "black solid thick";
+
+                    document.getElementById("goldMem").style.filter = "brightness(100%)";
+                    document.getElementById("goldMem").style.border = "black solid thick";
+
+                    this.membership.type = 'BRONZE';
+                    break;
+                case 1:
+                    document.getElementById("bronzeMem").style.filter = "brightness(100%)";
+                    document.getElementById("bronzeMem").style.border = "black solid thick";
+
+                    event.currentTarget.style.filter = "brightness(115%)";
+                    event.currentTarget.style.border = "blue solid thick";
+
+                    document.getElementById("goldMem").style.filter = "brightness(100%)";
+                    document.getElementById("goldMem").style.border = "black solid thick";
+
+                    this.membership.type = 'SILVER';
+                    break;
+                case 2:
+                    document.getElementById("bronzeMem").style.filter = "brightness(100%)";
+                    document.getElementById("bronzeMem").style.border = "black solid thick";
+
+                    document.getElementById("silverMem").style.filter = "brightness(100%)";
+                    document.getElementById("silverMem").style.border = "black solid thick";
+
+                    event.currentTarget.style.filter = "brightness(115%)";
+                    event.currentTarget.style.border = "blue solid thick";
+
+                    this.membership.type = 'GOLD';
+                    break;
+            }
+		}
 	},
 	mounted () {
         var toParse = localStorage.getItem('jwt');
