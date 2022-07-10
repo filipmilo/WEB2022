@@ -10,11 +10,15 @@ public class CommentsService {
 	
 	//methods
 	
-	public ArrayList<Comment> getAllByFacility(String facility) {
+	public ArrayList<Comment> getAllByFacility(String facility, boolean isOnlyApproved) {
 		ArrayList<Comment> requiredComments = new ArrayList<Comment>();
 		
 		for(Comment c: comments.getAll()) {
-			if(c.getFacility().equals(facility)) requiredComments.add(c);
+			if(isOnlyApproved && c.getFacility().equals(facility) && c.getStatus().equals("approved")) {
+				requiredComments.add(c);
+			} else if(!isOnlyApproved && c.getFacility().equals(facility)) {
+				requiredComments.add(c);
+			}
 		}
 		
 		return requiredComments;

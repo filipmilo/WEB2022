@@ -9,6 +9,7 @@ const Allusers = {template: '<allusers></allusers>'}
 const Trainings = {template: '<trainings></trainings>'}
 const Membership = {template: '<membership></membership>'}
 const Enroll = {template: '<enroll></enroll>'}
+const Comments = {template: '<comments></comments>'}
 
 
 const router = new VueRouter({

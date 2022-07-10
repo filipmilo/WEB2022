@@ -187,6 +187,8 @@ Vue.component("Facilitypage", {
 				</div>
 			</div>
 		</div>
+		
+		<comments></comments>
     </div>
 </div>
 `
