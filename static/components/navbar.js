@@ -3,6 +3,7 @@ Vue.component("Navbar", {
 		    return {
 			isLoggedIn: false,
 			username: '',
+			role: ''
 		  }
 	},
 	template: ` 
@@ -12,6 +13,10 @@ Vue.component("Navbar", {
 			<img src="logo.png" width="64" height="64"/>
 			<p>Home</p>
 		</a>
+
+		<div>
+			<button class="btn btn-outline-info" @click="$router.push('/membership')" v-if="this.role === 'CUSTOMER'" id="membership-button">Membership</button>
+		</div>
 
 		<div class="collapse navbar-collapse" id="username-div">
 			<div class="dropdown" id="dropdown-div" v-if="isLoggedIn">
@@ -47,6 +52,7 @@ Vue.component("Navbar", {
             this.isLoggedIn = false;
 			
 			this.$root.$emit('messageFromChild2ToChild1', 'false');
+			this.role = '';
 		
 			alert("Logged out");
 			
@@ -59,20 +65,28 @@ Vue.component("Navbar", {
 		if(toParse) {
 			this.isLoggedIn = true;
 			this.username = JSON.parse(toParse).username;
+			this.role = JSON.parse(toParse).role;
 		}
-		else
+		else{
 			this.isLoggedIn = false;
+		}
+			
 		
 		this.$root.$on('messageFromChild1ToChild2', (text) => {
 			if(text === 'false') {
 				this.isLoggedIn = false;
 			} else if (text === 'true') {
 				this.isLoggedIn = true;
+
+				let roleParse = localStorage.getItem('jwt');
+				this.role = JSON.parse(roleParse).role;
 			}
 		});
 
 		this.$root.$on('usernameMessage', (text) => {
 			this.username = text;
 		});
+
+		console.log("The role in navbar is:" + this.role);
     }
 });
