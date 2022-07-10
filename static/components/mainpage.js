@@ -24,6 +24,10 @@ Vue.component("Mainpage", {
 		<button v-if = "this.role === 'ADMIN'" v-on:click = "createSportsFacility" class="btn btn-info"> Create Sports Facility </button>
 		<button v-if = "this.role === 'ADMIN'" v-on:click = "showAllUsers" class="btn btn-info"> View all users </button>
 		
+		
+		<button v-if = "this.role === 'COACH'" v-on:click = "showCoachTrainings" class="btn btn-info"> View all trainings </button>
+		
+		
 		<button v-if = "this.role === 'MANAGER'" v-on:click = "managerFacility" class="btn btn-info"> View my facility </button>
 				
 	</div>
@@ -111,6 +115,9 @@ Vue.component("Mainpage", {
 		},
 		showLoginUser: function() {
 			router.push(`/login`);
+		},
+		showCoachTrainings: function(){
+			router.push(`/trainings`);	
 		},
 		searchForFacility: function() {
 			event.preventDefault();

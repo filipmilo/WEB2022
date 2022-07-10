@@ -11,20 +11,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-import model.Training;
+import model.TrainingHistory;
 
-public class TrainingStorage {
-	private HashMap<String, Training> allContent = new HashMap<String, Training>();
+public class TrainingHistoryStorage {
+	private HashMap<String, TrainingHistory> allTrainings = new HashMap<String, TrainingHistory>();
 	private File file;
 	
-	public TrainingStorage() {
+	
+	public TrainingHistoryStorage() {
 		this("resources\\data");
 	}
 	
-	private TrainingStorage(String path) {
+	private TrainingHistoryStorage(String path) {
 		BufferedReader in = null;
 		try {
-			file = new File(path + "/trainings.txt");
+			file = new File(path + "/trainingHistory.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			readAllContent(in);
@@ -38,10 +39,9 @@ public class TrainingStorage {
 			}
 		}
 	}
-	 
+	
 	private void readAllContent(BufferedReader in) {
-		String line, name = "", type = "", facility = "", coach = "", description = "", image = "", id = "", duration = ""; 
-		boolean deleted = false;
+		String line, id = "", training = "", customer = "", coach = "", deleted = ""; 
 		String date = "";
 		StringTokenizer st;
 		
@@ -53,22 +53,19 @@ public class TrainingStorage {
 				st = new StringTokenizer(line, ";");
 				while(st.hasMoreTokens()) {
 					id = st.nextToken().trim();
-					name = st.nextToken().trim();
-					type = st.nextToken().trim();
-					facility = st.nextToken().trim();
-					duration = st.nextToken().trim();
-					coach = st.nextToken().trim();
-					description = st.nextToken().trim();
-					image = st.nextToken().trim();
-					deleted = Boolean.parseBoolean(st.nextToken().trim());
 					date = st.nextToken().trim();
+					training = st.nextToken().trim();
+					customer = st.nextToken().trim();
+					coach = st.nextToken().trim();
+					deleted = st.nextToken().trim();
+					
 				}
 				
-				Training tr = new Training(name, type, facility, duration, coach, description, image);
-				tr.setId(id);
-				tr.setDeleted(deleted);
-				tr.setDate(LocalDate.parse(date));
-				allContent.put(tr.getId(), tr);
+				TrainingHistory th = new TrainingHistory(LocalDate.parse(date), training, customer, coach);
+				th.setId(id);
+				th.setDeleted(Boolean.parseBoolean(deleted));
+				
+				allTrainings.put(th.getId(), th);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -79,7 +76,7 @@ public class TrainingStorage {
 		try {
 			PrintWriter out = new PrintWriter(new FileWriter(file), true);
 			
-			for(Training training: allContent.values()) {
+			for(TrainingHistory training: allTrainings.values()) {
 				String str = makeLine(training);
 				out.println(str);
 			}
@@ -90,44 +87,36 @@ public class TrainingStorage {
 		}
 	}
 	
-	private String makeLine(Training training) {
+	private String makeLine(TrainingHistory training) {
 		StringBuilder str = new StringBuilder();
 		str.append(training.getId());
 		str.append(";");
-		str.append(training.getName());
+		str.append(training.getApplicationDate());
 		str.append(";");
-		str.append(training.getType());
+		str.append(training.getTraining());
 		str.append(";");
-		str.append(training.getFacility());
-		str.append(";");
-		str.append(training.getDuration());
+		str.append(training.getCustomer());
 		str.append(";");
 		str.append(training.getCoach());
 		str.append(";");
-		str.append(training.getDescription());
+		str.append(training.getCoach());
 		str.append(";");
-		str.append(training.getImagePath());
-		str.append(";");
-		str.append(training.isDeleted());
-		str.append(";");
-		str.append(training.getDate());
-		
+		str.append(training.isDeleted());	
 
 		return str.toString();
 	}
 	
-	public Collection<Training> getAll() {
-		return allContent.values();
+	public Collection<TrainingHistory> getAll() {
+		return allTrainings.values();
 	}
 	
-	public Training addTraining(Training training) {
-		allContent.put(training.getId(), training);
+	public TrainingHistory addTrainingHistory(TrainingHistory training) {
+		allTrainings.put(training.getId(), training);
 		save();
 		return training;
 	}
 	
-	public Training getById(String id) {
-		return allContent.get(id);
+	public TrainingHistory getById(String id) {
+		return allTrainings.get(id);
 	}
-	
 }

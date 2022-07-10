@@ -26,6 +26,15 @@ public class TrainingService {
 		
 	}
 	
+	public Training cancelTraining(String trainingId) {
+		Training training = trainings.getById(trainingId);
+		training.setDeleted(true);
+		
+		trainings.addTraining(training);
+		
+		return training;
+	}
+	
 	public Training editContent(Training training) {
 		return trainings.addTraining(training);
 	}
@@ -40,5 +49,19 @@ public class TrainingService {
 		}
 	
 		return content;
+	}
+	
+	public ArrayList<Training> getByCoach(String coach) {
+		ArrayList<Training> trainingsC = new ArrayList<Training>();
+		
+		for(Training tr: trainings.getAll()) {
+			if(tr.isDeleted()) 
+				continue;
+			
+			if(tr.getCoach().equals(coach)) 
+				trainingsC.add(tr);
+		}
+		
+		return trainingsC;
 	}
 }
