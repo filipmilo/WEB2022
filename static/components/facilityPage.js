@@ -14,7 +14,8 @@ Vue.component("Facilitypage", {
 					coach: '',
 					facilityId: '',
 					description: '',
-					image: ''
+					image: '',
+					date: ''
 				},
 				
 				allCoaches: [],
@@ -68,7 +69,7 @@ Vue.component("Facilitypage", {
 					</div>
 				</div>
 			</div>
-			<h1>Content:</h1>
+			
 			
 			<button type="button" class="btn btn-primary active" v-if="isManagerPage"  @click="addContentEnable">Add content</button>
 			<div id="new-content-div" v-if="enableAddContent">
@@ -127,7 +128,12 @@ Vue.component("Facilitypage", {
 								</select>
 							</td>
 						</tr>	
-						
+						<tr v-if="isTraining">
+							<td>
+								<p>Date: </p>
+								<input type="date" v-model="content.date" ></input>
+							</td>
+						</tr>	
 						<tr>
 							<td colspan="2" style="text-align:center">
 								<input type="submit" value="Post" @click="addContent"  class="btn btn-info"></input>
@@ -136,12 +142,16 @@ Vue.component("Facilitypage", {
 					</table>
 				</form>
 			</div>
+			<h1>Content:</h1>
+			<h2 v-if="contents === null || contents === ''">There is no regular content</h2>
 			<div class="horizontal-div" v-if="contents != null && contents != ''">
 				<div v-for="(c, index) in contents" @click="enableEdit(c)">
 					<p class="content-class-lead" v-if="index === 0"> {{ c.name }} </p>
 					<p class="content-class" v-else> {{ c.name }} </p>
 				</div>
 			</div>
+			
+			
 			<div class="horizontal-div">
 				<div id="workingHoursDiv">
 					<h1>Working Hours:</h1>
@@ -193,6 +203,7 @@ Vue.component("Facilitypage", {
 				this.content.facilityId = '';
 				this.content.description = '';
 				this.content.image = '';
+				this.content.date = '';
 				
 				this.isTraining = false;
 				this.isEdit = false;
@@ -213,6 +224,7 @@ Vue.component("Facilitypage", {
 			
 		},
 		enableEdit: function(content) {
+			if(this.isManagerPage == false) return;
 			this.currContentId = content.id;
 			this.isEdit = true;
 			this.enableAddContent = true;
@@ -224,6 +236,8 @@ Vue.component("Facilitypage", {
 			this.content.facilityId = content.facilityId;
 			this.content.description = content.description;
 			this.content.image = content.image;
+			this.content.date = content.date;
+			
 			
 			if(this.content.type === 'training1' || this.content.type === 'training2') {
 				this.isTraining = true;
@@ -251,8 +265,8 @@ Vue.component("Facilitypage", {
 			if((this.content.name === '' || this.content.type === '' || this.content.image === '') && !this.isTraining) {
 				alert("Name, type and image must be selected");
 				return;
-			} else if ((this.content.name === '' || this.content.image === '' || this.content.coach === '') && this.isTraining){
-				alert("Name, image and coach must be selected");
+			} else if ((this.content.name === '' || this.content.image === '' || this.content.coach === '' || this.content.date === '') && this.isTraining){
+				alert("Name, image, date and coach must be selected");
 				return;
 			}
 			

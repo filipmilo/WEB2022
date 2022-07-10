@@ -562,6 +562,11 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+
+#cancel-button {
+    margin: auto;
+}
+
 #membershipPage-div {
     width: 1200px;
     height: 600px;
