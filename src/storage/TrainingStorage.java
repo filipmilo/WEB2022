@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -40,7 +41,8 @@ public class TrainingStorage {
 	 
 	private void readAllContent(BufferedReader in) {
 		String line, name = "", type = "", facility = "", coach = "", description = "", image = "", id = "", duration = ""; 
-		
+		boolean deleted = false;
+		String date = "";
 		StringTokenizer st;
 		
 		try {
@@ -58,11 +60,14 @@ public class TrainingStorage {
 					coach = st.nextToken().trim();
 					description = st.nextToken().trim();
 					image = st.nextToken().trim();
-					
+					deleted = Boolean.parseBoolean(st.nextToken().trim());
+					date = st.nextToken().trim();
 				}
 				
 				Training tr = new Training(name, type, facility, duration, coach, description, image);
 				tr.setId(id);
+				tr.setDeleted(deleted);
+				tr.setDate(LocalDate.parse(date));
 				allContent.put(tr.getId(), tr);
 			}
 		} catch(Exception e) {
@@ -103,6 +108,10 @@ public class TrainingStorage {
 		str.append(";");
 		str.append(training.getImagePath());
 		str.append(";");
+		str.append(training.isDeleted());
+		str.append(";");
+		str.append(training.getDate());
+		
 
 		return str.toString();
 	}

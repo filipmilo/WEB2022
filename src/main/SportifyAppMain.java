@@ -33,6 +33,8 @@ public class SportifyAppMain {
 		FacilityController.addContent();
 		FacilityController.getContent();
 		FacilityController.editContent();
+		FacilityController.getCoachTrainings();
+		FacilityController.deleteTraining();
 	}
 
 }

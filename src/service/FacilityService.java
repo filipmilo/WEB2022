@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.StringTokenizer;
 
 import model.SportsFacility;
 import storage.FacilityStorage;
@@ -19,6 +20,30 @@ public class FacilityService {
 	
 	public SportsFacility getFacilityById(String id) {
 		return facilities.getById(id);
+	}
+	
+	public void removeContent(String facilityId, String trainingId) {
+		SportsFacility facility = facilities.getById(facilityId);
+		
+		StringTokenizer st = new StringTokenizer(facility.getContent(), ",");
+		StringBuilder str = new StringBuilder();
+		int i = 0;
+		while(st.hasMoreTokens()) {
+			String content = st.nextToken().trim();
+			i++;
+			if(!content.equals(trainingId)) {
+				str.append(content);
+				
+				if(st.hasMoreTokens()) {
+					str.append(",");
+				}
+			}
+		}
+		
+		if(i == 1) str.append("nothing");
+		facility.setContent(str.toString());
+		
+		facilities.editFacility(facility);
 	}
 	
 	public SportsFacility newFacility(SportsFacility facility) {

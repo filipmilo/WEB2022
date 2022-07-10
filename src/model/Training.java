@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Training {
 
 	private boolean deleted;
@@ -14,6 +16,16 @@ public class Training {
 	private String description;
 	private String imagePath; 
 	
+	private LocalDate date;
+	
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
 	public Training(String name, String type, String facility, String duration, String coach,
 			String description, String imagePath) {

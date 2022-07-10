@@ -1,5 +1,7 @@
 package dto;
 
+import java.time.LocalDate;
+
 public class ContentDTO {
 	private String name;
 	private String type;
@@ -9,8 +11,10 @@ public class ContentDTO {
 	private String description;
 	private String image;
 	
+	private LocalDate date;
+	
 	public ContentDTO(String name, String type, String duration, String coach, String facilityId, String description,
-			String image) {
+			String image, LocalDate date) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -19,6 +23,7 @@ public class ContentDTO {
 		this.facilityId = facilityId;
 		this.description = description;
 		this.image = image;
+		this.date = date;
 	}
 
 	public String getName() {
@@ -76,7 +81,13 @@ public class ContentDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 	
 }

@@ -1,2 +1,2 @@
-1;Hiit;training1;1;2;rob;Intensive high calorie draining training;20220521121703_1.jpg;
-2;Tabata;training2;1;2;rob;Intensive high calorie draining training;null;
+1;Hiit;training1;1;2;rob;Intensive high calorie draining training;20220521121703_1.jpg;true;2022-07-11
+2;Tabata;training2;1;3;rob;Intensive high calorie draining training;null;false;2022-07-11
