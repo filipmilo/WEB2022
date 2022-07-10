@@ -7,6 +7,7 @@ import static spark.Spark.get;
 import java.io.File;
 
 import controller.FacilityController;
+import controller.MembershipController;
 import controller.UserController;
 
 public class SportifyAppMain {
@@ -33,6 +34,9 @@ public class SportifyAppMain {
 		FacilityController.addContent();
 		FacilityController.getContent();
 		FacilityController.editContent();
+		
+		MembershipController.getAll();
+		MembershipController.newMembership();
 	}
 
 }
