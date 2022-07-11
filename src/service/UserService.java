@@ -98,4 +98,23 @@ public class UserService {
 		return users.getUser(username).getFacility();
 	}
 	
+	public User addTraining(String username, String training) {
+		User user = users.getUser(username);
+		String trainingHistory = user.getTrainingHistory();
+		
+		if(trainingHistory.equals("nothing")) {
+			trainingHistory = training;
+			user.setTrainingHistory(trainingHistory);
+			users.addUser(user);
+			return user;
+		}
+		
+		trainingHistory = trainingHistory + ',' + training;
+		
+		user.setTrainingHistory(trainingHistory);
+		users.addUser(user);
+		
+		return user;
+	}
+	
 }

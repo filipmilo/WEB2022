@@ -11,9 +11,10 @@ public class NewMembershipDTO {
 	private String customer;
 	private boolean status;
 	private int dailyLimit;
+	private int remainingVisits;
 	
 	public NewMembershipDTO(String type, String dateOfPayment, String dateOfExpiration, int fee, String customer,
-			boolean status, int dailyLimit) {
+			boolean status, int dailyLimit, int remainingVisits) {
 		super();
 		this.type = type;
 		this.dateOfPayment = dateOfPayment;
@@ -22,6 +23,7 @@ public class NewMembershipDTO {
 		this.customer = customer;
 		this.status = status;
 		this.dailyLimit = dailyLimit;
+		this.remainingVisits = remainingVisits;
 	}
 
 	public String getType() {
@@ -78,6 +80,14 @@ public class NewMembershipDTO {
 
 	public void setDailyLimit(int dailyLimit) {
 		this.dailyLimit = dailyLimit;
+	}
+
+	public int getRemainingVisits() {
+		return remainingVisits;
+	}
+
+	public void setRemainingVisits(int remainingVisits) {
+		this.remainingVisits = remainingVisits;
 	}
 	
 	

@@ -9,7 +9,7 @@ import controller.CommentsController;
 import controller.FacilityController;
 
 import controller.TrainingController;
-
+import controller.TrainingHistoryController;
 import controller.MembershipController;
 
 import controller.UserController;
@@ -29,6 +29,7 @@ public class SportifyAppMain {
 		UserController.getAllManagers();
 		UserController.getManagerFacilityId();
 		UserController.getAllCoaches();
+		UserController.addTraining();
 		
 		FacilityController.getAll();
 		FacilityController.searchFacilities();
@@ -44,10 +45,17 @@ public class SportifyAppMain {
 
 		MembershipController.getAll();
 		MembershipController.newMembership();
+		MembershipController.getMembershipByUsername();
+		MembershipController.reduceVisits();
+		MembershipController.checkApplicationValidity();
 		
-		CommentsController.getCommentsByFacility();
+		TrainingHistoryController.getAll();
+		TrainingHistoryController.addTrainingHistory();
+    
+    CommentsController.getCommentsByFacility();
 		CommentsController.addComment();
 		CommentsController.changeCommentStatus();
+
 
 	}
 

@@ -10,6 +10,8 @@ const Trainings = {template: '<trainings></trainings>'}
 const Membership = {template: '<membership></membership>'}
 const Enroll = {template: '<enroll></enroll>'}
 const Comments = {template: '<comments></comments>'}
+const Schedule = {template: '<schedule></schedule>'}
+
 
 
 const router = new VueRouter({
@@ -20,11 +22,12 @@ const router = new VueRouter({
 		{ path: '/', component: Mainpage},
 		{ path: '/register', name: 'home', component: Register},
 		{ path: '/profile', component: Profile},
-		{ path: '/facilityPage', name: 'facilityPage', component: Facilitypage},
+		{ path: '/facilityPage/:facilityID', name: 'facilityPage', component: Facilitypage},
 		{ path: '/allUsers', component: Allusers},
 		{ path: '/trainings', component: Trainings},
 		{ path: '/membership', component: Membership},
-		{ path: '/enroll', component: Enroll}
+		{ path: '/enroll', component: Enroll},
+		{ path: '/schedule', component: Schedule}
 
 	  ]
 });

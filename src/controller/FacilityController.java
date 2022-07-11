@@ -82,6 +82,5 @@ public class FacilityController {
 			return g.toJson(facilityService.getAllTypes());
 		});
 	}
-	
-	
+
 }
