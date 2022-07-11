@@ -42,7 +42,7 @@ public class UserStorage {
 	
 	private void readAllUsers(BufferedReader in) {
 		String line, username = "", password = "", name = "", surname = "", gender = "", dateOfBirth = "", 
-				role = "", facility = "", trainingHistory = "";
+				role = "", facility = "", trainingHistory = "", customerType = "";
 		StringTokenizer st;
 		
 		try {
@@ -61,9 +61,11 @@ public class UserStorage {
 					role = st.nextToken().trim();
 					facility = st.nextToken().trim();
 					trainingHistory = st.nextToken().trim();
+					customerType = st.nextToken().trim();
 				}
 				
-				User user = new User(username, password, name, surname, gender, LocalDate.parse(dateOfBirth), role, trainingHistory);
+				User user = new User(username, password, name, surname, gender, LocalDate.parse(dateOfBirth), 
+						role, trainingHistory, customerType);
 				user.setFacility(facility);
 				allUsers.put(username, user); 
 			}
@@ -107,6 +109,8 @@ public class UserStorage {
 		str.append(user.getFacility());
 		str.append(";");
 		str.append(user.getTrainingHistory());
+		str.append(";");
+		str.append(user.getCustomerType());
 		
 		
 		return str.toString();

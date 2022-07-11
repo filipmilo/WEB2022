@@ -200,8 +200,8 @@ Vue.component("Facilitypage", {
 			<div class="list-group" v-if="role === 'CUSTOMER'">
 				<a class="list-group-item list-group-item-action"
 				v-on:click="setTraining(null); selectedIndex = 0;" v-bind:class="{ 'active' : isSelected(0) }">No training</a>
-				<a class="list-group-item list-group-item-action"  v-for="(c, index) in contents" v-if="contents !== null && c !== null"
-				v-on:click="setTraining(c); selectedIndex = index+1;" v-bind:class="{ 'active' : isSelected(index+1) }" >{{ c.name }}</a>
+				<a class="list-group-item list-group-item-action"  v-for="(c, index) in contents"
+				v-on:click="setTraining(c); selectedIndex = index+1;" v-bind:class="{ 'active' : isSelected(index+1)}" v-if="c.type === 'training1' || c.type === 'training2'">{{ c.name }}</a>
 			</div>
 			<div style="margin-top: 100px; background-color: lightcoral; width: 900px; margin-left: auto; margin-right: auto;" v-if="role === 'CUSTOMER'">
 				<button id="schedule-button" class="btn btn-info" @click="scheduleTraining();" :disabled="isSelected(0)">Schedule Training</button>
