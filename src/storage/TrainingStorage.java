@@ -67,7 +67,12 @@ public class TrainingStorage {
 				Training tr = new Training(name, type, facility, duration, coach, description, image);
 				tr.setId(id);
 				tr.setDeleted(deleted);
-				tr.setDate(LocalDate.parse(date));
+				try {
+					tr.setDate(LocalDate.parse(date));
+				} catch(Exception e) {
+					tr.setDate(null);
+				}
+				
 				allContent.put(tr.getId(), tr);
 			}
 		} catch(Exception e) {

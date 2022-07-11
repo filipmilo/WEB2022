@@ -4,4 +4,4 @@
 4;rejected;meki;1;Very nice gym;4;false
 5;approved;meki;1;Nice gym;3;false
 6;approved;meki;5;okay place;2;false
-7;waiting;s;5;I like this place;4;false
+7;approved;s;5;I like this place;4;false

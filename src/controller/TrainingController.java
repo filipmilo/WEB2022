@@ -21,9 +21,9 @@ public class TrainingController {
 			res.type("application/json");
 			System.out.println(req.body());
 			
-			String jwt = req.headers("Authorization");
+			/*String jwt = req.headers("Authorization");
 			if(!Authorization.isLoggedIn(UserController.key, jwt))
-				return "null";
+				return "null";*/
 			
 			ContentDTO newContent = g.fromJson(req.body(), ContentDTO.class);
 			
