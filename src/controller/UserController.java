@@ -147,6 +147,19 @@ public class UserController {
 		});
 	}
 
-	
+	public static void addTraining() {
+		post("rest/users/addTraining/", (req, res) -> {
+			res.type("application/json");
+			
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(key, jwt) && jwt != null)
+				return "nothing";
+			
+			String username = req.queryParams("username");
+			String training = req.queryParams("training");
+			
+			return g.toJson(userService.addTraining(username, training));
+		});
+	}
 	
 }

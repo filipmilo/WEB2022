@@ -340,32 +340,44 @@ Vue.component("Facilitypage", {
 
 			this.newTraining.training = this.content.id;
 
-			// axios.get("/rest/memberships/getByUsername/", {
-			// 	params: {username: this.user},
-			// 	headers: {Authorization: `Bearer ${this.jwtt}`}					
-			// })
-			// .then(response => {
-			// 	this.newTraining.customer = response.data.customer;
-			// });
-
 			this.newTraining.customer = this.user;
 			this.newTraining.coach = this.content.coach;
 
 			console.log(this.newTraining);
 
-			axios.post("/rest/memberships/reduceVisits/", null, {
+			axios.get("/rest/memberships/checkValidity/", {
 				params: {username: this.user},
 				headers: {Authorization: `Bearer ${this.jwtt}`}					
 			})
 			.then(response => {
+				console.log('isValid: ' + response.data);
+
+				if(response.data === false)
+					return;
+
+				axios.post("/rest/memberships/reduceVisits/", null, {
+					params: {username: this.user},
+					headers: {Authorization: `Bearer ${this.jwtt}`}					
+				})
+				.then(response => {
+					console.log('remainingVisits: ' + response.data.remainingVisits);
+
+					axios.post("/rest/trainingHistory/new/", this.newTraining, {
+						headers: {Authorization: `Bearer ${this.jwtt}`}					
+					})
+					.then(response => {
+						alert('Training scheduled!')
+						axios.post("/rest/users/addTraining/", null, {
+							params: {username: this.user, training: this.newTraining.training},
+							headers: {Authorization: `Bearer ${this.jwtt}`}					
+						})
+						.then(response => {
+						});
+					});
+				});
 			});
 
-			axios.post("/rest/trainingHistory/new/", this.newTraining, {
-				headers: {Authorization: `Bearer ${this.jwtt}`}					
-			})
-			.then(response => {
-				alert('Training scheduled!')
-			});
+
 		}
 	},
 	mounted () {
@@ -388,13 +400,7 @@ Vue.component("Facilitypage", {
 			});
 			
 		});
-		
-		
-		/*axios.get("rest/facilities/content/", {params: {content: this.facility.content}})
-			.then(response => {
-				this.contents = response.data;
-			});
-			*/
+
 		var toParse = localStorage.getItem('jwt');
 		this.jwtt = JSON.parse(toParse).jwt;
 		

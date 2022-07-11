@@ -77,4 +77,16 @@ public class MembershipController {
 			return g.toJson(membershipService.reduceVisits(req.queryParams("username")));
 		});
 	}
+	
+	public static void checkApplicationValidity() {
+		get("rest/memberships/checkValidity/", (req, res) -> {
+			res.type("application/json");
+			
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(UserController.key, jwt))
+				return "null";
+			
+			return g.toJson(membershipService.checkApplicationValidity(req.queryParams("username")));
+		});
+	}
 }

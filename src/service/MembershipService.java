@@ -1,6 +1,9 @@
 package service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import model.Membership;
@@ -43,10 +46,26 @@ public class MembershipService {
 	
 	public Membership reduceVisits(String username) {
 		Membership mem = memberships.getByUsername(username);
+		
+		if((mem.getRemainingVisits() - 1) < 0)
+			return null;
+		
 		mem.setRemainingVisits(mem.getRemainingVisits() - 1);
 		memberships.editMembership(mem);
 		
 		return mem;
+	}
+	
+	public boolean checkApplicationValidity(String username) {
+		Membership mem = memberships.getByUsername(username);
+		LocalDate today = LocalDate.now();
+		
+		boolean isValid = mem.getDateOfExpiration().isAfter(today) && mem.getRemainingVisits() > 0;
+		
+		mem.setStatus(isValid);
+		memberships.editMembership(mem);
+		
+		return isValid;
 	}
 
 }

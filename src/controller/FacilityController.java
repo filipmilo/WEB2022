@@ -135,7 +135,7 @@ public class FacilityController {
 			
 			String content = req.queryParams("content");
 			
-			System.out.println(content);
+//			System.out.println(content);
 			
 			return g.toJson(trainingService.getAllContent(content));
 		});
