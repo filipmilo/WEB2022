@@ -47,7 +47,7 @@ public class User {
 	private Role role;
 	
 	//List of past trainings
-	private ArrayList<TrainingHistory> pastTrainings;
+	private String trainingHistory;
 	
 	//Membership
 	private Membership membership;
@@ -95,6 +95,41 @@ public class User {
 			this.role = Role.CUSTOMER;
 			break;
 		}
+	}
+	
+	public User(String username, String password, String name, String surname, String gender, LocalDate dateOfBirth, String role, String trainingHistory) {
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		
+		switch(gender) {
+		case "MALE":
+			this.gender = Gender.MALE;
+			break;
+		case "FEMALE":
+			this.gender = Gender.FEMALE;
+			break;
+		}
+		
+		this.dateOfBirth = dateOfBirth;
+		
+		switch(role) {
+		case "ADMIN":
+			this.role = Role.ADMIN;
+			break;
+		case "MANAGER":
+			this.role = Role.MANAGER;
+			break;
+		case "COACH":
+			this.role = Role.COACH;
+			break;
+		case "CUSTOMER":
+			this.role = Role.CUSTOMER;
+			break;
+		}
+		
+		this.trainingHistory = trainingHistory;
 	}
 
 	public String getUsername() {
@@ -164,12 +199,12 @@ public class User {
 		this.role = role;
 	}
 
-	public ArrayList<TrainingHistory> getPastTrainings() {
-		return pastTrainings;
+	public String getTrainingHistory() {
+		return trainingHistory;
 	}
 
-	public void setPastTrainings(ArrayList<TrainingHistory> pastTrainings) {
-		this.pastTrainings = pastTrainings;
+	public void setTrainingHistory(String trainingHistory) {
+		this.trainingHistory = trainingHistory;
 	}
 
 	public Membership getMembership() {

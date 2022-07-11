@@ -28,6 +28,7 @@ public class SportifyAppMain {
 		UserController.getAllManagers();
 		UserController.getManagerFacilityId();
 		UserController.getAllCoaches();
+		UserController.addTraining();
 		
 		FacilityController.getAll();
 		FacilityController.searchFacilities();
@@ -45,6 +46,7 @@ public class SportifyAppMain {
 		MembershipController.newMembership();
 		MembershipController.getMembershipByUsername();
 		MembershipController.reduceVisits();
+		MembershipController.checkApplicationValidity();
 		
 		TrainingHistoryController.getAll();
 		TrainingHistoryController.addTrainingHistory();
