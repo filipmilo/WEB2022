@@ -32,6 +32,18 @@ public class TrainingHistoryController {
 		});
 	}
 	
+	public static void getCoachTrainings() {
+		get("rest/trainingHistory/coachtrainings/", (req, res) -> {
+			res.type("application/json");
+			 
+			String jwt = req.headers("Authorization");
+			if(!Authorization.isLoggedIn(UserController.key, jwt))
+				return "null";
+			
+			return g.toJson(trainingHistoryService.getByCoach(req.queryParams("username")));
+		});
+	}
+	
 	public static void addTrainingHistory() {
 		post("rest/trainingHistory/new/", (req, res) -> {
 			res.type("application/json");

@@ -26,6 +26,10 @@ public class TrainingService {
 		
 	}
 	
+	public Training getTrainingById(String id) {
+		return trainings.getById(id);
+	}
+	
 	public Training cancelTraining(String trainingId) {
 		Training training = trainings.getById(trainingId);
 		training.setDeleted(true);
@@ -48,6 +52,7 @@ public class TrainingService {
 			content.add(trainings.getById(st.nextToken().trim()));
 		}
 	
+		
 		return content;
 	}
 	

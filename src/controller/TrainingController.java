@@ -28,7 +28,6 @@ public class TrainingController {
 			ContentDTO newContent = g.fromJson(req.body(), ContentDTO.class);
 			
 			Training training = new Training(newContent.getName(), newContent.getType(), newContent.getFacilityId(), newContent.getDuration(), newContent.getCoach(), newContent.getDescription(), newContent.getImage());
-			training.setDate(newContent.getDate());
 			
 			training = trainingService.addContent(training);
 			if(training != null)
@@ -53,7 +52,6 @@ public class TrainingController {
 			
 			Training training = new Training(newContent.getName(), newContent.getType(), newContent.getFacilityId(), newContent.getDuration(), newContent.getCoach(), newContent.getDescription(), newContent.getImage());
 			training.setId(trainingId);
-			training.setDate(newContent.getDate());
 			
 			training = trainingService.editContent(training);
 			
@@ -73,17 +71,6 @@ public class TrainingController {
 		});
 	}
 	
-	public static void getCoachTrainings() {
-		get("rest/facilities/coachtrainings/", (req, res) -> {
-			res.type("application/json");
-			 
-			String jwt = req.headers("Authorization");
-			if(!Authorization.isLoggedIn(UserController.key, jwt))
-				return "null";
-			
-			return g.toJson(trainingService.getByCoach(req.queryParams("username")));
-		});
-	}
 	
 	public static void deleteTraining() {
 		post("rest/facilities/deletetraining/", (req, res) ->{
@@ -101,6 +88,17 @@ public class TrainingController {
 			return g.toJson(trainingService.cancelTraining(trainingId));
 			
 		});
-		
+	}
+	
+	public static void getTrainingById() {
+		get("rest/facilities/getTraining/", (req, res) -> {
+			res.type("application/json");
+			
+			String content = req.queryParams("id");
+			
+			System.out.println(content);
+			
+			return g.toJson(trainingService.getTrainingById(content));
+		});
 	}
 }

@@ -40,8 +40,8 @@ public class SportifyAppMain {
 		TrainingController.addContent();
 		TrainingController.getContent();
 		TrainingController.editContent();
-		TrainingController.getCoachTrainings();
 		TrainingController.deleteTraining();
+		TrainingController.getTrainingById();
 
 		MembershipController.getAll();
 		MembershipController.newMembership();
@@ -51,6 +51,7 @@ public class SportifyAppMain {
 		
 		TrainingHistoryController.getAll();
 		TrainingHistoryController.addTrainingHistory();
+		TrainingHistoryController.getCoachTrainings();
     
 		CommentsController.getCommentsByFacility();
 		CommentsController.addComment();

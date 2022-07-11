@@ -1,7 +1,8 @@
 Vue.component("Trainings", {
 	data: function () {
 		    return {
-			trainings: null
+			trainings: [],
+
 		  }
 	},
 	template: 
@@ -11,7 +12,7 @@ Vue.component("Trainings", {
 	<div v-for="(t, index) in trainings" id="profiles-div">
 			<div id="info-div">
 			
-				<div id="title-div">
+				<!--<div id="title-div">
 						<h1>{{ t.name }}</h1>		
 						<button id="cancel-button" @click="deleteTraining(t.id, t.facility)" class="btn btn-danger" v-if="t.type === 'training1'">Cancel</button>		
 				</div>
@@ -23,8 +24,11 @@ Vue.component("Trainings", {
 				<p class="so-p" id="p-avgRating"> Duration: {{ t.duration }} </p>
 				<p class="so-p" id="p-workingHours"> Coach: {{ t.coach }} </p>
 				<p class="so-p" id="p-workingHours"> Facility: {{ t.facility }} </p>
-				<p class="so-p" id="p-workingHours"> Description: {{ t.description }} </p>
+				<p class="so-p" id="p-workingHours"> Description: {{ t.description }} </p>-->
 				
+				<p>Date: {{t.applicationDate}}</p>
+				<p>Training: {{t.training}}</p>
+				<p>Customer: {{t.customer}}</p>
 
 			</div>
 			
@@ -56,13 +60,14 @@ Vue.component("Trainings", {
 		var toParse = localStorage.getItem('jwt');
 		
 		if(toParse) {
-			axios.get("/rest/facilities/coachtrainings/", {
+			axios.get("/rest/trainingHistory/coachtrainings/", {
 				params: {username: JSON.parse(toParse).username},
 				headers: {Authorization: `Bearer ${JSON.parse(toParse).jwt}`}
 			})
 			.then(response =>{
 				console.log(response.data);
-				this.trainings = response.data
+				this.trainings = response.data;
+				
 			});
 		}
 		

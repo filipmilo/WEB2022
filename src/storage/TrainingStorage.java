@@ -42,7 +42,6 @@ public class TrainingStorage {
 	private void readAllContent(BufferedReader in) {
 		String line, name = "", type = "", facility = "", coach = "", description = "", image = "", id = "", duration = ""; 
 		boolean deleted = false;
-		String date = "";
 		StringTokenizer st;
 		
 		try {
@@ -61,17 +60,11 @@ public class TrainingStorage {
 					description = st.nextToken().trim();
 					image = st.nextToken().trim();
 					deleted = Boolean.parseBoolean(st.nextToken().trim());
-					date = st.nextToken().trim();
 				}
 				
 				Training tr = new Training(name, type, facility, duration, coach, description, image);
 				tr.setId(id);
 				tr.setDeleted(deleted);
-				try {
-					tr.setDate(LocalDate.parse(date));
-				} catch(Exception e) {
-					tr.setDate(null);
-				}
 				
 				allContent.put(tr.getId(), tr);
 			}
@@ -114,8 +107,6 @@ public class TrainingStorage {
 		str.append(training.getImagePath());
 		str.append(";");
 		str.append(training.isDeleted());
-		str.append(";");
-		str.append(training.getDate());
 		
 
 		return str.toString();
