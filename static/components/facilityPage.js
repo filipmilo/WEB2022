@@ -206,6 +206,8 @@ Vue.component("Facilitypage", {
 				<button id="schedule-button" class="btn btn-info" @click="scheduleTraining();" :disabled="isSelected(0)">Schedule Training</button>
 			</div>
 		</div>
+		
+		<comments></comments>
     </div>
 </div>
 `

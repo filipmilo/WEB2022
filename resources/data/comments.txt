@@ -1,0 +1,7 @@
+1;approved;s;1;Great gym although a lot of people;4;false
+2;rejected;meki;1;Awesome gym i love it;5;false
+3;approved;meki;1;Also i love the coffe here;5;false
+4;rejected;meki;1;Very nice gym;4;false
+5;approved;meki;1;Nice gym;3;false
+6;approved;meki;5;okay place;2;false
+7;waiting;s;5;I like this place;4;false
