@@ -8,6 +8,7 @@ public class EditUserDTO {
 	private String surname;
 	private String gender;
 	private String dateOfBirth;
+	private String customerType;
 	
 	private String role;
 
@@ -21,6 +22,19 @@ public class EditUserDTO {
 		this.gender = gender;
 		this.dateOfBirth = dateofBirth;
 		this.role = role;
+	}
+	
+	public EditUserDTO(String username, String password, String name, String surname, String gender, String dateofBirth,
+			String role, String customerType) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.gender = gender;
+		this.dateOfBirth = dateofBirth;
+		this.role = role;
+		this.customerType = customerType;
 	}
 
 	public String getUsername() {

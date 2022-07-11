@@ -62,7 +62,7 @@ public class User {
 	private int points;
 	
 	//type of customer
-	private CustomerType customerType;
+	private String customerType;
 	
 	public User(String username, String password, String name, String surname, String gender, LocalDate dateOfBirth, String role) {
 		this.username = username;
@@ -97,7 +97,8 @@ public class User {
 		}
 	}
 	
-	public User(String username, String password, String name, String surname, String gender, LocalDate dateOfBirth, String role, String trainingHistory) {
+	public User(String username, String password, String name, String surname, String gender, LocalDate dateOfBirth, 
+			String role, String trainingHistory, String customerType) {
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -130,6 +131,7 @@ public class User {
 		}
 		
 		this.trainingHistory = trainingHistory;
+		this.customerType = customerType;
 	}
 
 	public String getUsername() {
@@ -239,11 +241,11 @@ public class User {
 		this.points = points;
 	}
 
-	public CustomerType getCustomerType() {
+	public String getCustomerType() {
 		return customerType;
 	}
 
-	public void setCustomerType(CustomerType customerType) {
+	public void setCustomerType(String customerType) {
 		this.customerType = customerType;
 	}
 

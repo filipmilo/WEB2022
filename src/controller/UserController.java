@@ -81,7 +81,7 @@ public class UserController {
 			
 			User user = userService.getUser(username);
 			
-			return g.toJson(new EditUserDTO(user.getUsername(), user.getPassword(), user.getName(), user.getSurname(),user.getGenderStr(), user.getDateOfBirth().toString(), user.getRoleStr()));
+			return g.toJson(new EditUserDTO(user.getUsername(), user.getPassword(), user.getName(), user.getSurname(),user.getGenderStr(), user.getDateOfBirth().toString(), user.getRoleStr(), user.getCustomerType()));
 		}); 
 	}
 	
