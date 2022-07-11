@@ -52,7 +52,7 @@ public class SportifyAppMain {
 		TrainingHistoryController.getAll();
 		TrainingHistoryController.addTrainingHistory();
     
-    CommentsController.getCommentsByFacility();
+		CommentsController.getCommentsByFacility();
 		CommentsController.addComment();
 		CommentsController.changeCommentStatus();
 
